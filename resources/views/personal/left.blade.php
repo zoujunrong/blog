@@ -18,8 +18,8 @@
 </style>
 <div class="col-md-3">
     <div class="panel panel-default center-block">
-      <div style="text-align: center;padding: 20px 10px;"><a href="#" title="修改个人资料"><img class="img-circle" style="width:100px; cursor: pointer;"  src="{{ asset('images/favicon1.png') }}" alt="头像" data-toggle="tooltip" data-placement="top"></a>
-        <h4>zoujunrong</h4>
+      <div style="text-align: center;padding: 20px 10px;"><a href="/profile" title="个人主页"><img class="img-circle" style="width:100px; cursor: pointer;"  src="{{ asset('images/favicon1.png') }}" alt="头像" data-toggle="tooltip" data-placement="top"></a>
+        <h4><a href="/profile">zoujunrong</a></h4>
         <div>道欲道，学欲学。</div><br/>
         <div><span class="icon-adjust icon-large" data-toggle="tooltip" data-placement="top" title="充电量"> 23423</span>&nbsp;&nbsp; | &nbsp;&nbsp;<span class="icon-lightbulb icon-large" data-toggle="tooltip" data-placement="top" title="供电量"> 233</span></div>
       </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EditorController extends Controller
 {
@@ -21,8 +22,24 @@ class EditorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function doc()
+    public function create()
     {
-        return view('editor.doc');
+        $content = Storage::get('docs/content.html');
+        $menu = Storage::get('docs/menu.json');
+        $folders = Storage::get('docs/folders.json');
+
+        return view('editor.doc', ['content' => $content, 'menu'=> $menu, 'folders' => $folders]);
+    }
+
+    /**
+     * 存储
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        Storage::put('docs/content.html', $request->content);
+        Storage::put('docs/menu.json', $request->menuTree);
+        Storage::put('docs/folders.json', $request->folderList);
+        return view('editor.doc', ['content' => $request->content, 'menu'=> $request->menuTree, 'folders' => $request->folderList]);
     }
 }

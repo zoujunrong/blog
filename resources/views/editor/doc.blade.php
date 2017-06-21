@@ -158,7 +158,7 @@
         </style>
     </head>
     <body>
-        <form action="getContent.php" id="form" method="post">
+        <form action="#" id="form" method="post">
             {!! csrf_field() !!}
             <input type="hidden" name="menuTree" value="" />
             <input type="hidden" name="folderList" value="" />
@@ -175,55 +175,55 @@
             </div>
 
             <div id="folder_list" style="display:none;">
-                [{
-                        "isActive":false,
-                        "isExpanded":true,
-                        "isFolder":true,
-                        "text":"bootstrap 开发文档",
-                        "tooltip":"Bookmarks",
-                        "children":
-                        [
-                           {
-                              "href":"#",
-                              "text":"Home"
-                           },
-                           {
-                              "children":[
-                                 {
-                                    "href":"#",
-                                    "isActive":true,
-                                    "text":"Go to Google.com"
-                                 },
-                                 {
-                                    "href":"#",
-                                    "text":"Go to Yahoo.com"
-                                 }
-                              ],
-                              "isActive":false,
-                              "isExpanded":true,
-                              "isFolder":true,
-                              "text":"Folder 1",
-                              "tooltip":"Bookmarks"
-                           },
-                           {
-                              "children":[
-                                 {
-                                    "text":"Sub Node 1"
-                                 },
-                                 {
-                                    "text":"Sub Node 2"
-                                 },
-                                 {
-                                    "text":"Sub Node 3"
-                                 }
-                              ],
-                              "text":"Node 1"
-                           },
-                           {
-                              "text":"Node 2"
-                           }
-                        ]
-                }]
+                {{ $folders or '[{
+                    "isActive":false,
+                    "isExpanded":true,
+                    "isFolder":true,
+                    "text":"bootstrap 开发文档",
+                    "tooltip":"Bookmarks",
+                    "children":
+                    [
+                       {
+                          "href":"#",
+                          "text":"Home"
+                       },
+                       {
+                          "children":[
+                             {
+                                "href":"#",
+                                "isActive":true,
+                                "text":"Go to Google.com"
+                             },
+                             {
+                                "href":"#",
+                                "text":"Go to Yahoo.com"
+                             }
+                          ],
+                          "isActive":false,
+                          "isExpanded":true,
+                          "isFolder":true,
+                          "text":"Folder 1",
+                          "tooltip":"Bookmarks"
+                       },
+                       {
+                          "children":[
+                             {
+                                "text":"Sub Node 1"
+                             },
+                             {
+                                "text":"Sub Node 2"
+                             },
+                             {
+                                "text":"Sub Node 3"
+                             }
+                          ],
+                          "text":"Node 1"
+                       },
+                       {
+                          "text":"Node 2"
+                       }
+                    ]
+                }]' }}
             </div>
         </div>
         <div class="menu">
@@ -271,7 +271,7 @@
                     $('input[name=folderList]').val(folderList);
                     $.ajax({
                         type: "POST",
-                        url: "/editor",
+                        url: "/editor/doc",
                         data: $('#form').serialize(),
                         success: function(msg){
                          alert( "Data Saved: " + msg );
@@ -331,6 +331,8 @@
                             var btnId = $(this).attr('id')
                             var activeNodeId = $('.easytree-drag-source').attr('id')
                             if (btnId == 'menu_delete') {
+                                var splitArr = activeNodeId.split('_')
+                                if (splitArr.length <= 5) return;
                                 folderTree.removeNode(activeNodeId)
                                 folderTree.rebuildTree(folderTree.getAllNodes())
                             } else if(btnId == 'menu_new_folder') {

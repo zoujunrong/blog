@@ -27,6 +27,8 @@ Route::get('/esTest', 'EsTestController@index');
 
 //首页
 Route::get('/home', 'HomeController@index');
+Route::get('/profile', 'HomeController@profile');
+
 Route::get('/collect', 'CollectController@mine');
 Route::get('/doc/mine', 'DocController@mine');
 Route::get('/subject/mine', 'SubjectController@mine');
@@ -34,7 +36,8 @@ Route::get('/column/mine', 'ColumnController@mine');
 Route::get('/orgnazation/mine', 'OrgnazationController@mine');
 Route::get('/settings', 'SettingsController@mine');
 //文档
-Route::get('/editor/doc', 'editorController@doc');
+Route::get('/editor/doc', 'EditorController@create');
+Route::post('/editor/doc', 'EditorController@store');
 //专栏
 Route::get('/column', 'ColumnController@index');
 Route::get('/doc', 'DocController@index');
