@@ -1,0 +1,11 @@
+/*可以在这里添加你自己的css*/
+html.view {
+	background-color:#f2f2f2;
+}
+body.view {
+	width: 640px; margin: 20px auto; padding: 95px 120px; height:100%; box-shadow: #d8d8d8 0px 1px 1px 2px;
+	overflow-x:hidden;display: table;background-color:#fff;
+	table-layout: fixed;
+	word-wrap: break-word;
+	overflow: auto;
+}

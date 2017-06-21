@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <style>
+            #preview-body{
+                height:100%;
+                width:100%;
+                padding:0;
+                margin:0;
+                background-color: #f2f2f2;
+            }
+            #preview{
+                width: 640px; margin: 20px auto; padding: 95px 120px; height:100%; box-shadow: #d8d8d8 0px 1px 1px 2px;
+                display: table;background-color:#fff;table-layout: fixed;
+                word-wrap: break-word;
+                overflow: auto;;
+            }
+            #preview *{font-family:sans-serif;font-size:16px;}
+        </style>
+        <script type="text/javascript" src="../../third-party/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="../internal.js"></script>
+        <script src="../../ueditor.parse.js"></script>
+        <script type="text/javascript" src="../../../easyTree/jquery.easytree.min.js"></script>
+        <link rel="stylesheet" href="../../../easyTree/skin-win8/ui.easytree.css">
+        <title></title>
+    </head>
+    <body id="preview-body">
+        <div style="width:20%;height:100%;overflow-y:auto;overflow-x:hidden;white-space:nowrap;text-overflow:ellipsis;float:left;z-index:100;margin:0px;padding:0px;box-shadow: #d8d8d8 0px 1px 1px 2px;border:1px solid silver;padding:10px 0px;background-color: #fff;">
+            <div id="preview_menu">
+            </div>
+        </div>
+        <div id="preview">
+        </div>
+    </body>
+    <script>
+        document.getElementById('preview').innerHTML = editor.getContent();
+        uParse('#preview',{
+            rootPath : '../../',
+            chartContainerHeight:500
+        })
+        dialog.oncancel = function(){
+            document.getElementById('preview').innerHTML = '';
+        }
+
+        var menuTree = $('#preview_menu').easytree();
+        menuTree.rebuildTree(parent.easyTree.getAllNodes())
+        // 选中章节按钮
+        $('#preview_menu li a').click(function(e){
+            var posY = $(this).attr('href').replace('#', '');
+            // posY -= (posY /100 - 2) * 20;
+            document.body.scrollTop = posY;
+        });
+    </script>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="{{ config('app.locale') }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="{{asset('js/jquery1.12.4.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('lib/ueditor/ueditor.config.js')}}"></script>
+        <script type="text/javascript" src="{{asset('lib/ueditor/ueditor.all.min.js')}}"></script>
+        <script type="text/javascript" charset="utf-8" src="{{asset('lib/ueditor/kityformula-plugin/addKityFormulaDialog.js')}}"></script>
+        <script type="text/javascript" charset="utf-8" src="{{asset('lib/ueditor/kityformula-plugin/getKfContent.js')}}"></script>
+        <script type="text/javascript" charset="utf-8" src="{{asset('lib/ueditor/kityformula-plugin/defaultFilterFix.js')}}"></script>
+        
+        <script type="text/javascript" src="{{asset('lib/ueditor/ueditor.js')}}"></script>
+        <script type="text/javascript" src="{{asset('lib/easyTree/jquery.easytree.min.js')}}"></script>
+        <link rel="stylesheet" href="{{ asset('lib/easyTree/skin-win8/ui.easytree.css') }}">
+        
+        <title>文档编辑-Weuping</title>
+        <style>
+            body{margin: 0px;padding:0px;font-family: arial, helvetica;}
+            .nav-tabs {
+                width:100%;line-height: 30px;padding-left:5px;font-family: arial;font-size:13px;background: #ffe69f;
+            }
+            .nav-tabs span {
+                display: inline-block;
+                height: 31px;
+                padding:0px 8px;
+                cursor: pointer;
+            }
+            span.active{
+                font-weight: bolder;
+                background: #fff;
+            }
+
+            .menu {
+                position: absolute;
+                width: 200px;
+                padding: 2px;
+                margin: 0;
+                border: 1px solid #bbb;
+                background: #eee;
+                background: -webkit-linear-gradient(to bottom, #fff 0%, #e5e5e5 100px, #e5e5e5 100%);
+                background: linear-gradient(to bottom, #fff 0%, #e5e5e5 100px, #e5e5e5 100%);
+                z-index: 10001;
+                border-radius: 3px;
+                box-shadow: 1px 1px 4px rgba(0,0,0,.2);
+                opacity: 0;
+                -webkit-transform: translate(0, 15px) scale(.95);
+                transform: translate(0, 15px) scale(.95);
+                transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+                pointer-events: none;
+            }
+             
+            .menu-item {
+                display: block;
+                position: relative;
+                margin: 0;
+                padding: 0;
+                white-space: nowrap;
+            }
+             
+            .menu-btn { 
+                background: none;
+                line-height: normal;
+                overflow: visible;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                display: block;
+                width: 100%;
+                color: #444;
+                font-family: 'Roboto', sans-serif;
+                font-size: 13px;
+                text-align: left;
+                cursor: pointer;
+                border: 1px solid transparent;
+                white-space: nowrap;
+                padding: 6px 8px;
+                border-radius: 3px;
+            }
+             
+            .menu-btn::-moz-focus-inner,
+            .menu-btn::-moz-focus-inner {
+                border: 0;
+                padding: 0;
+            }
+             
+            .menu-text {
+                margin-left: 25px;
+            }
+             
+            .menu-btn .fa {
+                position: absolute;
+                left: 8px;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+             
+            .menu-item:hover > .menu-btn { 
+                color: #fff; 
+                outline: none; 
+                background-color: #2E3940;
+                background: -webkit-linear-gradient(to bottom, #5D6D79, #2E3940);
+                background: linear-gradient(to bottom, #5D6D79, #2E3940);
+                border: 1px solid #2E3940;
+            }
+             
+            .menu-item.disabled {
+                opacity: .5;
+                pointer-events: none;
+            }
+             
+            .menu-item.disabled .menu-btn {
+                cursor: default;
+            }
+             
+            .menu-separator {
+                display:block;
+                margin: 7px 5px;
+                height:1px;
+                border-bottom: 1px solid #fff;
+                background-color: #aaa;
+            }
+             
+            .menu-item.submenu::after {
+                content: "";
+                position: absolute;
+                right: 6px;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+                border: 5px solid transparent;
+                border-left-color: #808080; 
+            }
+             
+            .menu-item.submenu:hover::after {
+                border-left-color: #fff;
+            }
+             
+            .menu .menu {
+                top: 4px;
+                left: 99%;
+            }
+             
+            .show-menu,
+            .menu-item:hover > .menu {
+                opacity: 1;
+                -webkit-transform: translate(0, 0) scale(1);
+                transform: translate(0, 0) scale(1);
+                pointer-events: auto;
+            }
+             
+            .menu-item:hover > .menu {
+                -webkit-transition-delay: 100ms;
+                transition-delay: 300ms;
+            }  
+        </style>
+    </head>
+    <body>
+        <form action="getContent.php" id="form" method="post">
+            {!! csrf_field() !!}
+            <input type="hidden" name="menuTree" value="" />
+            <input type="hidden" name="folderList" value="" />
+            <script id="editor" type="text/plain" name="content">{!! $content or '<h1>首页</h1>世界你好！' !!}</script>
+        </form>
+        <!-- {{-- 通过js将此菜单栏注入到插件中实现菜单栏功能 --}} -->
+        <div id="ueditor_list_hide" style="display:none;">
+            <div class="nav-tabs">
+                  <span id="menu_folder">目录</span>
+                  <span class="active" role="presentation" id="menu_file">文件名文件名...</span>
+            </div>
+            <div id="menu_list">
+                {{ $menu or '[{"text" : "首页", "href" : "#0"}]' }}
+            </div>
+
+            <div id="folder_list" style="display:none;">
+                [{
+                        "isActive":false,
+                        "isExpanded":true,
+                        "isFolder":true,
+                        "text":"bootstrap 开发文档",
+                        "tooltip":"Bookmarks",
+                        "children":
+                        [
+                           {
+                              "href":"#",
+                              "text":"Home"
+                           },
+                           {
+                              "children":[
+                                 {
+                                    "href":"#",
+                                    "isActive":true,
+                                    "text":"Go to Google.com"
+                                 },
+                                 {
+                                    "href":"#",
+                                    "text":"Go to Yahoo.com"
+                                 }
+                              ],
+                              "isActive":false,
+                              "isExpanded":true,
+                              "isFolder":true,
+                              "text":"Folder 1",
+                              "tooltip":"Bookmarks"
+                           },
+                           {
+                              "children":[
+                                 {
+                                    "text":"Sub Node 1"
+                                 },
+                                 {
+                                    "text":"Sub Node 2"
+                                 },
+                                 {
+                                    "text":"Sub Node 3"
+                                 }
+                              ],
+                              "text":"Node 1"
+                           },
+                           {
+                              "text":"Node 2"
+                           }
+                        ]
+                }]
+            </div>
+        </div>
+        <div class="menu">
+            <li class="menu-item">
+                <button type="button" id="menu_new_folder" class="menu-btn">
+                    <span class="menu-text">新建文件夹</span>
+                </button>
+            </li>
+            <li class="menu-item">
+                <button type="button" id="menu_new_doc" class="menu-btn">
+                    <span class="menu-text">新建文档</span>
+                </button>
+            </li>
+            <li class="menu-item">
+                <button type="button" id="menu_rename" class="menu-btn">
+                    <span class="menu-text">重命名</span>
+                </button>
+            </li>
+            <li class="menu-item">
+                <button type="button" id="menu_delete" class="menu-btn">
+                    <span class="menu-text">删除</span>
+                </button>
+            </li>
+        </div> 
+        <script type="text/javascript">
+            var easyTree = null, folderTree = null;
+            var menuList = '{{ $menu or "" }}'
+            var contentIsChange = false;
+            //实例化编辑器
+            var ue = UE.getEditor('editor');
+            setInterval(function(){
+                if ( contentIsChange ) {
+                    resetHandler();
+                    contentIsChange = false;
+                }
+            }, 20000);
+
+            var form = document.getElementById('form');
+            
+            var kfSubmit = function(){
+                ue.getKfContent(function(content){
+                    menuList = JSON.stringify(easyTree.getAllNodes())
+                    folderList = JSON.stringify(folderTree.getAllNodes())
+                    $('input[name=menuTree]').val(menuList);
+                    $('input[name=folderList]').val(folderList);
+                    $.ajax({
+                        type: "POST",
+                        url: "/editor",
+                        data: $('#form').serialize(),
+                        success: function(msg){
+                         alert( "Data Saved: " + msg );
+                        }
+                    });
+                })
+                
+            }
+            ue.addListener("keydown ready", function(type, e) {
+                if ( e && ( ( !e.ctrlKey && e.keyCode != 18 ) || e.keyCode == 86 ) ) contentIsChange = true;
+                if ( type == 'keydown' && e.keyCode == 83 && e.ctrlKey ) {
+                    e.preventDefault(); //方法阻止元素发生默认的行为。
+                    resetHandler();
+                    return false;
+                }
+
+                if ( type == 'keydown' && e.keyCode == 8 ) {
+                    if ( ! ue.hasContents() ) {
+                        e.preventDefault(); //方法阻止元素发生默认的行为。
+                        return false;
+                    }
+                }
+                if ( type == 'ready' ) {
+                    list_side();
+                    //easyTree 文档网址 http://www.easyjstree.com
+                    folderTree = $('#folder_list').easytree({enableDnd: true});
+                    easyTree = $('#menu_list').easytree({stateChanged: toggled, enableDnd: true});
+                    var nodes = easyTree.getAllNodes();
+                    toggleNodes(nodes, 'open');
+                    easyTree.rebuildTree(nodes);
+
+                    // 选中章节按钮
+                    /*$('#menu_list li a').on('click', function(e){
+                        var posY = $(this).attr('href').replace('#', '');
+                        document.getElementById('ueditor_0').contentWindow.document.body.scrollTop = posY;
+                    });*/
+
+                    $('#folder_list li a').on('click', function(){
+                        menuFileActive($(this).text());
+                    });
+
+                    //操作界面
+                    $(function(){
+                        $('#menu_folder').on('click', function(e){
+                            $('#menu_list').hide();
+                            $('#folder_list').show();
+                            $('#menu_file').removeClass('active');
+                            $(this).addClass('active');
+                        });
+                        $('#menu_file').on('click', function(e){
+                            menuFileActive();
+                        });
+
+                        //菜单按钮点击事件
+                        $('.menu-btn').on('click', function(){
+                            hideMenu();
+                            var btnId = $(this).attr('id')
+                            var activeNodeId = $('.easytree-drag-source').attr('id')
+                            if (btnId == 'menu_delete') {
+                                folderTree.removeNode(activeNodeId)
+                                folderTree.rebuildTree(folderTree.getAllNodes())
+                            } else if(btnId == 'menu_new_folder') {
+                                var activeNode = folderTree.getNode(activeNodeId)
+                                if (!activeNode.isFolder) return;
+                                var name = prompt('请输入名称', '')
+                                if (name) {
+                                    var node = {
+                                        "text" : name,
+                                        "tooltip" : name,
+                                        "isFolder" : true,
+                                        "isExpanded" : true
+                                    }
+                                    folderTree.addNode(node, activeNodeId)
+                                    folderTree.rebuildTree(folderTree.getAllNodes())
+                                }
+                                
+                            } else if(btnId == 'menu_new_doc') {
+                                var activeNode = folderTree.getNode(activeNodeId)
+                                if (!activeNode.isFolder) return;
+                                var name = prompt('请输入名称', '')
+                                if (name) {
+                                    var node = {
+                                        "text" : name,
+                                        "tooltip" : name,
+                                        "href" : '#'
+                                    }
+                                    folderTree.addNode(node, activeNodeId)
+                                    folderTree.rebuildTree(folderTree.getAllNodes())
+                                }
+                            } else if(btnId == 'menu_rename') {
+                                var activeNode = folderTree.getNode(activeNodeId)
+                                var name = prompt('请输入名称', '')
+
+                                if (name) {
+                                    activeNode.text = name
+                                    activeNode.tooltip = name
+                                    var node = {
+                                        "text" : name,
+                                        "tooltip" : name
+                                    }
+                                    var nodes = renameNodeName(folderTree.getAllNodes(), activeNodeId, name)
+                                    folderTree.rebuildTree(nodes)
+                                }
+                            }
+                            $('#folder_list li a').on('click', function(){
+                                menuFileActive($(this).text());
+                            });
+                        });
+                    });
+
+                    var menuFileActive = function(filename=null) {
+                        $('#folder_list').hide();
+                        $('#menu_list').show();
+                        $('#menu_folder').removeClass('active');
+                        $('#menu_file').addClass('active');
+                        if(filename!== null) $('#menu_file').text(filename)
+                    }
+
+
+                }
+            }, false);
+
+            function getText(){
+                //当你点击按钮时编辑区域已经失去了焦点，如果直接用getText将不会得到内容，所以要在选回来，然后取得内容
+                var range = ue.selection.getRange();
+                range.select();
+                var txt = ue.selection.getText();
+            }
+
+            function toggleNodes(nodes, openOrClose){
+                var i = 0;
+                for (i = 0; i < nodes.length; i++) {
+                    nodes[i].isExpanded = openOrClose == "open"; // either expand node or don't
+                    
+                    // if has children open/close those as well
+                    if (nodes[i].children && nodes[i].children.length > 0) {
+                        toggleNodes(nodes[i].children, openOrClose);
+                    }
+                }
+            }
+
+            //重命名node name
+            function renameNodeName(nodes, id, name) {
+                var i = 0;
+                for (i = 0; i < nodes.length; i++) {
+                    if (nodes[i].id == id) {
+                        nodes[i].text = name
+                        nodes[i].tooltip = name
+                        break;
+                    } else {
+                        if (nodes[i].children && nodes[i].children.length > 0) {
+                            renameNodeName(nodes[i].children, id, name);
+                        }
+                    }
+                }
+                return nodes
+            }
+
+            function toggled() {
+            }
+
+            //菜单栏右键按钮操作
+            var menu = document.querySelector('.menu');
+            function showMenu(x, y){
+                menu.style.left = x + 'px';
+                menu.style.top = y + 'px';
+                menu.classList.add('show-menu');
+            }
+            function hideMenu(){
+                menu.classList.remove('show-menu');
+            }
+            function onContextMenu(e){
+                e.preventDefault();
+                if($('#menu_file').hasClass('active')) return;
+                showMenu(e.pageX, e.pageY);
+                document.addEventListener('mousedown', onMouseDown, false);
+            }
+            function onMouseDown(e){
+                setTimeout(function(){hideMenu();}, 200)
+                document.removeEventListener('mousedown', onMouseDown);
+            }
+            document.addEventListener('contextmenu', onContextMenu, false);
+
+
+        </script>
+    </body>
+</html>
