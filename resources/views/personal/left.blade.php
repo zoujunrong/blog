@@ -15,13 +15,22 @@
     text-decoration-line: none;
     color:#000;
   }
+  .header-panel-footer span{
+    display: inline-block;
+    color:#808080;width: 50px;
+    margin: 0px 5px;
+  }
+  .header-panel-footer span label{
+    font-weight: bold;
+    color:#000;
+  }
 </style>
 <div class="col-md-3">
     <div class="panel panel-default center-block">
       <div style="text-align: center;padding: 20px 10px;"><a href="/profile" title="个人主页"><img class="img-circle" style="width:100px; cursor: pointer;"  src="{{ asset('images/favicon1.png') }}" alt="头像" data-toggle="tooltip" data-placement="top"></a>
         <h4><a href="/profile">zoujunrong</a></h4>
         <div>道欲道，学欲学。</div><br/>
-        <div><span class="icon-adjust icon-large" data-toggle="tooltip" data-placement="top" title="充电量">充电 23423</span>&nbsp;&nbsp; | &nbsp;&nbsp;<span data-toggle="tooltip" data-placement="top" title="供电量">供电 233</span></div>
+        <div class="header-panel-footer"><span data-toggle="tooltip" data-placement="top" title="充电量（° 度）">充电 <label>23423</label></span><span data-toggle="tooltip" data-placement="top" title="供电量（° 度）">供电 <label>23333</label></span><span data-toggle="tooltip" data-placement="top" title="功率（W 瓦）">功率 <label>233</label></span></div>
       </div>
     </div>
     <div class="panel panel-default">
