@@ -25,4 +25,15 @@ class OrgnazationController extends Controller
     {
         return view('orgnazation.index');
     }
+
+    public function mine()
+    {
+        return view('orgnazation.mine');
+    }
+
+    //主页
+    public function profile()
+    {
+        return view('orgnazation.profile');
+    }
 }

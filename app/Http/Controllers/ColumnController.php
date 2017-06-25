@@ -25,4 +25,9 @@ class ColumnController extends Controller
     {
         return view('column.index');
     }
+
+    public function mine()
+    {
+        return view('column.mine');
+    }
 }

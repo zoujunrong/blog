@@ -46,9 +46,9 @@
   </style>
     <div class="jumbotron masthead" style="margin-top: -20px;">
       <div class="container header-pic">
-        <a href="/profile"><img class="img-circle" title="主页"  src="{{ asset('images/favicon1.png') }}" alt="头像" data-toggle="tooltip" data-placement="top"></a><span style="position: absolute;" class="icon-edit" title="编辑头像"></span>
-        <h3>环环网 1234W</h3>
-        <p>每次阅读都有进步，每次分享都有价值</p>
+        <a href="/profile"><img style="max-width: 100px;" class="img-circle" title="主页"  src="http://a0.att.hudong.com/61/92/20300543009208143927926724222_s.jpg" alt="头像" data-toggle="tooltip" data-placement="top"></a><span style="position: absolute;" class="icon-edit" title="编辑头像"></span>
+        <h3>Bootstrap</h3>
+        <p>简洁、直观、强悍的前端开发框架，让web开发更迅速、简单。</p>
       </div>
       <div class="navBar">
         <span>供 电<br/>100k°</span>
@@ -66,7 +66,7 @@
                   <div class="col-md-4 glaph-button {{ Request::is('profile') ? 'active' : '' }}"><a href="/home"><i class="icon-home"></i> 动态</a></div>
                   <div class="col-md-4 glaph-button {{ Request::is('subject/*') ? 'active' : '' }}"><a href="/subject/mine"><i class="icon-book"></i> 知识库 <span class="badge">14</span></a></div>
                   <div class="col-md-4 glaph-button {{ Request::is('column/*') ? 'active' : '' }}"><a href="/column/mine"><i class="icon-reorder"></i> 专栏 </a></div>
-                  <div class="col-md-4 glaph-button {{ Request::is('orgnazation/*') ? 'active' : '' }}"><a href="/orgnazation/mine"><i class="icon-group"></i> 组织 </a></div>
+                  <div class="col-md-4 glaph-button {{ Request::is('orgnazation/*') ? 'active' : '' }}"><a href="/orgnazation/mine"><i class="icon-group"></i> 成员 </a></div>
                   <div class="col-md-4 glaph-button {{ Request::is('settings') ? 'active' : '' }}"><a href="/settings"><i class="icon-user"></i> 基本资料 </a></div>
                 </div>
             </div>

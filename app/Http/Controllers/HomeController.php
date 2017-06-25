@@ -30,4 +30,9 @@ class HomeController extends Controller
     {
         return view('personal.profile');
     }
+
+    public function baseinfo()
+    {
+        return view('personal.baseinfo');
+    }
 }

@@ -34,6 +34,7 @@ Route::get('/doc/mine', 'DocController@mine');
 Route::get('/subject/mine', 'SubjectController@mine');
 Route::get('/column/mine', 'ColumnController@mine');
 Route::get('/orgnazation/mine', 'OrgnazationController@mine');
+Route::get('/home/baseinfo', 'HomeController@baseinfo');
 Route::get('/settings', 'SettingsController@mine');
 //文档
 Route::get('/editor/doc', 'EditorController@create');
@@ -43,6 +44,7 @@ Route::get('/column', 'ColumnController@index');
 Route::get('/doc', 'DocController@index');
 //组织
 Route::get('/orgnazation', 'OrgnazationController@index');
+Route::get('/orgnazation/profile', 'OrgnazationController@profile');
 //社区
 Route::get('/community', 'CommunityController@index');
 

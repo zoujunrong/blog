@@ -60,17 +60,21 @@
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
             <!-- Authentication Links -->
-            @if (Auth::guest())
+            @if (FALSE && Auth::guest())
                 <li><a href="{{ route('login') }}">登录</a></li>
                 <li><a href="{{ route('register') }}">注册</a></li>
             @else
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {{ Auth::user()->name }} <span class="caret"></span>
+                        <img style="width:18px;padding:0px;margin:0px;" class="img-circle" src="{{ asset('images/favicon1.png') }}" alt="..."> ZOUJUNRONG <span class="caret"></span>
                     </a>
 
                     <ul class="dropdown-menu" role="menu">
-                        <li>
+                        <li><a href="/home">个人主页</a></li>
+                        <li><a href="/home">通知</a></li>
+                        <li><a href="/home">编辑资料</a></li>
+                        <li role="separator" class="divider"></li>    
+                        <li>    
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
