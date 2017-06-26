@@ -2,7 +2,7 @@
 @section('content')
   <style>
   .masthead {
-    background-color: #2188b6;
+    background-color: #06406c;
     color: #fff;
     text-align: center;
     min-height: 200px;
@@ -43,6 +43,7 @@
   .header-pic:hover {
     color: #fff;
   }
+  
   </style>
     <div class="jumbotron masthead" style="margin-top: -20px;">
       <div class="container header-pic">
@@ -63,10 +64,10 @@
           <div class="panel panel-default">
             <div class="panel-body" style="padding:0px 15px;">
                 <div class="row">
-                  <div class="col-md-4 glaph-button {{ Request::is('profile') ? 'active' : '' }}"><a href="/home"><i class="icon-home"></i> 动态</a></div>
+                  <div class="col-md-4 glaph-button {{ Request::is('orgnazation/profile*') ? 'active' : '' }}"><a href="/home"><i class="icon-home"></i> 动态</a></div>
                   <div class="col-md-4 glaph-button {{ Request::is('subject/*') ? 'active' : '' }}"><a href="/subject/mine"><i class="icon-book"></i> 知识库 <span class="badge">14</span></a></div>
                   <div class="col-md-4 glaph-button {{ Request::is('column/*') ? 'active' : '' }}"><a href="/column/mine"><i class="icon-reorder"></i> 专栏 </a></div>
-                  <div class="col-md-4 glaph-button {{ Request::is('orgnazation/*') ? 'active' : '' }}"><a href="/orgnazation/mine"><i class="icon-group"></i> 成员 </a></div>
+                  <div class="col-md-4 glaph-button {{ Request::is('orgnazation/member*') ? 'active' : '' }}"><a href="/orgnazation/mine"><i class="icon-group"></i> 成员 </a></div>
                   <div class="col-md-4 glaph-button {{ Request::is('settings') ? 'active' : '' }}"><a href="/settings"><i class="icon-user"></i> 基本资料 </a></div>
                 </div>
             </div>

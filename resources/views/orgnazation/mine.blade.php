@@ -47,6 +47,8 @@
                       </a>
                         <h4>bootstrap</h4>
                         <p>官方提供的学习区域</p>
+                        <div class="header-panel-footer"><span data-toggle="tooltip" data-placement="top" title="供电量（° 度）">供电<br/><label>23333</label></span><span data-toggle="tooltip" data-placement="top" title="成员">成员<br/><label>233</label></span>
+                        </div>
                     </div>
                   </div>
                   <div class="col-sm-6 col-md-3">
@@ -56,6 +58,8 @@
                       </a>
                         <h4>PHP</h4>
                         <p>世界上最好的语言</p>
+                        <div class="header-panel-footer"><span data-toggle="tooltip" data-placement="top" title="供电量（° 度）">供电<br/><label>980</label></span><span data-toggle="tooltip" data-placement="top" title="成员">成员<br/><label>233</label></span>
+                        </div>
                     </div>
                   </div>
                   <div class="col-sm-6 col-md-3">
@@ -65,6 +69,8 @@
                       </a>
                         <h4>tensorflow</h4>
                         <p>包含学习文档，案例，以及学习心得</p>
+                        <div class="header-panel-footer"><span data-toggle="tooltip" data-placement="top" title="供电量（° 度）">供电<br/><label>245</label></span><span data-toggle="tooltip" data-placement="top" title="成员">成员<br/><label>233</label></span>
+                        </div>
                     </div>
                   </div>
                   <div class="col-sm-6 col-md-3">
@@ -74,6 +80,8 @@
                       </a>
                         <h4>bootstrap</h4>
                         <p>官方提供的学习区域</p>
+                        <div class="header-panel-footer"><span data-toggle="tooltip" data-placement="top" title="供电量（° 度）">供电<br/><label>2433</label></span><span data-toggle="tooltip" data-placement="top" title="成员">成员<br/><label>233</label></span>
+                        </div>
                     </div>
                   </div>
                   <div class="col-sm-6 col-md-3">
@@ -83,6 +91,8 @@
                       </a>
                         <h4>添加新组织</h4>
                         <p>官方提供的学习区域</p>
+                        <div class="header-panel-footer"><span data-toggle="tooltip" data-placement="top" title="供电量（° 度）">供电<br/><label>2333</label></span><span data-toggle="tooltip" data-placement="top" title="成员">成员<br/><label>0</label></span>
+                        </div>
                     </div>
                   </div>
                 </div>
