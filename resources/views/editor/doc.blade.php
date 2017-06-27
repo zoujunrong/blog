@@ -162,7 +162,8 @@
             {!! csrf_field() !!}
             <input type="hidden" name="menuTree" value="" />
             <input type="hidden" name="folderList" value="" />
-            <script id="editor" type="text/plain" name="content">{!! $content or '<h1>首页</h1>世界你好！' !!}</script>
+            <input type="hidden" name="content" value="" />
+            <script id="editor" type="text/plain">{!! $content or '<h1>首页</h1>世界你好！' !!}</script>
         </form>
         <!-- {{-- 通过js将此菜单栏注入到插件中实现菜单栏功能 --}} -->
         <div id="ueditor_list_hide" style="display:none;">
@@ -269,6 +270,7 @@
                     folderList = JSON.stringify(folderTree.getAllNodes())
                     $('input[name=menuTree]').val(menuList);
                     $('input[name=folderList]').val(folderList);
+                    $('input[name=content]').val($('#ueditor_0').contents().find('body').html());
                     $.ajax({
                         type: "POST",
                         url: "/editor/doc",
