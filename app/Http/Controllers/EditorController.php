@@ -24,9 +24,9 @@ class EditorController extends Controller
      */
     public function create()
     {
-        $content = Storage::get('docs/content.html');
-        $menu = Storage::get('docs/menu.json');
-        $folders = Storage::get('docs/folders.json');
+        $content = Storage::has('docs/content.html') ? Storage::get('docs/content.html') : null;
+        $menu = Storage::has('docs/menu.json') ? Storage::get('docs/menu.json') : null;
+        $folders = Storage::has('docs/folders.json') ? Storage::get('docs/folders.json') : '[{"text":"新建专题", "isFolder":true, "isExpanded":true}]';
 
         return view('editor.doc', ['content' => $content, 'menu'=> $menu, 'folders' => $folders]);
     }
@@ -36,7 +36,7 @@ class EditorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {print_r($request->content);exit;
         Storage::put('docs/content.html', $request->content);
         Storage::put('docs/menu.json', $request->menuTree);
         Storage::put('docs/folders.json', $request->folderList);

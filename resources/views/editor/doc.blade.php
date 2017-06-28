@@ -162,17 +162,16 @@
             {!! csrf_field() !!}
             <input type="hidden" name="menuTree" value="" />
             <input type="hidden" name="folderList" value="" />
-            <input type="hidden" name="content" value="" />
-            <script id="editor" type="text/plain">{!! $content or '<h1>首页</h1>世界你好！' !!}</script>
+            <script id="editor" type="text/plain" name="content">{!! $content or '<h1 id="136">首页</h1>世界你好！' !!}</script>
         </form>
         <!-- {{-- 通过js将此菜单栏注入到插件中实现菜单栏功能 --}} -->
         <div id="ueditor_list_hide" style="display:none;">
             <div class="nav-tabs">
-                  <span id="menu_folder">目录</span>
-                  <span class="active" role="presentation" id="menu_file">文件名文件名...</span>
+                  <span id="menu_folder">知识包</span>
+                  <span class="active" role="presentation" id="menu_file">目录</span>
             </div>
             <div id="menu_list">
-                {{ $menu or '[{"text" : "首页", "href" : "#0"}]' }}
+                {{ $menu or '[{"text" : "首页", "href" : "#136"}]' }}
             </div>
 
             <div id="folder_list" style="display:none;">
@@ -244,6 +243,16 @@
                 </button>
             </li>
             <li class="menu-item">
+                <button type="button" id="menu_moveup" class="menu-btn">
+                    <span class="menu-text">上移</span>
+                </button>
+            </li>
+            <li class="menu-item">
+                <button type="button" id="menu_movedown" class="menu-btn">
+                    <span class="menu-text">下移</span>
+                </button>
+            </li>
+            <li class="menu-item">
                 <button type="button" id="menu_delete" class="menu-btn">
                     <span class="menu-text">删除</span>
                 </button>
@@ -270,7 +279,7 @@
                     folderList = JSON.stringify(folderTree.getAllNodes())
                     $('input[name=menuTree]').val(menuList);
                     $('input[name=folderList]').val(folderList);
-                    $('input[name=content]').val($('#ueditor_0').contents().find('body').html());
+                    // $('input[name=content]').val($('#ueditor_0').contents().find('body').html());
                     $.ajax({
                         type: "POST",
                         url: "/editor/doc",
@@ -311,7 +320,7 @@
                         document.getElementById('ueditor_0').contentWindow.document.body.scrollTop = posY;
                     });*/
 
-                    $('#folder_list li a').on('click', function(){
+                    $('#folder_list li a').on('dblclick', function(){
                         menuFileActive($(this).text());
                     });
 
@@ -351,7 +360,6 @@
                                     folderTree.addNode(node, activeNodeId)
                                     folderTree.rebuildTree(folderTree.getAllNodes())
                                 }
-                                
                             } else if(btnId == 'menu_new_doc') {
                                 var activeNode = folderTree.getNode(activeNodeId)
                                 if (!activeNode.isFolder) return;
@@ -379,8 +387,15 @@
                                     var nodes = renameNodeName(folderTree.getAllNodes(), activeNodeId, name)
                                     folderTree.rebuildTree(nodes)
                                 }
+                            } else if(btnId == 'menu_moveup' || btnId == 'menu_movedown') {
+                                var activeNode = folderTree.getNode(activeNodeId)
+                                var allNodes = folderTree.getAllNodes()
+                                console.log(JSON.stringify(allNodes))
+                                allNodes = moveNodes(activeNode, allNodes, btnId == 'menu_moveup' ? 'up' : 'down');
+                                console.log(JSON.stringify(allNodes)); 
+                                if (allNodes) folderTree.rebuildTree(allNodes)
                             }
-                            $('#folder_list li a').on('click', function(){
+                            $('#folder_list li a').on('dblclick', function(){
                                 menuFileActive($(this).text());
                             });
                         });
@@ -392,8 +407,18 @@
                         $('#menu_folder').removeClass('active');
                         $('#menu_file').addClass('active');
                         if(filename!== null) $('#menu_file').text(filename)
+                        //判断是否重复
+                        /*if ( filename && $('#menu_file').text() != filename) {
+                            $.ajax({
+                                type: "GET",
+                                url: "/editor/doc",
+                                data: {"columnId":10, "docId":10},
+                                success: function(msg){
+                                    alert( "Data Saved: " + msg );
+                                }
+                            });
+                        }*/
                     }
-
 
                 }
             }, false);
@@ -415,6 +440,30 @@
                         toggleNodes(nodes[i].children, openOrClose);
                     }
                 }
+            }
+
+            //上下移动节点
+            function moveNodes(currentNode, allNodes, moveTo) {
+                if ((moveTo != 'up' && moveTo != 'down')) return false;
+                var index = null;
+                for (var i = 0; i < allNodes.length; i++) {
+                    if (allNodes[i].id == currentNode.id) {
+                        index = i;
+                        break;
+                    }
+                    if (allNodes[i].children && allNodes[i].children.length > 0) {
+                        allNodes[i].children = moveNodes(currentNode, allNodes[i].children, moveTo);
+                    }
+                }
+
+                if (index !== null && moveTo == 'up' && i > 0) {
+                    allNodes[i] = allNodes[i-1];
+                    allNodes[i-1] = currentNode;
+                } else if (index !== null && moveTo == 'down' && i < allNodes.length-1) {
+                    allNodes[i] = allNodes[i+1];
+                    allNodes[i+1] = currentNode;
+                }
+                return allNodes;
             }
 
             //重命名node name
