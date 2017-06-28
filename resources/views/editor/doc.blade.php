@@ -167,7 +167,7 @@
         <!-- {{-- 通过js将此菜单栏注入到插件中实现菜单栏功能 --}} -->
         <div id="ueditor_list_hide" style="display:none;">
             <div class="nav-tabs">
-                  <span id="menu_folder">知识包</span>
+                  <span id="menu_folder">电池组</span>
                   <span class="active" role="presentation" id="menu_file">目录</span>
             </div>
             <div id="menu_list">

@@ -42,6 +42,7 @@ Route::post('/editor/doc', 'EditorController@store');
 //专栏
 Route::get('/column', 'ColumnController@index');
 Route::get('/doc', 'DocController@index');
+Route::get('/column/profile', 'ColumnController@profile');
 //组织
 Route::get('/orgnazation', 'OrgnazationController@index');
 Route::get('/orgnazation/profile', 'OrgnazationController@profile');
