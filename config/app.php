@@ -181,6 +181,9 @@ return [
         //验证码
         Mews\Captcha\CaptchaServiceProvider::class,
 
+        // oss 存储
+        Jacobcyl\AliOSS\AliOssServiceProvider::class,
+
     ],
 
     /*

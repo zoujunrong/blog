@@ -36,4 +36,41 @@ class OrgnazationController extends Controller
     {
         return view('orgnazation.profile');
     }
+
+    // 能源库
+    public function subjects()
+    {
+        return view('orgnazation.subjects');
+    }
+
+    // 专栏
+    public function columns()
+    {
+        return view('orgnazation.columns');
+    }
+
+    // 互动社区
+    public function discuz()
+    {
+        return view('orgnazation.discuz');
+    }
+
+    // 互动社区
+    public function members()
+    {
+        return view('orgnazation.members');
+    }
+
+    // 设置
+    public function settings()
+    {
+        return view('orgnazation.settings');
+    }
+
+    // 供电流水
+    public function energyFlows()
+    {
+        return view('orgnazation.energyFlow');
+    }
+
 }

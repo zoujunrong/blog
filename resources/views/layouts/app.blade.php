@@ -72,7 +72,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="/home">个人主页</a></li>
                         <li><a href="/home">通知</a></li>
-                        <li><a href="/home">编辑资料</a></li>
+                        <li><a href="/home/baseinfo">编辑资料</a></li>
                         <li role="separator" class="divider"></li>    
                         <li>    
                             <a href="{{ route('logout') }}"

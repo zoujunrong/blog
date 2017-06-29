@@ -24,9 +24,9 @@ class DocController extends Controller
      */
     public function index()
     {
-        $content = Storage::get('docs/content.html');
-        $menu = Storage::get('docs/menu.json');
-        $folders = Storage::get('docs/folders.json');
+        $content = Storage::disk('oss')->has('docs/content.html') ? Storage::disk('oss')->get('docs/content.html') : null;
+        $menu = Storage::disk('oss')->has('docs/menu.json') ? Storage::disk('oss')->get('docs/menu.json') : null;
+        $folders = Storage::disk('oss')->has('docs/folders.json') ? Storage::disk('oss')->get('docs/folders.json') : null;
 
         //组装菜单
         $menuHtml = $this->builtMenuList(json_decode($menu, true), 'bs-docs-sidenav');

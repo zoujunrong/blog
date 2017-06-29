@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => 's3',
+    'cloud' => 'oss',
 
     /*
     |--------------------------------------------------------------------------
@@ -61,6 +61,16 @@ return [
             'secret' => env('AWS_SECRET'),
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
+        ],
+
+        'oss' => [
+                'driver'        => 'oss',
+                'access_id'  =>  env('OSS_ACCESS_ID','your id'),
+                'access_key' =>  env('OSS_ACCESS_KEY','your key'),
+                'bucket'     =>  env('OSS_BUCKET','your bucket'),
+                'endpoint'   =>  env('OSS_ENDPOINT','your endpoint'),  
+                'isCName'       => false, //'<如果上面使用了节点名称，这里设置为false，如果使用了自定义域名，为true>',
+                'debug'         => true, //'<true|false>'
         ],
 
     ],

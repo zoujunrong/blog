@@ -46,6 +46,12 @@ Route::get('/column/profile', 'ColumnController@profile');
 //组织
 Route::get('/orgnazation', 'OrgnazationController@index');
 Route::get('/orgnazation/profile', 'OrgnazationController@profile');
+Route::get('/orgnazation/subjects', 'OrgnazationController@subjects');
+Route::get('/orgnazation/columns', 'OrgnazationController@columns');
+Route::get('/orgnazation/discuz', 'OrgnazationController@discuz');
+Route::get('/orgnazation/members', 'OrgnazationController@members');
+Route::get('/orgnazation/settings', 'OrgnazationController@settings');
+Route::get('/orgnazation/energyFlows', 'OrgnazationController@energyFlows');
 //社区
 Route::get('/community', 'CommunityController@index');
 
