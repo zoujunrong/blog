@@ -29,7 +29,7 @@
                       </ul>
                     </li>
                     <li class="pull-right">
-                      <button type="button" class="btn btn-success icon-edit" data-toggle="modal" data-target="#subject_create_model"> 新建 </button>
+                      <button type="button" class="btn btn-success icon-edit" data-toggle="modal" data-target="#subject_create_model" title="创造一块新的能源电池组"> 创造 </button>
                     </li>
                   </ul>
                 </div>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">推荐专栏 <a href="#" class="pull-right"> 更多</a> <span class="pull-right">&nbsp;|&nbsp;</span><a href="#" class="pull-right"> 换一批</a></div>
+                    <div class="panel-heading">推荐电池 <a href="#" class="pull-right"> 更多</a> <span class="pull-right">&nbsp;|&nbsp;</span><a href="#" class="pull-right"> 换一批</a></div>
 
                     <div class="panel-body">
                         <div class="media">

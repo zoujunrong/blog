@@ -30,4 +30,9 @@ class ColumnController extends Controller
     {
         return view('column.mine');
     }
+
+    public function profile()
+    {
+        return view('column.profile');
+    }
 }
