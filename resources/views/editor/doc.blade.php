@@ -257,7 +257,7 @@
                     <span class="menu-text">删除</span>
                 </button>
             </li>
-        </div> 
+        </div>
         <script type="text/javascript">
             var easyTree = null, folderTree = null;
             var menuList = '{{ $menu or "" }}'
@@ -272,7 +272,7 @@
             }, 20000);
 
             var form = document.getElementById('form');
-            
+
             var kfSubmit = function(){
                 ue.getKfContent(function(content){
                     menuList = JSON.stringify(easyTree.getAllNodes())
@@ -289,7 +289,7 @@
                         }
                     });
                 })
-                
+
             }
             ue.addListener("keydown ready", function(type, e) {
                 if ( e && ( ( !e.ctrlKey && e.keyCode != 18 ) || e.keyCode == 86 ) ) contentIsChange = true;
