@@ -7,7 +7,6 @@
     "require": {
         "php": ">=5.6.4",
         "league/flysystem": "~1.0",
-        "aliyuncs/oss-sdk-php": "~2.0.4",
         "isswp101/elasticsearch-eloquent": "^1.1",
         "jacobcyl/ali-oss-storage": "dev-master",
         "laravel/framework": "5.4.*",
