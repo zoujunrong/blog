@@ -24,6 +24,10 @@
     font-weight: bold;
     color:#000;
   }
+  
+  .label-daynamic{
+    color: #8a8888;margin-right: 20px;
+  }
 </style>
 <div class="col-md-3">
     <div class="panel panel-default center-block">

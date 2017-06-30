@@ -2,11 +2,7 @@
 
 @section('content')
 @include('layouts.model.subject_create')
-<style type="text/css">
-  .label-daynamic{
-    color: #8a8888;margin-right: 20px;
-  }
-</style>
+
 <div class="container">
     <div class="row">
         @include('personal.left')                
