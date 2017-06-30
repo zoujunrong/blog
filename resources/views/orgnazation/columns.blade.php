@@ -3,19 +3,9 @@
               <div class="bs-example" data-example-id="nav-tabs-with-dropdown">
                   <ul class="nav nav-tabs">
                     <li role="presentation" class="active"><a href="#">全部</a></li>
-                    <li role="presentation"><a href="#">我的</a></li>
-                    <li role="presentation" class="dropdown">
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        分类 <span class="caret"></span>
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">新增分类</a></li>
-                      </ul>
-                    </li>
+                    <li role="presentation"><a href="#">已订阅</a></li>
+                    <li role="presentation"><a href="#">已审核</a></li>
+                    <li role="presentation"><a href="#">待审核</a></li>
                     <li class="pull-right">
                       <button type="button" class="btn btn-success icon-edit" data-toggle="modal" data-target="#subject_create_model"> 开通专栏 </button>
                     </li>

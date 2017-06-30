@@ -1,30 +1,75 @@
 @extends('orgnazation.secondNav')  
   @section('header')
-              <div class="media">
+                <div class="bs-example" data-example-id="nav-tabs-with-dropdown">
+                  <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#">全部</a></li>
+                    <li role="presentation"><input type="text" style="margin:6px;" placeholder="查找成员" /></li>
+                    <li role="presentation" class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        分类 <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">新增分类</a></li>
+                      </ul>
+                    </li>
+                    <li class="pull-right">
+                      <button type="button" class="btn btn-success icon-edit" data-toggle="modal" data-target="#subject_create_model"> 开通专栏 </button>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="media">
                   <div class="media-left">
-                    <a href="#">
-                      <img width="48px" class="media-object" src="{{ asset('images/favicon1.png') }}" alt="..."><span class="label label-info">&nbsp;100°&nbsp;</span>
+                    <a href="/column/profile">
+                      <img width="48px" class="img-circle" src="https://pic2.zhimg.com/ec7c6dcab134dcaaac8eab5367a2f42d_xl.jpg" alt="...">
                     </a>
                   </div>
                   <div class="media-body">
-                    <div class="row"><span class="col-md-10"><h4 class="media-heading"><a href="/doc" target="_blank">Sublime Text 全程指南</a></h4></span><span class="col-md-2 pull-right">10天前</span></div>
-                    
-                    <p>Sublime Text 全程指南 2014年 9月27日|评论 作者：Lucida 微博：@peng_gong 豆瓣：@figure9 原文链接：http://lucida.me/blog……/sublime-text-complete-guide/ 摘要（Abstract） 本文系统全面的介绍了Sublime Text，旨在成为最优秀的Sublime Text中文教程。 更新记录 2014/09……/27：完成初稿 2014/09/28： 更正打开控制台的快捷键为Ctrl + ` 更正全局替换的快捷键为Ctrl + Alt + Enter 前言</p>
+                    <h4 class="media-heading"><a href="/doc" target="_blank">工程师侃汽车行业</a><span class="pull-right" title="已供电1234度" style="font-size: 12px;">1234°</span></h4>
+                    <p>从零开始设计纯电动车动力系统</p>
                     
                   </div>
-              </div>
-              <hr/>
-              <div class="media">
+                </div>
+                <hr/>
+                <div class="media">
                   <div class="media-left">
-                    <a href="#" >
-                      <img width="48px" class="media-object" src="{{ asset('images/favicon1.png') }}" alt="..."><span class="label label-info">&nbsp;50k°&nbsp;</span>
+                    <a href="/column/profile">
+                      <img width="48px" class="img-circle" src="https://pic2.zhimg.com/bed1688c7c00827028513ee149d4dc65_xl.jpeg" alt="...">
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading">如何优雅地使用Sublime Text3</h4>
-                    <p>Sublime Text：一款具有代码高亮、语法提示、自动完成且反应快速的编辑器软件，不仅具有华丽的界面，还支持插件扩展机制，用她来写代码，绝对是一种享受。相比于难于上手的Vim，浮肿沉重的Eclipse，VS，即便体积轻巧迅速启动的Editplus、Notepad++，在SublimeText面前大略显失色，无疑这款性感无比的编辑器是Coding和Writing最佳的选择，没有之一。</p>
+                    <h4 class="media-heading"><a href="/doc" target="_blank">心理碎片</a><span class="pull-right" title="已供电1234度" style="font-size: 12px;">1663°</span></h4>
+                    <p>在我们风头正劲的时候，做事是不是也会更顺利呢?</p>
                   </div>
-               </div>
+                </div>
+                <hr/>
+                <div class="media">
+                  <div class="media-left">
+                    <a href="/column/profile">
+                      <img width="48px" class="img-circle" src="http://a1.mzstatic.com/us/r30/Purple6/v4/a8/d0/8e/a8d08eec-4e93-cab1-0482-a6a236c00d30/icon.512x512-75.png" alt="...">
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="/doc" target="_blank">php有关的那些事</a><span class="pull-right" title="已供电1234度" style="font-size: 12px;">134°</span></h4>
+                    <p>PHP（外文名:PHP: Hypertext Preprocessor，中文名：“超文本预处理器”）是一种通用开源脚本语言</p>
+                  </div>
+                </div>
+                <hr/>
+                <div class="media">
+                  <div class="media-left">
+                    <a href="/column/profile">
+                      <img width="48px" class="img-circle" src="https://pic1.zhimg.com/0264a22c3aa2093f40b58efb38dfbb64_xl.jpg" alt="...">
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="/doc" target="_blank">聊聊这个世界</a><span class="pull-right" title="已供电1234度" style="font-size: 12px;">234°</span></h4>
+                    <p>有时候是生产，还是消费，取决于执念</p>
+                  </div>
+                </div>
   @endsection
     
     

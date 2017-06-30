@@ -19,7 +19,7 @@
   </style>
     <div class="jumbotron masthead" style="margin-top: -20px;">
       <div class="container">
-        <h1>We uping</h1>
+        <h1>We Uping</h1>
         <h2>道欲道，学欲学。传不传，知不知。</h2>
         <p class="masthead-button-links">
           <a class="btn btn-lg btn-primary btn-shadow" href="/login" target="_blank" role="button">开启知识库</a>
