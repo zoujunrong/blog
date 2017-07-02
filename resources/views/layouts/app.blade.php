@@ -27,6 +27,15 @@
         text-decoration-line: none;
         border: none;
       }
+      .label-daynamic{
+        color: #8a8888;margin-right: 20px;
+      }
+      .txt-center{
+        text-align: center;
+      }
+      .tag-label{
+        margin:5px;padding: 2px 8px;border-radius: 2px;background-color: #fff;color: #118;
+      }
     </style>
   </head>
 

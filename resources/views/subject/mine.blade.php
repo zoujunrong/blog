@@ -29,16 +29,17 @@
                       </ul>
                     </li>
                     <li class="pull-right">
-                      <button type="button" class="btn btn-success icon-edit" data-toggle="modal" data-target="#subject_create_model" title="创造一块新的能源电池组"> 创造 </button>
+                      <button type="button" class="btn btn-success icon-edit" data-toggle="modal" data-target="#subject_create_model" title="创造一个新的能源"> 创建 </button>
                     </li>
                   </ul>
                 </div>
                 
                 <div class="media">
-                  <div class="media-left">
+                  <div class="media-left txt-center">
                     <a href="">
                       <img width="65px" src="{{ asset('images/tmp/ed6a56fb4693daef5ef73dcd.jpg') }}" alt="...">
                     </a>
+                    <label class="label label-default">未投稿</label>
                   </div>
                   <div class="media-body">
                     <h4 class="media-heading"><a href="/doc" target="_blank">php 中文文档</a> <a href="/editor/doc" target="_blank" class="pull-right icon-edit"></a></h4>
@@ -51,10 +52,11 @@
                 </div>
                 <hr/>
                 <div class="media">
-                  <div class="media-left">
+                  <div class="media-left txt-center">
                     <a href="">
                       <img width="65px" src="{{ asset('images/tmp/96ff1b2cccbff121dd368367.jpg') }}" alt="...">
                     </a>
+                    <label class="label label-success">已投稿</label>
                   </div>
                   <div class="media-body">
                     <h4 class="media-heading"><a href="/doc" target="_blank">tensorflow 中文文档</a> <a href="/editor/doc" target="_blank" class="pull-right icon-edit"></a></h4>
@@ -65,7 +67,7 @@
                     <span class="label-daynamic">收藏：12</span>
                   </div>
                 </div>
-                <hr/>
+
               </div>
             </div>
           </div>

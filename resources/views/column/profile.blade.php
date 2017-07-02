@@ -53,7 +53,7 @@
       </div>
       <div class="navBar">
         <span>供电<br/>100k°</span>
-        <span>电池组<br/>23</span>
+        <span>油瓶<br/>23</span>
         <span>订阅<br/>64</span>
         <span>互动<br/>646k</span>
       </div>

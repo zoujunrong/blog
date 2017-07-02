@@ -1,5 +1,10 @@
 @extends('orgnazation.secondNav')  
   @section('header')
+  <style type="text/css">
+    .label{
+      font-size: 12px;
+    }
+  </style>
                 <div class="bs-example" data-example-id="nav-tabs-with-dropdown">
                   <ul class="nav nav-tabs">
                     <li role="presentation" class="active"><a href="#">全部</a></li>
@@ -29,7 +34,7 @@
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading"><a href="/doc" target="_blank">工程师侃汽车行业</a><span class="pull-right" title="已供电1234度" style="font-size: 12px;">1234°</span></h4>
+                    <h4 class="media-heading"><a href="/doc" target="_blank"><span class="label label-info">队长</span> 工程师侃汽车行业</a><span class="pull-right" title="已供电1234度" style="font-size: 12px;">1234°</span></h4>
                     <p>从零开始设计纯电动车动力系统</p>
                     
                   </div>
@@ -42,7 +47,7 @@
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading"><a href="/doc" target="_blank">心理碎片</a><span class="pull-right" title="已供电1234度" style="font-size: 12px;">1663°</span></h4>
+                    <h4 class="media-heading"><a href="/doc" target="_blank"><span class="label label-info">队员</span> 心理碎片</a><span class="pull-right" title="已供电1234度" style="font-size: 12px;">1663°</span></h4>
                     <p>在我们风头正劲的时候，做事是不是也会更顺利呢?</p>
                   </div>
                 </div>

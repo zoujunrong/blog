@@ -45,11 +45,13 @@
   }
   
 </style>
-    <div class="jumbotron masthead" style="margin-top: -20px;">
+    <div class="jumbotron masthead" style="margin-top: -40px;">
       <div class="container header-pic">
         <a href="/profile"><img style="max-width: 100px;" class="img-circle" title="主页"  src="http://a0.att.hudong.com/61/92/20300543009208143927926724222_s.jpg" alt="头像" data-toggle="tooltip" data-placement="top"></a><span style="position: absolute;" class="icon-edit" title="编辑头像"></span>
         <h3>Bootstrap</h3>
         <p>简洁、直观、强悍的前端开发框架，让web开发更迅速、简单。</p>
+        <label class="icon-tag tag-label"> 前端开发</label>
+        <label class="icon-tag tag-label"> 互联网</label>
       </div>
       <div class="navBar">
         <a href="/orgnazation/energyFlows"><span>供 电<br/>100k°</span></a>

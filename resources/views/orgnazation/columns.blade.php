@@ -19,8 +19,11 @@
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading"><a href="/doc" target="_blank">工程师侃汽车行业</a><span class="pull-right" title="已供电1234度" style="font-size: 12px;">1234°</span></h4>
+                    <h4 class="media-heading"><a href="/doc" target="_blank">工程师侃汽车行业</a><span class="pull-right" title="今日供电1234度" style="font-size: 12px;font-weight: bold;">1234°</span></h4>
                     <p>从零开始设计纯电动车动力系统</p>
+                    <span class="label-daynamic">更新：刚刚</span>
+                    <span class="label-daynamic">总供电：1234k°</span>
+                    <span class="label-daynamic">订阅量：1234W</span>
                     
                   </div>
                 </div>
@@ -32,8 +35,11 @@
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading"><a href="/doc" target="_blank">心理碎片</a><span class="pull-right" title="已供电1234度" style="font-size: 12px;">1663°</span></h4>
+                    <h4 class="media-heading"><a href="/doc" target="_blank">心理碎片</a><span class="pull-right" title="今日供电1663度" style="font-size: 12px;font-weight: bold;">1663°</span></h4>
                     <p>在我们风头正劲的时候，做事是不是也会更顺利呢?</p>
+                    <span class="label-daynamic">更新：刚刚</span>
+                    <span class="label-daynamic">总供电：1234k°</span>
+                    <span class="label-daynamic">订阅量：1234W</span>
                   </div>
                 </div>
                 <hr/>
@@ -44,8 +50,11 @@
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading"><a href="/doc" target="_blank">php有关的那些事</a><span class="pull-right" title="已供电1234度" style="font-size: 12px;">134°</span></h4>
+                    <h4 class="media-heading"><a href="/doc" target="_blank">php有关的那些事</a><span class="pull-right" title="今日供电134度" style="font-size: 12px;font-weight: bold;">134°</span></h4>
                     <p>PHP（外文名:PHP: Hypertext Preprocessor，中文名：“超文本预处理器”）是一种通用开源脚本语言</p>
+                    <span class="label-daynamic">更新：刚刚</span>
+                    <span class="label-daynamic">总供电：1234k°</span>
+                    <span class="label-daynamic">订阅量：1234W</span>
                   </div>
                 </div>
                 <hr/>
@@ -56,8 +65,12 @@
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading"><a href="/doc" target="_blank">聊聊这个世界</a><span class="pull-right" title="已供电1234度" style="font-size: 12px;">234°</span></h4>
-                    <p>有时候是生产，还是消费，取决于执念</p>
+                    <h4 class="media-heading"><a href="/doc" target="_blank">聊聊这个世界</a><span class="pull-right" title="今日供电234度" style="font-size: 12px;font-weight: bold;">234°</span></h4>
+                    
+                    <p>有时候是生产，还是消费，取决于执念有时候是生产，还是消费，取决于执念有时候是生产，还是消费，取决于执念</p>
+                    <span class="label-daynamic">更新：刚刚</span>
+                    <span class="label-daynamic">总供电：1234k°</span>
+                    <span class="label-daynamic">订阅量：1234W</span>
                   </div>
                 </div>
   @endsection

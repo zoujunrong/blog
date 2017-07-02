@@ -31,10 +31,11 @@
               </div>
               <div class="panel-body">
                 <div class="media">
-                  <div class="media-left">
+                  <div class="media-left text-center">
                     <a href="#" data-toggle="popover" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">
-                      <img width="48px" class="img-circle" src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="..."><span class="label label-default">&nbsp;专&nbsp;题&nbsp;</span>
+                      <img width="48px" class="img-circle" src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="...">
                     </a>
+                    <span class="label label-default">专题</span>
                   </div>
                   <div class="media-body">
                     <div class="row"><span class="col-md-10">人工智能</span><span class="col-md-2 pull-right">刚刚</span></div>
@@ -68,10 +69,11 @@
                 </div>
                 <hr/>
                 <div class="media">
-                  <div class="media-left">
+                  <div class="media-left text-center">
                     <a href="#" data-toggle="popover" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">
-                      <img width="48px" class="img-circle" src="//upload.jianshu.io/users/upload_avatars/1415547/d358b4661b26?imageMogr2/auto-orient/strip|imageView2/1/w/144/h/144" alt="..."><span class="label label-default">&nbsp;专&nbsp;题&nbsp;</span>
+                      <img width="48px" class="img-circle" src="//upload.jianshu.io/users/upload_avatars/1415547/d358b4661b26?imageMogr2/auto-orient/strip|imageView2/1/w/144/h/144" alt="...">
                     </a>
+                    <span class="label label-default">专题</span>
                   </div>
                   <div class="media-body">
                     <div class="row"><span class="col-md-10">人工智能</span><span class="col-md-2 pull-right">10分钟</span></div>
