@@ -28,7 +28,7 @@
 </style>
 <div class="col-md-3">
     <div class="panel panel-default center-block">
-      <div style="text-align: center;padding: 20px 10px;"><a href="/profile" title="个人主页"><img class="img-circle" style="width:100px; cursor: pointer;"  src="https://pbs.twimg.com/profile_images/875018008812335104/L9ehTueu_400x400.jpg" alt="头像" data-toggle="tooltip" data-placement="top"></a>
+      <div style="text-align: center;padding: 20px 10px;"><a href="/profile" style="border:1px solid silver;width:100%;" title="个人主页"><img class="img-circle" style="width:100px;height: 100px; cursor: pointer;"  src="https://goss1.vcg.com/creative/vcg/800/version23/VCG41530463096.jpg" alt="头像" data-toggle="tooltip" data-placement="top"></a>
         <h4><a href="/profile">zoujunrong</a></h4>
         <div>道欲道，学欲学。</div><br/>
         <div class="header-panel-footer"><span data-toggle="tooltip" data-placement="top" title="充电量（° 度）">充电 <label>23423</label></span><span data-toggle="tooltip" data-placement="top" title="供电量（° 度）">供电 <label>23333</label></span><span data-toggle="tooltip" data-placement="top" title="功率（W 瓦）">功率 <label>233</label></span></div>

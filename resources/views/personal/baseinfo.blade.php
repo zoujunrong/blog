@@ -2,6 +2,12 @@
 
 @section('content')
 @include('layouts.model.subject_create')
+<style type="text/css">
+  .hr-devide{
+    border-bottom: 1px solid #eee; padding: 5px 15px;
+    font-size: 14px;font-weight: bold;color: #5cb85c;
+  }
+</style>
 <div class="container">
     <div class="row">
         @include('personal.left')                
@@ -13,18 +19,19 @@
               <div class="panel-body">
                 <div class="bs-example" data-example-id="nav-tabs-with-dropdown">
                   <ul class="nav nav-tabs">
-                    <li role="presentation" class="active"><a href="#">基本信息</a></li>
-                    <li role="presentation"><a href="#">教育信息</a></li>
+                    <li role="presentation" class="active"><a href="#base-info">基本信息</a></li>
+                    <li role="presentation"><a href="#edu-info">教育信息</a></li>
                     <li role="presentation"><a href="#">职业信息</a></li>
                     <li role="presentation"><a href="#">学习方向</a></li>
                     <li role="presentation"><a href="#">知识领域</a></li>
                     <li class="pull-right">
-                      <button type="button" class="btn btn-success icon-edit" data-toggle="modal" data-target="#subject_create_model"> 创建 </button>
+                      <button type="button" class="btn btn-success icon-edit" data-toggle="modal" data-target="#subject_create_model"> 修改 </button>
                     </li>
                   </ul>
                 </div>
                 <br/>
                 <form class="form-horizontal">
+                  <h4 class="hr-devide" id="base-info">基本信息</h4>
                   <div class="form-group">
                     <label class="col-sm-2 control-label">账号</label>
                     <div class="col-sm-3">
@@ -81,6 +88,7 @@
                     </div>
                   </div>
 
+                  <h4 id="edu-info" class="hr-devide">教育信息</h4>
                   <div class="form-group">
                     <label class="col-sm-2 control-label">学历</label>
                     <div class="col-sm-5">
@@ -95,6 +103,21 @@
                       </select>
                     </div>
                   </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">学校</label>
+                    <div class="col-sm-5">
+                      <input type="text" class="form-control" placeholder="cellphone">
+                    </div>
+                    <div class="col-sm-2 col-sm-offset-2">
+                      <select class="form-control">
+                        <option value="">仅自己可见</option>
+                        <option value="">所有人可见</option>
+                        <option value="">组织成员可见</option>
+                        <option value="">我关注的人可见</option>
+                      </select>
+                    </div>
+                  </div>
+
                 </form>
                 
               </div>

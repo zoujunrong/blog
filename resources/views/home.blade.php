@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-
+<style type="text/css">
+  body {
+    position: relative;
+  }
+  
+</style>
 <div class="container">
     <div class="row">
         @include('personal.left')
