@@ -56,3 +56,7 @@ Route::get('/orgnazation/energyFlows', 'OrgnazationController@energyFlows');
 Route::get('/community', 'CommunityController@index');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

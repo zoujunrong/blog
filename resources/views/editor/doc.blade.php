@@ -19,7 +19,7 @@
         <style>
             body{margin: 0px;padding:0px;font-family: arial, helvetica;}
             .nav-tabs {
-                width:100%;line-height: 30px;padding-left:5px;font-family: arial;font-size:13px;background: #ffe69f;
+                width:100%;line-height: 30px;padding-left:5px;font-family: arial;font-size:13px;background: rgba(204, 204, 204, 0.6);
             }
             .nav-tabs span {
                 display: inline-block;

@@ -38,7 +38,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" style="display: none;">
                             <label for="captcha" class="col-md-4 control-label">验证码</label>
                             <div class="col-md-6">
                                 <label onclick="javascript:re_captcha();"><input type="text" class="form-control" name="captcha"></label>
@@ -61,6 +61,9 @@
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     忘记密码?
                                 </a>
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    注册
+                                </a>
                             </div>
                         </div>
 
@@ -69,14 +72,14 @@
                                 <button type="submit" class="btn btn-primary">
                                     登录
                                 </button>
-                                <label><span class="btn glyphicon glyphicon-phone"></span></label>
-                                <label >
+                                <label title="手机验证码登录"><span class="btn glyphicon glyphicon-phone"></span></label>
+                                <label title="微信登录">
                                   <span class="btn glyphicon glyphicon-envelope"></span>
                                 </label>
-                                <label>
+                                <label title="github账号登录">
                                   <span class="btn glyphicon glyphicon-cloud"></span>
                                 </label>
-                                <label>
+                                <label title="QQ账号登录">
                                   <span class="btn glyphicon glyphicon-qrcode"></span>
                                 </label>
                                 
