@@ -176,7 +176,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Sleimanx2\Plastic\PlasticServiceProvider::class,
 
         //验证码
         Mews\Captcha\CaptchaServiceProvider::class,

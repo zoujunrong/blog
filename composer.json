@@ -7,12 +7,10 @@
     "require": {
         "php": ">=5.6.4",
         "league/flysystem": "~1.0",
-        "isswp101/elasticsearch-eloquent": "^1.1",
         "jacobcyl/ali-oss-storage": "dev-master",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "mews/captcha": "^2.1",
-        "sleimanx2/plastic": "^0.3.0"
+        "mews/captcha": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

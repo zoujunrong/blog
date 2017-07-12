@@ -21,10 +21,6 @@ Route::get('editor', function () {
 Auth::routes();
 
 
-
-//es
-Route::get('/esTest', 'EsTestController@index');
-
 //首页
 Route::get('/home', 'HomeController@index');
 Route::get('/profile', 'HomeController@profile');

@@ -44,7 +44,7 @@
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -69,7 +69,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
             <!-- Authentication Links -->
-            @if (FALSE && Auth::guest())
+            @if (Auth::guest())
                 <li><a href="{{ route('login') }}">登录</a></li>
                 <li><a href="{{ route('register') }}">注册</a></li>
             @else
