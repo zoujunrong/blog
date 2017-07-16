@@ -18,6 +18,11 @@ Route::get('/', function () {
 Route::get('editor', function () {
     return view('editor');
 });
+
+//社会化组件登录
+Route::get('/login/github', 'Auth\LoginController@redirectToProvider');
+Route::get('/auth/callback', 'Auth\LoginController@handleProviderCallback');
+
 Auth::routes();
 
 

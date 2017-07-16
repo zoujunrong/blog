@@ -183,6 +183,9 @@ return [
         // oss 存储
         Jacobcyl\AliOSS\AliOssServiceProvider::class,
 
+        // 社会化登录
+        Laravel\Socialite\SocialiteServiceProvider::class,
+
     ],
 
     /*
@@ -232,7 +235,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
-
+        
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

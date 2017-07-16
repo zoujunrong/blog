@@ -41,7 +41,7 @@
     color:#000;
   }
   .header-pic:hover {
-    color: #fff;
+    color: #fff; 
   }
   </style>
     <div class="jumbotron masthead" style="margin-top: -20px;">

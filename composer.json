@@ -6,10 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "league/flysystem": "~1.0",
         "jacobcyl/ali-oss-storage": "dev-master",
         "laravel/framework": "5.4.*",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
+        "league/flysystem": "~1.0",
         "mews/captcha": "^2.1"
     },
     "require-dev": {

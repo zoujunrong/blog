@@ -26,7 +26,7 @@
         
         <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top">
             {!! $menuHtml !!}
-            <a class="back-to-top" href="#top">
+            <a class="back-to-top" style="position: fixed;bottom: 10px;" href="#top">
               返回顶部
             </a>
             

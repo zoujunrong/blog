@@ -35,4 +35,25 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'github' => [
+        'client_id'     => env('CLIENT_ID'),
+        'client_secret' => env('CLIENT_SECRET'),
+        'redirect'      => str_finish(env('APP_URL'), '/').'auth/callback?driver=github',
+    ],
+    'weixin' => [
+        'client_id'     => env('WEIXIN_KEY'),
+        'client_secret' => env('WEIXIN_SECRET'),
+        'redirect'      => env('WEIXIN_REDIRECT_URI'),
+        'auth_base_uri' => 'https://open.weixin.qq.com/connect/qrconnect',
+    ],
+
+    'baidu_translate' => [
+        'appid' => env('BAIDU_TRANSLATE_APPID'),
+        'key'   => env('BAIDU_TRANSLATE_KEY'),
+    ],
+
+    'bearychat' => [
+        'hook' => env('BEARYCHAT_HOOK'),
+    ],
+
 ];
