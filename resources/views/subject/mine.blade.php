@@ -70,7 +70,7 @@
                   <div class="media-body">
                     <p style="font-size:12px;color:gray;"><span>人工智能</span><span class="pull-right">刚刚</span></p>
                     <h4 class="media-heading"><a href="/doc" target="_blank">tensorflow 中文文档</a></h4>
-                    <p>TensorFlow™ 是一个采用数据流图（data flow graphs），用于数值计算的开源软件库。节点（Nodes）在图中表示数学操作，图中的线（edges）则表示在节点间相互联系的多维数据数组，即张量（tensor）。<a class="icon-double-angle-right" href="/doc"> 阅读</a></p>
+                    <p>TensorFlow™ 是一个采用数据流图（data flow graphs），用于数值计算的开源软件库。节点（Nodes）在图中表示数学操作，图中的线（edges）则表示在节点间相互联系的多维数据数组，即张量（tensor）<a class="icon-double-angle-right" href="/doc"> 阅读</a></p>
                     <span class="label-daynamic"><a href="#">引用：34W</a></span>
                     <span class="label-daynamic"><a href="#">评论：34W</a></span>
                     <span class="label-daynamic"><a href="#">收藏：12</a></span>
