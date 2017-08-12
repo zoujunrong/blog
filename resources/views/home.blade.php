@@ -4,13 +4,21 @@
 <style type="text/css">
   body {
     position: relative;
+    font-family: arial;
   }
-  
+  h4 a{
+    color: black;
+    font-weight: bolder;
+  }
+  .media-body p {
+    font-size: 15px;
+    line-height: 25px;
+  }
 </style>
 <div class="container">
     <div class="row">
-        @include('personal.left')
-        <div class="col-md-6">
+        
+        <div class="col-md-7 col-md-offset-1">
           <div class="row">
             <div class="panel panel-default">
               <div class="panel-heading" style="background-color: #fff;">
@@ -36,14 +44,11 @@
               </div>
               <div class="panel-body">
                 <div class="media">
-                  <div class="media-left text-center">
-                    <a href="#" data-toggle="popover" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">
-                      <img width="48px" class="img-circle" src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="...">
-                    </a>
-                    <span class="label label-default">专题</span>
-                  </div>
+                  
                   <div class="media-body">
-                    <div class="row"><span class="col-md-10">人工智能</span><span class="col-md-2 pull-right">刚刚</span></div>
+                    <div class="row"><span class="col-md-10"><a style="margin: 5px;height: 25px;" href="#" data-toggle="popover" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">
+                      <img width="25px" class="img-rounded" src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="...">
+                     人工智能</a></span></div>
                     <h4><a href="/doc" target="_blank">如何使用深度学习重建高分辨率音频？</a></h4>
                     <p>机器人圈」导览：关于高分辨率音频的炫酷想必大家都清楚，那么管如何构建呢？物理博士Jeffrey Hetherly在受到深度学习成功应用于图像超分辨率的启发后，开始使用深度神经网络在这一领域探索，下面就和机器人圈一起来学习一下吧。<a class="icon-double-angle-down" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 全文</a></p>
 
@@ -65,10 +70,11 @@
                       </span>
                     </div>
                     <div class="row">
-                      <span class="col-md-3"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534k</a></span>
-                      <span class="col-md-3"><a href="javascript:void(0);" title="收藏" class="icon-folder-open-alt"> </a></span>
-                      <span class="col-md-3"><a href="javascript:void(0);"  title="评论" class="icon-comment-alt"> </a></span>
-                      <span class="col-md-3"><a href="javascript:void(0);" title="阅读" class="icon-eye-open"> 3454k</a></span>
+                      <span class="col-md-2"><a href="javascript:void(0);" title="阅读" class="icon-eye-open"> 3454k</a></span>
+                      <span class="col-md-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534k</a></span>
+                      <span class="col-md-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
+                      <span class="col-md-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
+                      <span class="col-md-2"><a href="javascript:void(0);" title="举报" class="icon-legal"> 举报</a></span>
                     </div>
                   </div>
                 </div>
@@ -226,88 +232,9 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">推荐专栏<a href="#" class="pull-right"> 更多</a> <span class="pull-right">&nbsp;|&nbsp;</span><a href="#" class="pull-right"> 换一批</a></div>
 
-                    <div class="panel-body">
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img width="36px" class="img-circle" src="//upload.jianshu.io/users/upload_avatars/4105511/9d387f167dc4?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="...">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h5 class="media-heading">Zoujunronge e <button type="button" class="btn btn-default btn-xs icon-plus pull-right"> 订阅</button></h5>
-                            <p>Cras sit amet nibh ertr rxc...</p>
-                          </div>
-                        </div>
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img width="36px" class="img-circle" src="//upload.jianshu.io/users/upload_avatars/113479/3e1f96720ff8.JPG?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="...">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h5 class="media-heading">Zoujunronge e <button type="button" class="btn btn-default btn-xs icon-plus pull-right"> 订阅</button></h5>
-                            <p>Cras sit amet nibh...</p>
-                          </div>
-                        </div>
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img width="36px" class="img-circle" src="{{ asset('images/favicon1.png') }}" alt="...">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h5 class="media-heading">Zoujunronge e <button type="button" class="btn btn-default btn-xs icon-plus pull-right"> 订阅</button></h5>
-                            <p>Cras sit amet nibh...</p>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">推荐组织 <a href="#" class="pull-right"> 更多</a> <span class="pull-right">&nbsp;|&nbsp;</span><a href="#" class="pull-right"> 换一批</a></div>
-
-                    <div class="panel-body">
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img width="36px" class="img-circle" src="//upload.jianshu.io/users/upload_avatars/4171107/4e91e36376a6.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="...">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h5 class="media-heading">Zoujunronge e <button type="button" class="btn btn-default btn-xs icon-plus pull-right"> 订阅</button></h5>
-                            <p>Cras sit amet nibh...</p>
-                          </div>
-                        </div>
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img width="36px" class="img-circle" src="//upload.jianshu.io/users/upload_avatars/530449/adef2ba9e0cc.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="...">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h5 class="media-heading">Zoujunronge e <button type="button" class="btn btn-default btn-xs icon-plus pull-right"> 订阅</button></h5>
-                            <p>Cras sit amet nibh...</p>
-                          </div>
-                        </div>
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img width="36px" class="img-circle" src="//upload.jianshu.io/users/upload_avatars/1950577/86457b78-6b63-4ecc-84e4-8ec86987e90c.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="...">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h5 class="media-heading">Zoujunronge e <button type="button" class="btn btn-default btn-xs icon-plus pull-right"> 订阅</button></h5>
-                            <p>Cras sit amet nibh...</p>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
-                    
-    </div>
+        @include('personal.left')
+        
 </div>
 
 <!-- Modal -->

@@ -36,6 +36,9 @@
       .tag-label{
         margin:5px;padding: 2px 8px;border-radius: 2px;background-color: #fff;color: #118;
       }
+      a {
+        color:#7a8599;
+      }
     </style>
   </head>
 
@@ -114,9 +117,6 @@
       </div>
     </footer>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
 </body></html>
 
 
