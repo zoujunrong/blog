@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ColumnController extends Controller
+class ExploreController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,16 +23,6 @@ class ColumnController extends Controller
      */
     public function index()
     {
-        return view('column.index');
-    }
-
-    public function mine()
-    {
-        return view('column.mine');
-    }
-
-    public function profile()
-    {
-        return view('column.profile');
+        return view('explore');
     }
 }

@@ -10,8 +10,7 @@
 </style>
 <div class="container">
     <div class="row">
-        @include('personal.left')                
-        <div class="col-md-8">
+        <div class="col-md-7 col-md-offset-1">
           <div class="row">
 
             
@@ -84,7 +83,7 @@
             </div>
           </div>
         </div>
-        
+        @include('personal.menu')
 </div>
 
 <!-- Modal -->

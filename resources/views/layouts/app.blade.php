@@ -67,8 +67,7 @@
           <ul class="nav navbar-nav">
           
             <li class="{{ Request::is('home') ? 'active' : '' }}"><a href="/home">首页</a></li>
-            <li class="{{ Request::is('column') ? 'active' : '' }}"><a href="/column">专栏</a></li>
-            <li class="{{ Request::is('orgnazation') ? 'active' : '' }}"><a href="/orgnazation">组织</a></li>
+            <li class="{{ Request::is('explore') ? 'active' : '' }}"><a href="/explore">发现</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right hidden-sm">
             <!-- Authentication Links -->

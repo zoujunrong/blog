@@ -33,6 +33,8 @@ Route::get('/profile', 'HomeController@profile');
 Route::get('/collect', 'CollectController@mine');
 Route::get('/doc/mine', 'DocController@mine');
 Route::get('/subject/mine', 'SubjectController@mine');
+Route::get('/subject/info', 'SubjectController@info');
+
 Route::get('/column/mine', 'ColumnController@mine');
 Route::get('/orgnazation/mine', 'OrgnazationController@mine');
 Route::get('/home/baseinfo', 'HomeController@baseinfo');
@@ -61,3 +63,5 @@ Route::get('/community', 'CommunityController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/explore', 'ExploreController@index')->name('explore');

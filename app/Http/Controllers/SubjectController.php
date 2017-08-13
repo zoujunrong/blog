@@ -16,5 +16,8 @@ class SubjectController extends Controller
     	return view('subject.create');
     }
 
-    // 
+    // 个人专题
+    public function info() {
+    	return view('subject.know-info');
+    }
 }
