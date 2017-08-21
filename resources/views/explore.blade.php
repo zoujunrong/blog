@@ -18,9 +18,12 @@
 		color: #000;
 	}
 	.exp-list-top .active, .exp-list-top li:hover {
-		background-color: #eee;
-		border-radius:2em;
+		border-radius:4px;
 		box-shadow: 1px 1px 1px #888888;
+		background: linear-gradient(128deg, #fa2f2f 0%, #ff5b36 90%);
+	}
+	.exp-list-top>.active a,.exp-list-top>li:hover a {
+		color: #fff;
 	}
 
 	.panel {
