@@ -12,7 +12,7 @@
     	font-size: 16px;
     	line-height: 40px;
     	text-align: center;
-    	
+    	margin-bottom: 2px;
 	}
 	.exp-list-top a {
 		color: #000;
@@ -68,7 +68,7 @@
 				<li><a href="#">农学</a></li>
 			</ul>
 		</div>
-		<div class="col-md-7">
+		<div class="col-md-8">
 			<ul class="nav nav-tabs">
 			  <li role="presentation" class="active"><a href="#">全部</a></li>
 			  <li role="presentation"><a href="#">知识</a></li>
