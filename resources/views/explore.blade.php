@@ -22,7 +22,7 @@
 		box-shadow: 1px 1px 1px #888888;
 		background: linear-gradient(128deg, #fa2f2f 0%, #ff5b36 90%);
 	}
-	.exp-list-top>.active a,.exp-list-top>li:hover a {
+	.exp-list-top>.active a,.exp-list-top>li:hover a{
 		color: #fff;
 	}
 

@@ -1,114 +1,209 @@
 @extends('layouts.app')
+
 @section('content')
-  <style>
-  .masthead {
-    background-color: #2188b6;
-    color: #fff;
-    text-align: center;
-    min-height: 200px;
+<style type="text/css">
+  body {
+    position: relative;
+    font-family: arial;
   }
-  .masthead p {
-    font-size: 14px;
+  h4 a{
+    color: black;
+    font-weight: bolder;
   }
-  .navBar {
-    position: absolute;width:100%; height:48px;background: #fff;margin-top:20px;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
+  .media-body p {
+    font-size: 15px;
+    line-height: 25px;
   }
-  .masthead span {
-    width: 100px;height:48px;display: inline-block;
-    cursor: pointer;color:#000;padding:3px;font-size: 15px;
-  }
-  .masthead span:hover{
-    border-bottom:3px solid #2188b6;
-  }
-  .masthead span.active{
-    border-bottom:3px solid #2188b6;font-weight: bold;color: #2188b6;
-  }
-  .glaph-button {
-    height: 40px;
-    width: 100%;
-    background-color: #fff;
-    border: 0px;
-    display:table;
-  }
-  .glaph-button:hover,.active{
-    background-color: #eee;
-  }
-  .glaph-button a{
-    vertical-align:middle;    
-    display:table-cell;
-    text-decoration-line: none;
-    color:#000;
-  }
-  .header-pic:hover {
-    color: #fff; 
-  }
-  </style>
-    <div class="jumbotron masthead" style="margin-top: -20px;">
-      <div class="container header-pic">
-        <a href="/profile"><img class="img-circle" title="主页"  src="{{ asset('images/favicon1.png') }}" alt="头像" data-toggle="tooltip" data-placement="top"></a><span style="position: absolute;" class="icon-edit" title="编辑头像"></span>
-        <h3>环环网 1234W</h3>
-        <p>每次阅读都有进步，每次分享都有价值</p>
-      </div>
-      <div class="navBar">
-        <span>供 电<br/>100k°</span>
-        <span>充 电<br/>300k°</span>
-        <span>作 品<br/>64</span>
-      </div>
-    </div>
-    <br/>
-    <div class="container projects">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="panel panel-default">
-            <div class="panel-body" style="padding:0px 15px;">
-                <div class="row">
-                  <div class="col-md-4 glaph-button {{ Request::is('profile') ? 'active' : '' }}"><a href="/home"><i class="icon-home"></i> 动态</a></div>
-                  <div class="col-md-4 glaph-button {{ Request::is('subject/*') ? 'active' : '' }}"><a href="/subject/mine"><i class="icon-book"></i> 知识库 <span class="badge">14</span></a></div>
-                  <div class="col-md-4 glaph-button {{ Request::is('column/*') ? 'active' : '' }}"><a href="/column/mine"><i class="icon-reorder"></i> 专栏 </a></div>
-                  <div class="col-md-4 glaph-button {{ Request::is('orgnazation/*') ? 'active' : '' }}"><a href="/orgnazation/mine"><i class="icon-group"></i> 组织 </a></div>
-                  <div class="col-md-4 glaph-button {{ Request::is('settings') ? 'active' : '' }}"><a href="/settings"><i class="icon-user"></i> 基本资料 </a></div>
-                </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-9">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                      <img width="48px" class="media-object" src="{{ asset('images/favicon1.png') }}" alt="..."><span class="label label-info">&nbsp;100°&nbsp;</span>
-                    </a>
-                  </div>
+</style>
+<div class="container">
+    <div class="row">
+        
+        <div class="col-md-7 col-md-offset-1">
+          <div class="row">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <ul class="nav nav-tabs">
+                  <li role="presentation" class="active"><a href="#">成果</a></li>
+                  <li role="presentation"><a href="#">订阅</a></li>
+                </ul>
+                <div class="media">
+                  
                   <div class="media-body">
-                    <div class="row"><span class="col-md-10"><h4 class="media-heading"><a href="/doc" target="_blank">Sublime Text 全程指南</a></h4></span><span class="col-md-2 pull-right">10天前</span></div>
-                    
-                    <p>Sublime Text 全程指南 2014年 9月27日|评论 作者：Lucida 微博：@peng_gong 豆瓣：@figure9 原文链接：http://lucida.me/blog……/sublime-text-complete-guide/ 摘要（Abstract） 本文系统全面的介绍了Sublime Text，旨在成为最优秀的Sublime Text中文教程。 更新记录 2014/09……/27：完成初稿 2014/09/28： 更正打开控制台的快捷键为Ctrl + ` 更正全局替换的快捷键为Ctrl + Alt + Enter 前言</p>
-                    
+                    <div class="row"><span class="col-md-10"><a style="margin: 5px;height: 25px;" href="#" data-toggle="popover" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">
+                      <img width="25px" class="img-rounded" src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="...">
+                     人工智能</a></span><span class="col-md-2 pull-right">10天前</span></div>
+                    <h4><a href="/doc" target="_blank">如何使用深度学习重建高分辨率音频？</a></h4>
+                    <p>
+                    <img class="pull-left" style="width: 190px; margin: 5px 10px 0 0" src="//upload-images.jianshu.io/upload_images/1950577-98f475c00a46ea69.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cover">
+                    <p>我以前在超市做兼职的时候遇到一个女孩，她跟我一样做酸奶推销，八十一天，但是一天要站十个小时，而且还不包吃，这个姑娘特别喜欢林峰，她为了林峰学习粤语，看很多港片，买了很多林峰的海报，杂志封面是林峰的她也全买，林峰到内地有活动她总是赶到现场支持，她说她最大的愿望是有一天去香港看林峰的演唱会，但是重点来了，她今年已经二十八岁...<a class="icon-double-angle-right" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 阅读</a></p>
+                    </p>
+                    <p style="clear: both;"></p>
+
+                    <div class="row">
+                      <span class="col-xs-2 col-sm-2"><a style="color:#ff5b36;" href="javascript:void(0);" title="阅读" class="icon-eye-open"> 3454K</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534K</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="举报" class="icon-legal"> 举报</a></span>
+                    </div>
                   </div>
                 </div>
                 <hr/>
                 <div class="media">
-                  <div class="media-left">
-                    <a href="#" >
-                      <img width="48px" class="media-object" src="{{ asset('images/favicon1.png') }}" alt="..."><span class="label label-info">&nbsp;50k°&nbsp;</span>
-                    </a>
-                  </div>
+                  
                   <div class="media-body">
-                    <h4 class="media-heading">如何优雅地使用Sublime Text3</h4>
-                    <p>Sublime Text：一款具有代码高亮、语法提示、自动完成且反应快速的编辑器软件，不仅具有华丽的界面，还支持插件扩展机制，用她来写代码，绝对是一种享受。相比于难于上手的Vim，浮肿沉重的Eclipse，VS，即便体积轻巧迅速启动的Editplus、Notepad++，在SublimeText面前大略显失色，无疑这款性感无比的编辑器是Coding和Writing最佳的选择，没有之一。</p>
+                    <div class="row"><span class="col-md-10"><a style="margin: 5px;height: 25px;" href="#" data-toggle="popover" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">
+                      <img width="25px" class="img-rounded" src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="...">
+                     人工智能</a></span><span class="col-md-2 pull-right">10天前</span></div>
+                    <h4><a href="/doc" target="_blank">如何使用深度学习重建高分辨率音频？</a></h4>
+                    <p>
+                    <img class="pull-left" style="width: 190px; margin: 5px 10px 0 0" src="//upload-images.jianshu.io/upload_images/1950577-98f475c00a46ea69.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cover">
+                    <p>我以前在超市做兼职的时候遇到一个女孩，她跟我一样做酸奶推销，八十一天，但是一天要站十个小时，而且还不包吃，这个姑娘特别喜欢林峰，她为了林峰学习粤语，看很多港片，买了很多林峰的海报，杂志封面是林峰的她也全买，林峰到内地有活动她总是赶到现场支持，她说她最大的愿望是有一天去香港看林峰的演唱会，但是重点来了，她今年已经二十八岁...<a class="icon-double-angle-right" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 阅读</a></p>
+                    </p>
+                    <p style="clear: both;"></p>
+
+                    <div class="row">
+                      <span class="col-xs-2 col-sm-2"><a style="color:#ff5b36;" href="javascript:void(0);" title="影响" class="icon-eye-open"> 3454K</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534K</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="举报" class="icon-legal"> 举报</a></span>
+                    </div>
                   </div>
                 </div>
                 <hr/>
+                <div class="media">
+                  
+                  <div class="media-body">
+                    <div class="row"><span class="col-md-10"><a style="margin: 5px;height: 25px;" href="#" data-toggle="popover" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">
+                      <img width="25px" class="img-rounded" src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="...">
+                     人工智能</a></span><span class="col-md-2 pull-right">10天前</span></div>
+                    <h4><a href="/doc" target="_blank">如何使用深度学习重建高分辨率音频？</a></h4>
+                    <p>
+                    <img class="pull-left" style="width: 190px; margin: 5px 10px 0 0" src="//upload-images.jianshu.io/upload_images/1950577-98f475c00a46ea69.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cover">
+                    <p>我以前在超市做兼职的时候遇到一个女孩，她跟我一样做酸奶推销，八十一天，但是一天要站十个小时，而且还不包吃，这个姑娘特别喜欢林峰，她为了林峰学习粤语，看很多港片，买了很多林峰的海报，杂志封面是林峰的她也全买，林峰到内地有活动她总是赶到现场支持，她说她最大的愿望是有一天去香港看林峰的演唱会，但是重点来了，她今年已经二十八岁...<a class="icon-double-angle-right" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 阅读</a></p>
+                    </p>
+                    <p style="clear: both;"></p>
+
+                    <div class="row">
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="阅读" class="icon-eye-open"> 3454K</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534K</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="举报" class="icon-legal"> 举报</a></span>
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+                <div class="media">
+                  
+                  <div class="media-body">
+                    <div class="row"><span class="col-md-10"><a style="margin: 5px;height: 25px;" href="#" data-toggle="popover" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">
+                      <img width="25px" class="img-rounded" src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="...">
+                     人工智能</a></span><span class="col-md-2 pull-right">10天前</span></div>
+                    <h4><a href="/doc" target="_blank">如何使用深度学习重建高分辨率音频？</a></h4>
+                    <p>
+                    <img class="pull-left" style="width: 190px; margin: 5px 10px 0 0" src="//upload-images.jianshu.io/upload_images/1950577-98f475c00a46ea69.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cover">
+                    <p>我以前在超市做兼职的时候遇到一个女孩，她跟我一样做酸奶推销，八十一天，但是一天要站十个小时，而且还不包吃，这个姑娘特别喜欢林峰，她为了林峰学习粤语，看很多港片，买了很多林峰的海报，杂志封面是林峰的她也全买，林峰到内地有活动她总是赶到现场支持，她说她最大的愿望是有一天去香港看林峰的演唱会，但是重点来了，她今年已经二十八岁...<a class="icon-double-angle-right" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 阅读</a></p>
+                    </p>
+                    <p style="clear: both;"></p>
+
+                    <div class="row">
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="阅读" class="icon-eye-open"> 3454K</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534K</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="举报" class="icon-legal"> 举报</a></span>
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+                <div class="media">
+                  
+                  <div class="media-body">
+                    <div class="row"><span class="col-md-10"><a style="margin: 5px;height: 25px;" href="#" data-toggle="popover" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">
+                      <img width="25px" class="img-rounded" src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="...">
+                     人工智能</a></span><span class="col-md-2 pull-right">10天前</span></div>
+                    <h4><a href="/doc" target="_blank">如何使用深度学习重建高分辨率音频？</a></h4>
+                    <p>
+                    <img class="pull-left" style="width: 190px; margin: 5px 10px 0 0" src="//upload-images.jianshu.io/upload_images/1950577-98f475c00a46ea69.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cover">
+                    <p>我以前在超市做兼职的时候遇到一个女孩，她跟我一样做酸奶推销，八十一天，但是一天要站十个小时，而且还不包吃，这个姑娘特别喜欢林峰，她为了林峰学习粤语，看很多港片，买了很多林峰的海报，杂志封面是林峰的她也全买，林峰到内地有活动她总是赶到现场支持，她说她最大的愿望是有一天去香港看林峰的演唱会，但是重点来了，她今年已经二十八岁...<a class="icon-double-angle-right" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 阅读</a></p>
+                    </p>
+                    <p style="clear: both;"></p>
+
+                    <div class="row">
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="阅读" class="icon-eye-open"> 3454K</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534K</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="举报" class="icon-legal"> 举报</a></span>
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+                <div class="media">
+                  
+                  <div class="media-body">
+                    <div class="row"><span class="col-md-10"><a style="margin: 5px;height: 25px;" href="#" data-toggle="popover" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">
+                      <img width="25px" class="img-rounded" src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="...">
+                     人工智能</a></span><span class="col-md-2 pull-right">10天前</span></div>
+                    <h4><a href="/doc" target="_blank">如何使用深度学习重建高分辨率音频？</a></h4>
+                    <p>
+                    <img class="pull-left" style="width: 190px; margin: 5px 10px 0 0" src="//upload-images.jianshu.io/upload_images/1950577-98f475c00a46ea69.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cover">
+                    <p>我以前在超市做兼职的时候遇到一个女孩，她跟我一样做酸奶推销，八十一天，但是一天要站十个小时，而且还不包吃，这个姑娘特别喜欢林峰，她为了林峰学习粤语，看很多港片，买了很多林峰的海报，杂志封面是林峰的她也全买，林峰到内地有活动她总是赶到现场支持，她说她最大的愿望是有一天去香港看林峰的演唱会，但是重点来了，她今年已经二十八岁...<a class="icon-double-angle-right" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 阅读</a></p>
+                    </p>
+                    <p style="clear: both;"></p>
+
+                    <div class="row">
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="阅读" class="icon-eye-open"> 3454K</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534K</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
+                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="举报" class="icon-legal"> 举报</a></span>
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+
+              </div>
             </div>
           </div>
         </div>
-        </div>
+
+        @include('personal.menu')
+        
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">引用</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
+  </div>
+</div>
 
+<script type="text/javascript">
+  $(function () {
+    $('[data-toggle="popover"]').popover();
+    $('[data-toggle="popover"]').on('mouseover', function(){
+      $(this).popover('show');
+    }).on('mouseout', function(){
+      $(this).popover('hide');
+    })
+    $('[data-toggle="tooltip"]').tooltip();
+  })
+</script>
 @endsection
-    
-    
-    
+

@@ -1,4 +1,5 @@
 <style type="text/css">
+  .panel{margin-bottom: 10px;}
   .glaph-button {
     height: 40px;
     width: 100%;
@@ -31,9 +32,11 @@
       <div style="text-align: center;padding: 20px 10px;"><a href="/profile" title="个人主页"><img class="img-circle" style="width:100px;height: 100px; cursor: pointer;"  src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="头像" data-toggle="tooltip" data-placement="top"></a>
         <h4><a href="/profile">zoujunrong</a></h4>
         <div>道欲道，学欲学。</div><br/>
-        <div class="header-panel-footer"><span data-toggle="tooltip" data-placement="top" title="充电量（° 度）">充电 <label>23423</label></span><span data-toggle="tooltip" data-placement="top" title="供电量（° 度）">供电 <label>23333</label></span><span data-toggle="tooltip" data-placement="top" title="功率（W 瓦）">功率 <label>233</label></span></div>
+        <div class="header-panel-footer"><span data-toggle="tooltip" data-placement="top" title="充电量（° 度）">老师 <label>23423</label></span><span data-toggle="tooltip" data-placement="top" title="供电量（° 度）">学生 <label>23333</label></span><span data-toggle="tooltip" data-placement="top" title="功率（W 瓦）">影响力 <label>233</label></span></div>
       </div>
     </div>
+    
+    @if ( Request::is('home') )
     <div class="panel panel-default">
       <div class="panel-body" style="padding:0px 15px;">
           <div class="row">
@@ -44,6 +47,21 @@
             <div class="col-md-4 glaph-button {{ Request::is('home/baseinfo') ? 'active' : '' }}"><a href="/home/baseinfo"><i class="icon-cogs"></i> 基本资料 </a></div>
           </div>
       </div>
+    </div>
+    @elseif ( Request::is('profile') )
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+              <p><a href="#">环境科学</a>、<a href="#">环境化学</a></p>
+              <p>归属: <a href="#">南昌大学环境与化学工程学院</a></p>
+              <p>职位: <a href="#">工学教授</a></p>
+              <p>学历: <a href="#">上海交通大学博士</a></p>
+            </div>
+          </div>
+      </div>
+    </div>
+    @endif
     </div>
           
 </div>
