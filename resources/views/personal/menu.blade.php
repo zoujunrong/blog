@@ -50,6 +50,12 @@
     </div>
     @elseif ( Request::is('profile') )
     <div class="panel panel-default">
+      <div class="panel-body" style="padding:0px">
+        <div class="row" id="chart">
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
       <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
@@ -65,3 +71,25 @@
     </div>
           
 </div>
+<script src="{{ asset('js/statistic_graph.js') }}"></script>
+<script type="text/javascript">
+  $(function(){
+  $('#chart').radarChart({
+    size: [280, 250],
+    step: 1,
+    title: "涉及领域",
+    values: {
+      "JavaScript": 4.1,
+      "Node.js": 3.5,
+      "jQuery": 4,
+      "PHP": 3,
+      "C++": 2.5,
+      "我是很长很长的一串中文，真的很长很长": 3.5,
+      "DHTML": 4
+    },
+    showAxisLabels: false
+  });
+});
+
+
+</script>

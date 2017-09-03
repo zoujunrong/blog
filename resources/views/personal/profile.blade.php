@@ -14,6 +14,9 @@
     font-size: 15px;
     line-height: 25px;
   }
+  .media-body .footer{
+
+  }
 </style>
 <div class="container">
     <div class="row">
@@ -38,9 +41,8 @@
                     <p>我以前在超市做兼职的时候遇到一个女孩，她跟我一样做酸奶推销，八十一天，但是一天要站十个小时，而且还不包吃，这个姑娘特别喜欢林峰，她为了林峰学习粤语，看很多港片，买了很多林峰的海报，杂志封面是林峰的她也全买，林峰到内地有活动她总是赶到现场支持，她说她最大的愿望是有一天去香港看林峰的演唱会，但是重点来了，她今年已经二十八岁...<a class="icon-double-angle-right" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 阅读</a></p>
                     </p>
                     <p style="clear: both;"></p>
-
-                    <div class="row">
-                      <span class="col-xs-2 col-sm-2"><a style="color:#ff5b36;" href="javascript:void(0);" title="阅读" class="icon-eye-open"> 3454K</a></span>
+                    <div class="row" style="margin-top: 20px;">
+                      <span class="col-xs-2 col-sm-2"> <b style="font-size: 20px;color:#ff5b36;line-height: 20px;" title="影响了5.1千人"> 5.1K</b></span>
                       <span class="col-xs-2 col-sm-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534K</a></span>
                       <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
                       <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
@@ -61,9 +63,8 @@
                     <p>我以前在超市做兼职的时候遇到一个女孩，她跟我一样做酸奶推销，八十一天，但是一天要站十个小时，而且还不包吃，这个姑娘特别喜欢林峰，她为了林峰学习粤语，看很多港片，买了很多林峰的海报，杂志封面是林峰的她也全买，林峰到内地有活动她总是赶到现场支持，她说她最大的愿望是有一天去香港看林峰的演唱会，但是重点来了，她今年已经二十八岁...<a class="icon-double-angle-right" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 阅读</a></p>
                     </p>
                     <p style="clear: both;"></p>
-
-                    <div class="row">
-                      <span class="col-xs-2 col-sm-2"><a style="color:#ff5b36;" href="javascript:void(0);" title="影响" class="icon-eye-open"> 3454K</a></span>
+                    <div class="row" style="margin-top: 20px;">
+                      <span class="col-xs-2 col-sm-2"> <b style="font-size: 20px;color:#ff5b36;line-height: 20px;" title="影响了5.1千人"> 5.1K</b></span>
                       <span class="col-xs-2 col-sm-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534K</a></span>
                       <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
                       <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
@@ -84,9 +85,8 @@
                     <p>我以前在超市做兼职的时候遇到一个女孩，她跟我一样做酸奶推销，八十一天，但是一天要站十个小时，而且还不包吃，这个姑娘特别喜欢林峰，她为了林峰学习粤语，看很多港片，买了很多林峰的海报，杂志封面是林峰的她也全买，林峰到内地有活动她总是赶到现场支持，她说她最大的愿望是有一天去香港看林峰的演唱会，但是重点来了，她今年已经二十八岁...<a class="icon-double-angle-right" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 阅读</a></p>
                     </p>
                     <p style="clear: both;"></p>
-
-                    <div class="row">
-                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="阅读" class="icon-eye-open"> 3454K</a></span>
+                    <div class="row" style="margin-top: 20px;">
+                      <span class="col-xs-2 col-sm-2"> <b style="font-size: 20px;color:#ff5b36;line-height: 20px;" title="影响了5.1千人"> 5.1K</b></span>
                       <span class="col-xs-2 col-sm-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534K</a></span>
                       <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
                       <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
@@ -107,9 +107,8 @@
                     <p>我以前在超市做兼职的时候遇到一个女孩，她跟我一样做酸奶推销，八十一天，但是一天要站十个小时，而且还不包吃，这个姑娘特别喜欢林峰，她为了林峰学习粤语，看很多港片，买了很多林峰的海报，杂志封面是林峰的她也全买，林峰到内地有活动她总是赶到现场支持，她说她最大的愿望是有一天去香港看林峰的演唱会，但是重点来了，她今年已经二十八岁...<a class="icon-double-angle-right" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 阅读</a></p>
                     </p>
                     <p style="clear: both;"></p>
-
-                    <div class="row">
-                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="阅读" class="icon-eye-open"> 3454K</a></span>
+                    <div class="row" style="margin-top: 20px;">
+                      <span class="col-xs-2 col-sm-2"> <b style="font-size: 20px;color:#ff5b36;line-height: 20px;" title="影响了5.1千人"> 5.1K</b></span>
                       <span class="col-xs-2 col-sm-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534K</a></span>
                       <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
                       <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
@@ -130,9 +129,8 @@
                     <p>我以前在超市做兼职的时候遇到一个女孩，她跟我一样做酸奶推销，八十一天，但是一天要站十个小时，而且还不包吃，这个姑娘特别喜欢林峰，她为了林峰学习粤语，看很多港片，买了很多林峰的海报，杂志封面是林峰的她也全买，林峰到内地有活动她总是赶到现场支持，她说她最大的愿望是有一天去香港看林峰的演唱会，但是重点来了，她今年已经二十八岁...<a class="icon-double-angle-right" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 阅读</a></p>
                     </p>
                     <p style="clear: both;"></p>
-
-                    <div class="row">
-                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="阅读" class="icon-eye-open"> 3454K</a></span>
+                    <div class="row" style="margin-top: 20px;">
+                      <span class="col-xs-2 col-sm-2"> <b style="font-size: 20px;color:#ff5b36;line-height: 20px;" title="影响了5.1千人"> 5.1K</b></span>
                       <span class="col-xs-2 col-sm-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534K</a></span>
                       <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
                       <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
@@ -153,9 +151,8 @@
                     <p>我以前在超市做兼职的时候遇到一个女孩，她跟我一样做酸奶推销，八十一天，但是一天要站十个小时，而且还不包吃，这个姑娘特别喜欢林峰，她为了林峰学习粤语，看很多港片，买了很多林峰的海报，杂志封面是林峰的她也全买，林峰到内地有活动她总是赶到现场支持，她说她最大的愿望是有一天去香港看林峰的演唱会，但是重点来了，她今年已经二十八岁...<a class="icon-double-angle-right" href="http://mp.weixin.qq.com/s?src=3&timestamp=1498400942&ver=1&signature=03fn-njMA86IJDUqXKfESWNqLKF7upPf3dImAJFl*Z9SEwDFlLCRnBVjXMZ*sJrM9Hva7sVIXKBTqJpuePCG4U0ljspTe1qQPZ4KkkWWYCJ7na-QBRtnuz4vfV2v14iF4pATxq7nlxG0f9na895s9pWNyPcsjYfjDw6hrDwQFno="> 阅读</a></p>
                     </p>
                     <p style="clear: both;"></p>
-
-                    <div class="row">
-                      <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="阅读" class="icon-eye-open"> 3454K</a></span>
+                    <div class="row" style="margin-top: 20px;">
+                      <span class="col-xs-2 col-sm-2"> <b style="font-size: 20px;color:#ff5b36;line-height: 20px;" title="影响了5.1千人"> 5.1K</b></span>
                       <span class="col-xs-2 col-sm-2"><a href="#" method="post" title="引用" class="icon-quote-left" data-toggle="modal" data-target="#myModal"> 534K</a></span>
                       <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);"  title="评论" class="icon-comment"> 评论</a></span>
                       <span class="col-xs-2 col-sm-2"><a href="javascript:void(0);" title="分享" class="icon-share-alt"> 分享</a></span>
@@ -164,7 +161,6 @@
                   </div>
                 </div>
                 <hr/>
-
               </div>
             </div>
           </div>
