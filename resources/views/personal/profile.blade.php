@@ -14,9 +14,6 @@
     font-size: 15px;
     line-height: 25px;
   }
-  .media-body .footer{
-
-  }
 </style>
 <div class="container">
     <div class="row">
