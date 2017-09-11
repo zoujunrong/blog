@@ -39,6 +39,9 @@
       a {
         color:#7a8599;
       }
+      .affact-label{
+        font-size: 20px;color:#ff5b36;line-height: 20px;
+      }
     </style>
   </head>
 

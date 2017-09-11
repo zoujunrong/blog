@@ -25,11 +25,26 @@
     font-weight: bold;
     color:#000;
   }
-  
+  .attention{
+    background-color: #fff;border:none;border-bottom: 1px solid silver;border-right: 1px solid silver;padding:3px 10px;outline:none;
+  }
+  .attention:hover{
+    background-color: #eee;
+  }
+  .attention:active{
+    background-color: #ddd;
+  }
+  .huan-label-info{
+    background-color: #ff5b36;color:#fff;margin:0px;padding:2px 5px;
+  }
 </style>
 <div class="col-md-3">
     <div class="panel panel-default center-block">
-      <div style="text-align: center;padding: 20px 10px;"><a href="/profile" title="个人主页"><img class="img-circle" style="width:100px;height: 100px; cursor: pointer;"  src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="头像" data-toggle="tooltip" data-placement="top"></a>
+      @if ( Request::is('profile') )
+      <button type="button" class="attention"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 关注</button>
+      @endif
+      <div style="text-align: center;padding: 20px 10px;">
+      <a href="/profile" title="个人主页"><img class="img-circle" style="width:100px;height: 100px; cursor: pointer;"  src="http://upload.jianshu.io/collections/images/279834/1473388229.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="头像" data-toggle="tooltip" data-placement="top"></a>
         <h4><a href="/profile">zoujunrong</a></h4>
         <div>道欲道，学欲学。</div><br/>
         <div class="header-panel-footer"><span data-toggle="tooltip" data-placement="top" title="充电量（° 度）">老师 <label>23423</label></span><span data-toggle="tooltip" data-placement="top" title="供电量（° 度）">学生 <label>23333</label></span><span data-toggle="tooltip" data-placement="top" title="功率（W 瓦）">影响力 <label>233</label></span></div>
@@ -49,7 +64,8 @@
       </div>
     </div>
     @elseif ( Request::is('profile') )
-    <div class="panel panel-default">
+    <div class="panel panel-default" style="padding:0px">
+      <b class="huan-label-info">14</b>
       <div class="panel-body" style="padding:0px">
         <div class="row" id="chart">
         </div>
@@ -79,13 +95,12 @@
     step: 1,
     title: "涉及领域",
     values: {
-      "JavaScript": 4.1,
-      "Node.js": 3.5,
-      "jQuery": 4,
-      "PHP": 3,
-      "C++": 2.5,
-      "我是很长很长的一串中文，真的很长很长": 3.5,
-      "DHTML": 4
+      "经济学(4.1)": 4.1,
+      "金融学(3.5)": 3.5,
+      "历史学(4)": 4,
+      "数学(3)": 3,
+      "海洋科学(2.5)": 2.5,
+      "心理学(13.5)": 13.5,
     },
     showAxisLabels: false
   });

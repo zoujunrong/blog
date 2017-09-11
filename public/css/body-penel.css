@@ -1,0 +1,21 @@
+body {
+  position: relative;
+  font-family: arial;
+}
+h4 a{
+  color: black;
+  font-weight: bolder;
+}
+.media-body p {
+  font-size: 15px;
+  line-height: 25px;
+}
+
+.panel-card-footer{
+  margin: 20px 0px 0px 0px;
+  background-color: #fff;
+}
+.panel-card-footer > span{
+  width: 80px;
+  display: inline-block;
+}
