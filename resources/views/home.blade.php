@@ -3,7 +3,6 @@
 <link href="{{ asset('css/body-penel.css') }}" rel="stylesheet">
 <div class="container">
     <div class="row">
-        
         <div class="col-md-7 col-md-offset-1">
           <div class="row">
             <div class="panel panel-default">
@@ -13,7 +12,10 @@
                   <div class="col-xs-4 col-sm-4"></div>
                   <div class="col-xs-5 col-sm-5">
                     <div class="btn-group pull-right" role="group">
-                      <button type="button" class="btn btn-success dropdown-toggle icon-edit" aria-haspopup="true" aria-expanded="false"> <a style="color:#fff;" href="/editor/doc" target="_blank" >创建知识体</a>
+                      
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bokModal">
+                        创建知识体
                       </button>
                     </div>
 
@@ -243,28 +245,54 @@
           </div>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="bokModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">创建知识体</h4>
+              </div>
+              <div class="modal-body">
+                <form id="bokForm">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">标题</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="知识体标题（不超过255字符）">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">描述</label>
+                    <textarea class="form-control" placeholder="简单描述一下你的知识体（不超过255字符）"></textarea>
+                  </div>
+                  <div class="form-inline">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">所属领域</label>
+                      <select class="form-control">
+                        <option>计算机</option>
+                      </select>
+                      <select class="form-control">
+                        <option>人工智能</option>
+                      </select>
+                    </div>
+                  </div>
+                  <br/>
+                  <div class="form-group">
+                    <label for="exampleInputFile">知识体头像</label>
+                    <input type="file" id="exampleInputFile" accept="image/jpeg">
+                    <img id="showThumb" style="display: none;width: 100px;height: 100px;margin: 10px 0px;border:1px solid silver;" src="" >
+                    <p class="help-block">使用高度符合知识体的封面，能够提高关注度.</p>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="bokSubmit" type="button" class="btn btn-primary">开始创建</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         @include('personal.menu')
         
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">引用</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <script type="text/javascript">
@@ -274,9 +302,27 @@
       $(this).popover('show');
     }).on('mouseout', function(){
       $(this).popover('hide');
-    })
+    });
     $('[data-toggle="tooltip"]').tooltip();
-  })
+
+    $('#exampleInputFile').on('change', function() {
+      var url = window.URL.createObjectURL($(this)[0].files[0])
+      $("#showThumb").attr('src', url).show();
+    });
+
+    // bokForm表单处理事件
+    $('#bokSubmit').on('click', function() {
+      $.ajax({
+          type: "POST",
+          url: "/editor/doc",
+          data: $('#form').serialize(),
+          dataType: 'json',
+          success: function(msg) {
+           alert( "Data Saved: " + JSON.stringify(msg) );
+          }
+      });
+    });
+  });
 </script>
 @endsection
 

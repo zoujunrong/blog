@@ -65,3 +65,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/explore', 'ExploreController@index')->name('explore');
+
+
+// 分类信息
+// Route::get('/category/getsub/{id}', '');
