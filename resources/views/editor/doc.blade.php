@@ -175,55 +175,7 @@
             </div>
 
             <div id="folder_list" style="display:none;">
-                {{ $folders or '[{
-                    "isActive":false,
-                    "isExpanded":true,
-                    "isFolder":true,
-                    "text":"bootstrap 开发文档",
-                    "tooltip":"Bookmarks",
-                    "children":
-                    [
-                       {
-                          "href":"#",
-                          "text":"Home"
-                       },
-                       {
-                          "children":[
-                             {
-                                "href":"#",
-                                "isActive":true,
-                                "text":"Go to Google.com"
-                             },
-                             {
-                                "href":"#",
-                                "text":"Go to Yahoo.com"
-                             }
-                          ],
-                          "isActive":false,
-                          "isExpanded":true,
-                          "isFolder":true,
-                          "text":"Folder 1",
-                          "tooltip":"Bookmarks"
-                       },
-                       {
-                          "children":[
-                             {
-                                "text":"Sub Node 1"
-                             },
-                             {
-                                "text":"Sub Node 2"
-                             },
-                             {
-                                "text":"Sub Node 3"
-                             }
-                          ],
-                          "text":"Node 1"
-                       },
-                       {
-                          "text":"Node 2"
-                       }
-                    ]
-                }]' }}
+                {{ $folders or '[]' }}
             </div>
         </div>
         <div class="menu">
@@ -284,8 +236,9 @@
                         type: "POST",
                         url: "/editor/doc",
                         data: $('#form').serialize(),
-                        success: function(msg){
-                         alert( "Data Saved: " + msg );
+                        dataType: 'json',
+                        success: function(msg) {
+                         alert( "Data Saved: " + JSON.stringify(msg) );
                         }
                     });
                 })

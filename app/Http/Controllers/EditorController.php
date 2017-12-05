@@ -37,9 +37,11 @@ class EditorController extends Controller
      */
     public function store(Request $request)
     {
+        
         Storage::disk('oss')->put('docs/content.html', $request->content);
         Storage::disk('oss')->put('docs/menu.json', $request->menuTree);
         Storage::disk('oss')->put('docs/folders.json', $request->folderList);
+        return ['errCode' => 200, 'errMsg' => '操作成功', 'data' => [1,2,3,3,4,5]];
         return view('editor.doc', ['content' => $request->content, 'menu'=> $request->menuTree, 'folders' => $request->folderList]);
     }
 }
