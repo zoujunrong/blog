@@ -6,12 +6,15 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "barryvdh/laravel-cors": "^0.10.0",
         "jacobcyl/ali-oss-storage": "dev-master",
         "laravel/framework": "5.4.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "league/flysystem": "~1.0",
-        "mews/captcha": "^2.1"
+        "mews/captcha": "^2.1",
+        "socialiteproviders/weixin": "^4.0",
+        "tymon/jwt-auth": "^0.5.12"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -74,7 +74,7 @@
                                 </button>
                                 <label title="手机验证码登录"><span class="btn glyphicon glyphicon-phone"></span></label>
                                 <label title="微信登录">
-                                  <a class="btn glyphicon glyphicon-envelope" href="/login/github"></a>
+                                  <a class="btn glyphicon glyphicon-envelope" href="/login/weixin"></a>
                                 </label>
                                 <label title="github账号登录">
                                   <a class="btn glyphicon glyphicon-cloud" href="/login/github"></a>

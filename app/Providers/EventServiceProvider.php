@@ -15,6 +15,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\SomeEvent' => [
             'App\Listeners\EventListener',
+            'SocialiteProviders\Weixin\WeixinExtendSocialite@handle',
         ],
     ];
 

@@ -22,6 +22,7 @@ Route::get('editor', function () {
 //社会化组件登录
 Route::get('/login/github', 'Auth\LoginController@redirectToProvider');
 Route::get('/auth/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('/login/weixin', function(){return Socialite::with('weixin')->redirect();});
 
 Auth::routes();
 
@@ -65,3 +66,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/explore', 'ExploreController@index')->name('explore');
+
+
+Route::group(['middleware' => ['api','cors'],'prefix' => 'api'], function () {
+    Route::post('register', 'ApiController@register');     // 注册
+    Route::post('login', 'ApiController@login');           // 登陆
+    Route::group(['middleware' => 'jwt.auth'], function () {
+        Route::post('get_user_details', 'APIController@get_user_details');  // 获取用户详情
+    });
+});

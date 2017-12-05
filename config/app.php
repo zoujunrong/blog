@@ -184,7 +184,12 @@ return [
         Jacobcyl\AliOSS\AliOssServiceProvider::class,
 
         // 社会化登录
-        Laravel\Socialite\SocialiteServiceProvider::class,
+        // Laravel\Socialite\SocialiteServiceProvider::class,
+        \SocialiteProviders\Manager\ServiceProvider::class,
+
+        // JWT api
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
     ],
 
@@ -237,6 +242,7 @@ return [
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
         
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class
     ],
 
 ];
