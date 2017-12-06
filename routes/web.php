@@ -69,9 +69,9 @@ Route::get('/explore', 'ExploreController@index')->name('explore');
 
 
 Route::group(['middleware' => ['api','cors'],'prefix' => 'api'], function () {
-    Route::post('register', 'ApiController@register');     // 注册
     Route::post('login', 'ApiController@login');           // 登陆
     Route::group(['middleware' => 'jwt.auth'], function () {
-        Route::post('get_user_details', 'APIController@get_user_details');  // 获取用户详情
+        Route::post('get_user_details', 'ApiController@get_user_details');  // 获取用户详情
+        Route::post('syncbookmarks', 'ApiController@syncBookmarks');  // 获取用户详情
     });
 });
