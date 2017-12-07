@@ -27,6 +27,37 @@ class File extends Model
 		return $tableName;
 	}
 
+	static public function getTables($ids)
+	{
+		$tables = [];
+
+		if (!empty($ids)) {
+			foreach ($ids as $id) {
+				$tables[self::getTableName($id)][] = $id;
+			}
+		}
+		return $tables;
+
+	}
+
+
+	public function getFilesByIds($fileIds, $options=[])
+	{
+		// 获取表
+		$tables = self::getTables($fileIds);
+
+		$files = collect([]);
+
+		if (!empty($tables)) {
+			foreach ($tables as $table) {
+				$files->merge(DB::table($table)->whereIn(id, $ids)->where($options)->get());
+			}
+
+		}
+		return $files;
+
+	}
+
 
 	
 

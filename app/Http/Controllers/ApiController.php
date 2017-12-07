@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\models\Folder;
 
-class ApiController extends Controller
+class ApiController extends CommonController
 {
 
     /*登陆*/
@@ -15,17 +15,27 @@ class ApiController extends Controller
     {
         $input = $request->all();
         if (!$token = JWTAuth::attempt($input)) {
-            return response()->json(['code'=> 40001, 'result' => '邮箱或密码错误.']);
+            self::setErrorMsg(40001, '邮箱或密码错误.');
         }
-        return response()->json(['code'=> 0, 'result' => $token]);
+        return self::response($token);
     }
 
     /*获取用户信息*/
-    public function get_user_details(Request $request)
+    public function getUserDetails(Request $request)
     {
         $input = $request->all();
         $user = JWTAuth::toUser($input['token']);
-        return response()->json(['result' => $user]);
+        return self::response($user);
+    }
+
+
+    /**
+     * 同步用户bookmarks信息
+     */
+    public function getBookmarks(Request $request) {
+        $input = $request->all();
+        $folders = (new Folder())->getUserFoldersByFid($input['uid'], $input['fid']);
+
     }
 
     /**
@@ -34,7 +44,14 @@ class ApiController extends Controller
     public function syncBookmarks(Request $request)
     {
         $input = $request->all();
-        $bookmarks = $input['bookmarks'];
+
+        if (empty($input['bookmarks'])) {
+            self::setErrorMsg(4001, '未获取到书签信息');
+        }
+
+        $insertRes = (new Folder())->insertFoldersAndFilesByTree($input['uid'], $input['bookmarks']);
+
+        return self::response($insertRes);
 
     }
 

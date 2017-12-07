@@ -4,6 +4,8 @@ namespace App\models;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use FolderMapFile;
+use File;
 
 class Folder extends Model
 {
@@ -23,8 +25,8 @@ class Folder extends Model
 			DB::statement('CREATE TABLE IF NOT EXISTS `'.$tableName.'` LIKE `'.$baseTable.'`');
 			self::$tables[$tableName] = 1;
 		}
-
 		return $tableName;
+
 	}
 
 
@@ -45,14 +47,57 @@ class Folder extends Model
     	return DB::table(self::getTableName($userId))->where($where)->get();
     }
 
+    public function getFolderFilesByFolderIds($folderIds)
+    {
+        $files = (new FolderMapFile())->getFolderFilesByFolderIds($folderIds);
+        return $files;
+    }
+
     /**
      * @param  userId 用户ID
      * @param  data 插入数据
      * @return [type]
      */
-    public function insertFolders($userId, $datas)
+    public function insertFoldersAndFilesByTree($userId, $treeData)
     {
+        foreach ($treeData as $value) {
+            # code...
+        }
     	return DB::table(self::getTableName($userId))->insert($datas);
+    }
+
+    /**
+     * 分离文件夹和文件
+     * @return [type] [description]
+     */
+    private function separateFolderAndFiles($userId, $treeData, $fid=null)
+    {
+        if (!empty($treeData)) {
+            $folders = $files = $fileMaps = [];
+
+            foreach ($treeData as $data) {
+                if (isset($data['children'])) {
+                    $time = time();
+                    $folders[$data['id']] = [
+                        'uid' => $userId,
+                        'fid' => $fid,
+                        'title' => $data['title'],
+                        'files' => isset($data['children']) ? count($data['children']) : 0,
+                        'updated_at' => $time,
+                    ];
+                } else {
+                    $urlmd5 = md5($data['url']);
+
+                    $files[] = [
+                        'folder_id' => $fid,
+                        'title' => $data['title'],
+                        'url_md5' => $urlmd5,
+
+                    ];
+                }
+
+            }
+        }
     }
 
 }
