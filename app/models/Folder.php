@@ -88,13 +88,19 @@ class Folder extends Model
                 } else {
                     $urlmd5 = md5($data['url']);
 
-                    $files[] = [
+                    $files[$data['id']] = [
                         'folder_id' => $fid,
+                        'uid' => $userId,
                         'title' => $data['title'],
-                        'url_md5' => $urlmd5,
-
+                        'url_md5' => $urlmd5
                     ];
                 }
+
+                if (!empty($folders)) {
+                    // 获取所有文件夹
+                    
+                }
+
 
             }
         }

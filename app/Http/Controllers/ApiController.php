@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\models\Folder;
+use App\models\Bookmark;
 
 class ApiController extends CommonController
 {
@@ -44,14 +45,15 @@ class ApiController extends CommonController
     public function syncBookmarks(Request $request)
     {
         $input = $request->all();
-
+        $input['bookmarks'] = json_decode($input['bookmarks'], true);
         if (empty($input['bookmarks'])) {
             self::setErrorMsg(4001, '未获取到书签信息');
+            return self::response();
         }
 
-        $insertRes = (new Folder())->insertFoldersAndFilesByTree($input['uid'], $input['bookmarks']);
+        (new Bookmark())->syncBookmarksTree($input['uid'], $input['bookmarks'], 0);
 
-        return self::response($insertRes);
+        return self::response();
 
     }
 
