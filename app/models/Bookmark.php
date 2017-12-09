@@ -27,6 +27,16 @@ class Bookmark extends Model
 
 	}
 
+    public function getIsDelete($where, $isDelete)
+    {
+        if ($isDelete === 0) {
+            $where[] = ['deleted_at', '=', 0];
+        } elseif ($isDelete === 1) {
+            $where[] = ['deleted_at', '>', 0];
+        }
+        return $where;
+    }
+
 
 	/**
 	 * 获取书签
@@ -34,27 +44,49 @@ class Bookmark extends Model
 	 * @param  fid 父级文件夹ID
 	 * @return folders array 所有文件夹
 	 */
-    public function getUserFoldersByFid($userId, $fid=null)
+    public function getUserBookmarksByFid($userId, $fid=null, $isDelete=null)
     {
-     //    $selection = DB::table(self::getTableName($userId));
-     //    $selection = $selection->where('uid', $userId);
-    	// if ($fid !== null) {
-     //        $selection = $selection->where('fid', int($fid));
-    	// }
-    	return DB::table(self::getTableName($userId))->where('uid', $userId)->get();
+        $where = [['uid', '=', $userId]];
+    	if ($fid !== null) {
+            $where[] = ['fid', '=', intval($fid)];
+    	}
+        $where = $this->getIsDelete($where, $isDelete);
+    	return DB::table(self::getTableName($userId))->where($where)->get()->keyBy('url_md5');
 
+    }
+
+    /**
+     * 获取书签信息
+     */
+    public function getUserBookmarksTreeByFid($userId, $fid=null, $isDelete=null)
+    {
+        $where = [['uid', '=', $userId]];
+        if ($fid !== null) {
+            $where[] = ['fid', '=', intval($fid)];
+        }
+        $where = $this->getIsDelete($where, $isDelete);
+        $datas = DB::table(self::getTableName($userId))->where($where)->get();
+        if (!empty($datas)) {
+            foreach ($datas as $key=>$data) {
+                if ($data->is_folder && $data->childrens > 0) {
+                    $datas[$key]->children = $this->getUserBookmarksTreeByFid($userId, $data->id, $isDelete);
+                }
+            }
+        }
+        return $datas;
+        
     }
 
 
     /**
-     * 
+     *  同步书签信息
      */
     public function syncBookmarksTree($uid, $bookmarks, $fid=0)
     {
         // 先插
         if (!empty($bookmarks)) {
             // 首先查找出同级下的所有文件
-            $exists = $this->getUserFoldersByFid($uid, $fid);
+            $exists = $this->getUserBookmarksByFid($uid, $fid);
             // 非文件夹可以批量保存
             $insertUrls = [];
             foreach ($bookmarks as $bookmarkData) {
@@ -62,13 +94,16 @@ class Bookmark extends Model
                 $md5val = isset($bookmarkData['url']) && !empty($bookmarkData['url']) ? md5($bookmarkData['url']) : md5($bookmarkData['title']);
                 
                 if (isset($exists[$md5val])) {
-                    if ($exists[$md5val]['title'] != $bookmarkData['title']) {
-                        DB::table(self::getTableName($uid))->where('id', $exists[$md5val]['id'])
-                        ->update(['title' => $bookmarkData['title']]);
+                    if ($exists[$md5val]->title != $bookmarkData['title']) {
+                        $updateWhere = ['title' => $bookmarkData['title']];
+                        $updateWhere['is_folder'] = isset($bookmarkData['children']) ? 1 : 0;
+                        $updateWhere['childrens'] = isset($bookmarkData['children']) ? count($bookmarkData['children']) : 0;
+                        DB::table(self::getTableName($uid))->where('id', $exists[$md5val]->id)
+                        ->update($updateWhere);
                     }
 
                     if (isset($bookmarkData['children'])) {
-                        $this->syncBookmarksTree($uid, $bookmarkData['children'], $exists[$md5val]['id']);
+                        $this->syncBookmarksTree($uid, $bookmarkData['children'], $exists[$md5val]->id);
                     }
 
                 } else {
@@ -78,14 +113,16 @@ class Bookmark extends Model
                         'fid'   => $fid,
                         'title' => $bookmarkData['title'],
                         'url_md5' => $md5val,
-                        'url' => $bookmarkData['url'],
-                        'sortid' => $bookmarkData['index'],
-                        'create_at' => substr($bookmarkData['dateAdded'], 0, 10),
-                        'update_at' => isset($bookmarkData['dateGroupModified']) ? substr($bookmarkData['dateGroupModified'], 0, 10) : substr($bookmarkData['dateAdded'], 0, 10),
+                        'url' => isset($bookmarkData['url']) ? $bookmarkData['url'] : '',
+                        'sortid' => isset($bookmarkData['index']) ? $bookmarkData['index'] : 0,
+                        'created_at' => substr($bookmarkData['dateAdded'], 0, 10),
+                        'updated_at' => isset($bookmarkData['dateGroupModified']) ? substr($bookmarkData['dateGroupModified'], 0, 10) : substr($bookmarkData['dateAdded'], 0, 10),
                     ];
                     
                     // 判断是文件夹还是链接
                     if (isset($bookmarkData['children'])) {
+                        $insertData['is_folder'] = 1;
+                        $insertData['childrens'] = count($bookmarkData['children']);
                         $newid = DB::table(self::getTableName($uid))->insertGetId($insertData);
                         $this->syncBookmarksTree($uid, $bookmarkData['children'], $newid);
                     } else {

@@ -75,5 +75,6 @@ Route::group(['middleware' => ['api','cors'],'prefix' => 'api'], function () {
 
         // 同步书签
         Route::post('syncbookmarks', 'ApiController@syncBookmarks');  // 获取用户详情
+        Route::post('getbookmarks', 'ApiController@getBookmarks');  
     });
 });

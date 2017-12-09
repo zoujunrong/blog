@@ -35,8 +35,8 @@ class ApiController extends CommonController
      */
     public function getBookmarks(Request $request) {
         $input = $request->all();
-        $folders = (new Folder())->getUserFoldersByFid($input['uid'], $input['fid']);
-
+        $bookmarks = (new Bookmark())->getUserBookmarksTreeByFid($input['uid'], $input['fid'], 0);
+        return self::response($bookmarks);
     }
 
     /**
