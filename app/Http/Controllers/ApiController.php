@@ -52,6 +52,7 @@ class ApiController extends CommonController
         }
 
         (new Bookmark())->syncBookmarksTree($input['uid'], $input['bookmarks'], 0);
+        (new User())->updateBookmarktime($input['uid'], $input['updatetime']);
 
         return self::response();
 
