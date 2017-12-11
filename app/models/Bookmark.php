@@ -27,7 +27,6 @@ class Bookmark extends Model
 
 	}
 
-
     public function getIsDelete($where, $isDelete)
     {
         if ($isDelete === 0) {
@@ -36,14 +35,6 @@ class Bookmark extends Model
             $where[] = ['deleted_at', '>', 0];
         }
         return $where;
-    }
-
-    /**
-     * 更新主表
-     */
-    public function updateMainData($userId, $data)
-    {
-        DB::table($this->table)->where('uid', $userId)->get();
     }
 
 
