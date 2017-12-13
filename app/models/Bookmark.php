@@ -84,11 +84,15 @@ class Bookmark extends Model
     public function syncBookmarksTree($uid, $bookmarks, $fid=0)
     {
         // 先插
-        if (!empty($bookmarks)) {
+        if (!empty($bookmarks) && $uid > 0) {
+            // 先删除所有
+            DB::table(self::getTableName($uid))->where([['uid', $uid], ['fid', $fid]])
+                        ->update(['deleted_at' => time()]);
             // 首先查找出同级下的所有文件
             $exists = $this->getUserBookmarksByFid($uid, $fid);
             // 非文件夹可以批量保存
             $insertUrls = [];
+            $replyIds = [];    // 恢复已删除标识
             foreach ($bookmarks as $bookmarkData) {
                 $insertData = [];
                 $md5val = isset($bookmarkData['url']) && !empty($bookmarkData['url']) ? md5($bookmarkData['url']) : md5($bookmarkData['title']);
@@ -98,8 +102,11 @@ class Bookmark extends Model
                         $updateWhere = ['title' => $bookmarkData['title']];
                         $updateWhere['is_folder'] = isset($bookmarkData['children']) ? 1 : 0;
                         $updateWhere['childrens'] = isset($bookmarkData['children']) ? count($bookmarkData['children']) : 0;
+                        $updateWhere['deleted_at'] = 0;
                         DB::table(self::getTableName($uid))->where('id', $exists[$md5val]->id)
                         ->update($updateWhere);
+                    } else {
+                        $replyIds[] = $exists[$md5val]->id;
                     }
 
                     if (isset($bookmarkData['children'])) {
@@ -136,6 +143,11 @@ class Bookmark extends Model
             // 查看批量插入书签链接地址
             if (!empty($insertUrls)) {
                 DB::table(self::getTableName($uid))->insert($insertUrls);
+            }
+
+            // 需要恢复的ID
+            if (!empty($replyIds)) {
+                DB::table(self::getTableName($uid))->whereIn('id', $replyIds)->update(['deleted_at' => 0]);
             }
             
         }
