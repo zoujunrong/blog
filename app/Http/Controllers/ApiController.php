@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\models\Bookmark;
+use App\models\ShareBookmark;
 
 class ApiController extends CommonController
 {
@@ -63,6 +64,13 @@ class ApiController extends CommonController
     /**
      * 分享文件夹
      */
-    
+    public function shareBookmarks()
+    {
+        $input = $request->all();
+        $input['bookmarks'] = json_decode($input['bookmarks'], true);
+        $response = (new ShareBookmark())->insertOrUpdateDatas($input['uid'], $input['bookmarks']);
+
+        return self::response($response);
+    }
 
 }

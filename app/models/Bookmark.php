@@ -81,7 +81,7 @@ class Bookmark extends Model
     /**
      *  同步书签信息
      */
-    public function syncBookmarksTree($uid, $bookmarks, $fid=0)
+    public function syncBookmarksTree($uid, $bookmarks, $fid=0, $path='0')
     {
         // 先插
         if (!empty($bookmarks) && $uid > 0) {
@@ -99,11 +99,14 @@ class Bookmark extends Model
                 
                 if (isset($exists[$md5val])) {
                     if ($exists[$md5val]->title != $bookmarkData['title']) {
+
                         $updateWhere = ['title' => $bookmarkData['title']];
                         $updateWhere['is_folder'] = isset($bookmarkData['children']) ? 1 : 0;
                         $updateWhere['childrens'] = isset($bookmarkData['children']) ? count($bookmarkData['children']) : 0;
                         $updateWhere['sortid'] = isset($bookmarkData['index']) ? $bookmarkData['index'] : 0;
                         $updateWhere['deleted_at'] = 0;
+                        $updateWhere['parent_path'] = $path;   // 存父级的路径
+
                         DB::table(self::getTableName($uid))->where('id', $exists[$md5val]->id)
                         ->update($updateWhere);
                     } else {
@@ -111,7 +114,7 @@ class Bookmark extends Model
                     }
 
                     if (isset($bookmarkData['children'])) {
-                        $this->syncBookmarksTree($uid, $bookmarkData['children'], $exists[$md5val]->id);
+                        $this->syncBookmarksTree($uid, $bookmarkData['children'], $exists[$md5val]->id, $path.'-'.$exists[$md5val]->id);
                     }
 
                 } else {
@@ -125,6 +128,7 @@ class Bookmark extends Model
                         'sortid' => isset($bookmarkData['index']) ? $bookmarkData['index'] : 0,
                         'created_at' => substr($bookmarkData['dateAdded'], 0, 10),
                         'updated_at' => isset($bookmarkData['dateGroupModified']) ? substr($bookmarkData['dateGroupModified'], 0, 10) : substr($bookmarkData['dateAdded'], 0, 10),
+                        'parent_path' => $path
                     ];
                     
                     // 判断是文件夹还是链接
@@ -132,7 +136,7 @@ class Bookmark extends Model
                         $insertData['is_folder'] = 1;
                         $insertData['childrens'] = count($bookmarkData['children']);
                         $newid = DB::table(self::getTableName($uid))->insertGetId($insertData);
-                        $this->syncBookmarksTree($uid, $bookmarkData['children'], $newid);
+                        $this->syncBookmarksTree($uid, $bookmarkData['children'], $newid, $path.'-'.$newid);
                     } else {
                         $insertUrls[] = $insertData;
                     }
@@ -148,7 +152,7 @@ class Bookmark extends Model
 
             // 需要恢复的ID
             if (!empty($replyIds)) {
-                DB::table(self::getTableName($uid))->whereIn('id', $replyIds)->update(['deleted_at' => 0]);
+                DB::table(self::getTableName($uid))->whereIn('id', $replyIds)->update(['deleted_at' => 0, 'parent_path' => $path]);
             }
             
         }
