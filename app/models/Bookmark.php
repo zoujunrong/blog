@@ -102,6 +102,7 @@ class Bookmark extends Model
                         $updateWhere = ['title' => $bookmarkData['title']];
                         $updateWhere['is_folder'] = isset($bookmarkData['children']) ? 1 : 0;
                         $updateWhere['childrens'] = isset($bookmarkData['children']) ? count($bookmarkData['children']) : 0;
+                        $updateWhere['sortid'] = isset($bookmarkData['index']) ? $bookmarkData['index'] : 0;
                         $updateWhere['deleted_at'] = 0;
                         DB::table(self::getTableName($uid))->where('id', $exists[$md5val]->id)
                         ->update($updateWhere);

@@ -18,7 +18,9 @@ class ApiController extends CommonController
         if (!$token = JWTAuth::attempt($input)) {
             self::setErrorMsg(40001, '邮箱或密码错误.');
         }
-        return self::response($token);
+        $user = JWTAuth::toUser($token);
+        $user['token'] = $token;
+        return self::response($user);
     }
 
     /*获取用户信息*/
@@ -57,5 +59,10 @@ class ApiController extends CommonController
         return self::response();
 
     }
+
+    /**
+     * 分享文件夹
+     */
+    
 
 }
