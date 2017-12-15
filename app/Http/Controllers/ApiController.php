@@ -64,13 +64,32 @@ class ApiController extends CommonController
     /**
      * 分享文件夹
      */
-    public function shareBookmarks()
+    public function shareBookmarks(Request $request)
     {
         $input = $request->all();
         $input['bookmarks'] = json_decode($input['bookmarks'], true);
-        $response = (new ShareBookmark())->insertOrUpdateDatas($input['uid'], $input['bookmarks']);
+
+        $shareRequestDatas = $this->handleShareRequestData($input['uid'], $input['bookmarks']);
+        $response = (new ShareBookmark())->insertOrUpdateDatas($input['uid'], $shareRequestDatas);
+        // 此处不追求连贯性
+        (new Bookmark())->updateDatasByIds($input['uid'], array_keys($shareRequestDatas), ['open_status' => 1]);
 
         return self::response($response);
+    }
+
+    public function handleShareRequestData($uid, $bookmarks)
+    {
+        $returnData = [];
+        if (!empty($bookmarks)) {
+            foreach ($bookmarks as $bookmark) {
+                $returnData[$bookmark['id']] = [
+                    'author'    => $uid,
+                    'bookmark_id' => $bookmark['id']
+                ];
+            }
+        }
+        return $returnData;
+
     }
 
 }

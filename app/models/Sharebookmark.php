@@ -14,9 +14,9 @@ class Sharebookmark extends Model
 	 * @param  folderId 文件夹ID
 	 * @return tableName 表名
 	 */
-	static public function getTableName($folderId)
+	static public function getTableName($userId)
 	{
-		$baseTable = 'sharefloders';
+		$baseTable = 'sharebookmarks';
 		// $tableName = "{$baseTable}_".ceil($folderId/config("model.folder_map_files_max_folder"));
 		// // 检测表是否存在，不存在时创建
 		// if (!isset(self::$tables[$tableName])) {
@@ -24,7 +24,7 @@ class Sharebookmark extends Model
 		// 	self::$tables[$tableName] = 1;
 		// }
 
-		return $tableName;
+		return $baseTable;
 	}
 
 	/**
@@ -36,14 +36,20 @@ class Sharebookmark extends Model
 	public function insertOrUpdateDatas($userId, $datas)
 	{
 		// 首先判断是否重复
-		$shares = DB::table($this->getTableName)->where('author', $userId)->get()->keyBy('bookmark_path')->all();
+		$shares = DB::table($this->getTableName($userId))->where('author', $userId)->get()->keyBy('bookmark_id')->all();
 
 		$inserts = [];
 		$returnData = [];
 		foreach ($datas as $data) {
-			if (isset($shares[$data['bookmark_path']])) {
-				// 修改
-				$returnData[] = DB::table($this->getTableName)->where('id', $shares[$data['bookmark_path']]['id'])->update($data);
+			if (isset($shares[$data['bookmark_id']])) {
+				// 判断是否需要修改
+				if ($shares[$data['bookmark_id']]->deleted_at != 0) {
+					$data['deleted_at'] = 0;
+					$returnData[] = DB::table($this->getTableName($userId))->where('id', $shares[$data['bookmark_id']]->id)->update($data);
+				} else {
+					$returnData[] = true;
+				}
+				
 			} else {
 				$data['author'] = $userId;
 				$inserts[] = $data;
@@ -52,7 +58,7 @@ class Sharebookmark extends Model
 
 		// 批量插入
 		if (!empty($inserts)) {
-			$insertResult = DB::table('users')->insert($inserts);
+			$insertResult = DB::table($this->getTableName($userId))->insert($inserts);
 			$returnData = array_merge($returnData, array_fill(0, count($inserts), $insertResult));
 		}
 

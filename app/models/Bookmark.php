@@ -159,6 +159,15 @@ class Bookmark extends Model
     }
 
 
+    /**
+     *  修改信息
+     */
+    public function updateDatasByIds($uid, $ids, $data)
+    {
+        return DB::table(self::getTableName($uid))->whereIn('id', $ids)->update($data);
+    }
+
+
 
     
 
