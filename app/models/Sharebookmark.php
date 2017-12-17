@@ -35,6 +35,7 @@ class Sharebookmark extends Model
 	 */
 	public function insertOrUpdateDatas($userId, $datas)
 	{
+		if (empty($userId) || empty($datas)) return [];
 		// 首先判断是否重复
 		$shares = DB::table($this->getTableName($userId))->where('author', $userId)->get()->keyBy('bookmark_id')->all();
 

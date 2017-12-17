@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
+
+use App\User;
 use App\models\Bookmark;
 use App\models\ShareBookmark;
+use App\models\Notebook;
+use App\models\Tag;
+use App\models\TagMap;
 
 class ApiController extends CommonController
 {
@@ -91,5 +95,61 @@ class ApiController extends CommonController
         return $returnData;
 
     }
+
+
+
+    /**
+     * 创建笔记
+     */
+    public function createNotebooks(Request $request)
+    {
+        // 先存储文件
+        $input = $request->all();
+        $result = (new Notebook())->createNoteBooks($input['uid'], [$input]);
+        if (!empty($result) && $result[0] && $request->hasFile('photo')) {
+            // 检查文件的有效性
+            if ($request->file('photo')->isValid()) {
+                // 验证文件的扩展 只能是图片类型jpg,png,gif
+                if (in_array($request->photo->extension(), ['jpg', 'png', 'gif'])) {
+                    Storage::disk('oss')->put("notebook/{$result[0]}.".$request->photo->extension(), file_get_contents($request->photo->path()));
+                }
+            }
+        }
+        return self::response($result);
+    }
+
+    /**
+     * 获取笔记
+     */
+    public function getNotebooks(Request $request)
+    {
+        $input = $request->all();
+        $notebooks = (new Notebook())->getNotebooks($input['uid']);
+        // 获取对应的标签信息
+        $tags = (new TagMap())->getTagsByObjs('1', $notebooks->keys()->all())->groupBy('obj_id');
+        $response = ['notebooks' => $notebooks, 'tags' => $tags];
+        return self::response($response);
+    }
+    
+    
+    /**
+     * 创建标签
+     */
+    public function createtag(Request $request)
+    {
+        $response = (new TagMap())->insertTag($request->all());
+        return self::response($response);
+    }
+    
+    /**
+     * 删除标签
+     */
+    public function deletetag(Request $request)
+    {
+        $response = (new TagMap())->deleteTag($request->input('obj_id'), $request->input('tag_map_id'));
+        return self::response($response);
+    }
+    
+    
 
 }

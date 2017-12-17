@@ -1,23 +1,10 @@
-/*
-Navicat MySQL Data Transfer
+﻿-- Adminer 4.3.0 MySQL dump
 
-Source Server         : localhost
-Source Server Version : 50505
-Source Host           : localhost:3306
-Source Database       : blog
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-Target Server Type    : MYSQL
-Target Server Version : 50505
-File Encoding         : 65001
-
-Date: 2017-12-15 21:58:17
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for bookmarks
--- ----------------------------
 DROP TABLE IF EXISTS `bookmarks`;
 CREATE TABLE `bookmarks` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -29,20 +16,18 @@ CREATE TABLE `bookmarks` (
   `url` varchar(500) DEFAULT '' COMMENT '原始地址',
   `childrens` smallint(6) unsigned DEFAULT '0' COMMENT '子节点数量',
   `is_folder` tinyint(3) unsigned DEFAULT '0' COMMENT '是否为文件夹 0 否  1 是',
-  `open_status` tinyint(1) unsigned DEFAULT '0' COMMENT '开放状态： 0 私有，1开放',
-  `parent_path` varchar(100) DEFAULT NULL,
+  `open_status` tinyint(3) unsigned DEFAULT '0' COMMENT '公开状态：0 不公开，1公开',
+  `parent_path` varchar(120) DEFAULT NULL COMMENT '父级书签路径',
   `sortid` mediumint(8) unsigned DEFAULT '0' COMMENT '排序ID',
   `created_at` int(11) DEFAULT '0',
   `deleted_at` int(11) DEFAULT '0',
   `updated_at` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `select1` (`uid`,`deleted_at`,`url_md5`) USING BTREE,
-  KEY `select2` (`url_md5`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
+  KEY `select2` (`url_md5`,`deleted_at`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for bookmarks_1
--- ----------------------------
+
 DROP TABLE IF EXISTS `bookmarks_1`;
 CREATE TABLE `bookmarks_1` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -54,20 +39,18 @@ CREATE TABLE `bookmarks_1` (
   `url` varchar(500) DEFAULT '' COMMENT '原始地址',
   `childrens` smallint(6) unsigned DEFAULT '0' COMMENT '子节点数量',
   `is_folder` tinyint(3) unsigned DEFAULT '0' COMMENT '是否为文件夹 0 否  1 是',
-  `open_status` tinyint(1) unsigned DEFAULT '0' COMMENT '开放状态： 0 私有，1开放',
-  `parent_path` varchar(100) DEFAULT NULL,
+  `open_status` tinyint(3) unsigned DEFAULT '0' COMMENT '公开状态：0 不公开，1公开',
+  `parent_path` varchar(120) DEFAULT NULL COMMENT '父级书签路径',
   `sortid` mediumint(8) unsigned DEFAULT '0' COMMENT '排序ID',
   `created_at` int(11) DEFAULT '0',
   `deleted_at` int(11) DEFAULT '0',
   `updated_at` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `select1` (`uid`,`deleted_at`,`url_md5`) USING BTREE,
-  KEY `select2` (`url_md5`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
+  KEY `select2` (`url_md5`,`deleted_at`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for files
--- ----------------------------
+
 DROP TABLE IF EXISTS `files`;
 CREATE TABLE `files` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -75,7 +58,6 @@ CREATE TABLE `files` (
   `title` varchar(120) NOT NULL DEFAULT '' COMMENT '标题',
   `desc` varchar(255) DEFAULT '' COMMENT '描述',
   `type` tinyint(4) DEFAULT '0' COMMENT '文件内容类型 ''0: article'', ''1: news''',
-  `url_md5` char(32) DEFAULT NULL COMMENT 'url的md5值',
   `url` varchar(500) DEFAULT '' COMMENT '原始地址',
   `location` tinyint(4) DEFAULT '0' COMMENT '文件存储的位置 ''0: remote'',''1: local'', ''2: oss''',
   `reads` int(11) DEFAULT '0' COMMENT '文件阅读次数',
@@ -83,39 +65,32 @@ CREATE TABLE `files` (
   `reviews` int(11) DEFAULT '0' COMMENT '评论数',
   `remarks` int(11) DEFAULT '0' COMMENT '备注数',
   `shares` int(11) DEFAULT '0' COMMENT '推荐次数',
-  `sortid` mediumint(8) unsigned DEFAULT '0' COMMENT '排序ID',
   `created_at` int(11) DEFAULT '0',
   `deleted_at` int(11) DEFAULT '0',
   `updated_at` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `select2` (`url_md5`,`deleted_at`) USING BTREE,
   KEY `select1` (`author`,`deleted_at`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for folders
--- ----------------------------
+
 DROP TABLE IF EXISTS `folders`;
 CREATE TABLE `folders` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
-  `fid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父ID',
+  `fid` int(11) unsigned DEFAULT '0' COMMENT '父文件夹ID',
+  `local_id` mediumint(10) unsigned DEFAULT '0' COMMENT '本地ID',
   `title` varchar(50) NOT NULL DEFAULT '' COMMENT '标题',
-  `path` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '路径',
   `status` tinyint(4) DEFAULT '0' COMMENT '标签状态, ''0: private'',''1: protect'',''2: public''',
   `files` int(10) unsigned DEFAULT '0' COMMENT '文件数',
-  `sortid` mediumint(8) unsigned DEFAULT '0' COMMENT '排序ID',
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   `deleted_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `select1` (`status`,`uid`) USING BTREE,
-  KEY `select2` (`uid`,`fid`,`title`) USING BTREE
+  KEY `uid` (`uid`,`fid`) USING BTREE,
+  KEY `status` (`status`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='书签文件夹';
 
--- ----------------------------
--- Table structure for folder_map_files
--- ----------------------------
+
 DROP TABLE IF EXISTS `folder_map_files`;
 CREATE TABLE `folder_map_files` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -127,20 +102,60 @@ CREATE TABLE `folder_map_files` (
   KEY `file_id` (`file_id`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for migrations
--- ----------------------------
+
+SET NAMES utf8mb4;
+
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ----------------------------
--- Table structure for password_resets
--- ----------------------------
+
+DROP TABLE IF EXISTS `notebooks`;
+CREATE TABLE `notebooks` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '作者ID',
+  `title` varchar(60) NOT NULL DEFAULT '' COMMENT '标题',
+  `has_photo` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否上传头像 0 否， 1是',
+  `desc` varchar(255) DEFAULT '' COMMENT '描述',
+  `source_id` int(11) unsigned DEFAULT '0' COMMENT '引用ID: 0 原创， 非零 引用ID',
+  `quotes` int(10) unsigned DEFAULT '0' COMMENT '引用数量',
+  `assists` int(11) DEFAULT '0' COMMENT '赞的数量',
+  `reviews` int(11) DEFAULT '0' COMMENT '评论数量',
+  `open_status` tinyint(1) unsigned DEFAULT '0' COMMENT '开放状态： 0 私有，1开放',
+  `sortid` mediumint(8) unsigned DEFAULT '0' COMMENT '排序ID',
+  `created_at` int(11) DEFAULT '0',
+  `deleted_at` int(11) DEFAULT '0',
+  `updated_at` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `select1` (`uid`,`deleted_at`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `notebooks_1`;
+CREATE TABLE `notebooks_1` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '作者ID',
+  `title` varchar(60) NOT NULL DEFAULT '' COMMENT '标题',
+  `has_photo` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否上传头像 0 否， 1是',
+  `desc` varchar(255) DEFAULT '' COMMENT '描述',
+  `source_id` int(11) unsigned DEFAULT '0' COMMENT '引用ID: 0 原创， 非零 引用ID',
+  `quotes` int(10) unsigned DEFAULT '0' COMMENT '引用数量',
+  `assists` int(11) DEFAULT '0' COMMENT '赞的数量',
+  `reviews` int(11) DEFAULT '0' COMMENT '评论数量',
+  `open_status` tinyint(1) unsigned DEFAULT '0' COMMENT '开放状态： 0 私有，1开放',
+  `sortid` mediumint(8) unsigned DEFAULT '0' COMMENT '排序ID',
+  `created_at` int(11) DEFAULT '0',
+  `deleted_at` int(11) DEFAULT '0',
+  `updated_at` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `select1` (`uid`,`deleted_at`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
 DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE `password_resets` (
   `email` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -149,9 +164,7 @@ CREATE TABLE `password_resets` (
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ----------------------------
--- Table structure for reviews
--- ----------------------------
+
 DROP TABLE IF EXISTS `reviews`;
 CREATE TABLE `reviews` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -164,25 +177,20 @@ CREATE TABLE `reviews` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for sharebookmarks
--- ----------------------------
+
 DROP TABLE IF EXISTS `sharebookmarks`;
 CREATE TABLE `sharebookmarks` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `author` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分享者',
   `has_img` tinyint(4) DEFAULT '0' COMMENT '是否存在头像',
-  `bookmark_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '文件夹ID',
+  `bookmark_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '书签ID',
   `subscribes` int(10) unsigned DEFAULT '0' COMMENT '订阅数',
-  `deleted_at` tinyint(1) unsigned DEFAULT '0' COMMENT '删除标识',
+  `deleted_at` tinyint(1) unsigned DEFAULT '0' COMMENT '删除标志',
   PRIMARY KEY (`id`),
-  KEY `select1` (`bookmark_id`) USING BTREE,
-  KEY `select2` (`author`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  KEY `select1` (`author`,`bookmark_id`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for sharefolders
--- ----------------------------
+
 DROP TABLE IF EXISTS `sharefolders`;
 CREATE TABLE `sharefolders` (
   `id` int(11) NOT NULL,
@@ -196,9 +204,7 @@ CREATE TABLE `sharefolders` (
   KEY `select2` (`author`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for subscribes
--- ----------------------------
+
 DROP TABLE IF EXISTS `subscribes`;
 CREATE TABLE `subscribes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -209,36 +215,48 @@ CREATE TABLE `subscribes` (
   KEY `select2` (`folder_id`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for tags
--- ----------------------------
+
 DROP TABLE IF EXISTS `tags`;
 CREATE TABLE `tags` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `author` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '标签创建者',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '标签名',
-  `created_at` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`)
+  `uses` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '标签使用次数',
+  `created_at` int(11) unsigned DEFAULT '0',
+  `updated_at` int(11) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for tag_maps
--- ----------------------------
+
 DROP TABLE IF EXISTS `tag_maps`;
 CREATE TABLE `tag_maps` (
-  `id` int(11) NOT NULL,
-  `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '植入标签对象的类型 ''0:file'',''1:folder'',''2:user''',
-  `tag_id` int(11) NOT NULL,
-  `obj_id` int(11) NOT NULL DEFAULT '0' COMMENT '对象ID',
-  `created_at` int(11) DEFAULT '0' COMMENT '创建时间',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '植入标签对象的类型 ''0:bookmark'',''1:notebook'',''2:user''',
+  `tag_id` int(11) unsigned NOT NULL,
+  `obj_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '对象ID',
+  `created_at` int(11) unsigned DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(11) unsigned DEFAULT '0' COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `select1` (`type`,`obj_id`) USING BTREE,
-  KEY `select2` (`obj_id`,`type`) USING BTREE
+  KEY `tag_id_type` (`tag_id`,`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for users
--- ----------------------------
+
+DROP TABLE IF EXISTS `tag_maps_1`;
+CREATE TABLE `tag_maps_1` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '植入标签对象的类型 ''0:bookmark'',''1:notebook'',''2:user''',
+  `tag_id` int(11) unsigned NOT NULL,
+  `obj_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '对象ID',
+  `created_at` int(11) unsigned DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(11) unsigned DEFAULT '0' COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `select1` (`type`,`obj_id`) USING BTREE,
+  KEY `tag_id_type` (`tag_id`,`type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -248,7 +266,24 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `bookmark_updatetime` int(10) unsigned DEFAULT '0' COMMENT '标签最新修改时间',
+  `bookmark_updatetime` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+DROP TABLE IF EXISTS `users_bak`;
+CREATE TABLE `users_bak` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- 2017-12-17 16:28:00
