@@ -101,7 +101,7 @@ class ApiController extends CommonController
     /**
      * 创建笔记
      */
-    public function createNotebooks(Request $request)
+    public function createOrUpdateNotebook(Request $request)
     {
         // 先存储文件
         $input = $request->all();
@@ -122,6 +122,15 @@ class ApiController extends CommonController
         return self::response($response);
     }
     
+    /**
+     * 删除笔记
+     */
+    public function deleteNotebook(Request $request)
+    {
+        $response = (new Notebook())->deleteNotebook($request->input('uid'), $request->input('id'));
+        return self::response($response);
+    }
+    
     
     /**
      * 创建标签
@@ -139,6 +148,14 @@ class ApiController extends CommonController
     {
         $response = (new TagMap())->deleteTag($request->input('obj_id'), $request->input('tag_map_id'));
         return self::response($response);
+    }
+    
+    /**
+     * 获取与我相关的所有标签
+     */
+    public function getAllMyTags(Request $request)
+    {
+        
     }
     
     

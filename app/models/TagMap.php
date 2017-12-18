@@ -158,6 +158,14 @@ class TagMap extends Model
 	    
 	}
 	
+	
+	/**
+	 * 获取所有相关的标签
+	 */
+	public function getUserAllTagsByType($uid, $type=null)
+	{
+	    
+	}
 
 
 }

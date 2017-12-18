@@ -29,24 +29,14 @@ class Notebook extends Model
 		return $tableName;
 
 	}
-
-    /**
-     * 设置自动维护的字段格式
-     */
-    public function fromDateTime($value)
-    {
-        return strtotime(parent::fromDateTime($value));
-    }
-
-    public function getIsDelete($where, $isDelete)
-    {
-        if ($isDelete === 0) {
-            $where[] = ['deleted_at', '=', 0];
-        } elseif ($isDelete === 1) {
-            $where[] = ['deleted_at', '>', 0];
-        }
-        return $where;
-    }
+	
+	/**
+	 * 设置自动维护的字段格式
+	 */
+	public function fromDateTime($value)
+	{
+	    return strtotime(parent::fromDateTime($value));
+	}
 
 
 	/**
@@ -146,10 +136,24 @@ class Notebook extends Model
         $notebook->uid = $uid;
         $notebook->title = $data['title'];
         $notebook->desc = $data['desc'];
-        $notebook->open_status = $data['open_status'];
+        $notebook->open_status = isset($data['open_status']) ? $data['open_status'] : 0;
         
         $notebook->setTable(self::getTableName($uid));
         return $notebook->save();
+    }
+    
+    /**
+     * 删除笔记
+     */
+    public function deleteNotebook($uid, $notebookId)
+    {
+        $this->setTable(self::getTableName($uid));
+        $notebook = $this->find($notebookId);
+        if (isset($notebook->id)) {
+            $notebook->setTable(self::getTableName($uid));
+            return $notebook->delete();
+        }
+        return false;
     }
 
 

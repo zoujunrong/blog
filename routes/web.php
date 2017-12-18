@@ -80,8 +80,9 @@ Route::group(['middleware' => ['api','cors'],'prefix' => 'api'], function () {
         Route::post('shareBookmarks', 'ApiController@shareBookmarks');  // 分享书签
 
 
-        Route::post('getnotebook', 'ApiController@getNotebooks');  // 创建笔记本
-        Route::post('createnotebook', 'ApiController@createNotebooks');  // 创建笔记本
+        Route::post('getnotebook', 'ApiController@getNotebooks');  // 获取笔记本
+        Route::post('createnotebook', 'ApiController@createOrUpdateNotebook');  // 创建或修改笔记本
+        Route::post('deletenotebook', 'ApiController@deleteNotebook');  // 创建或修改笔记本
         
         Route::post('createtag', 'ApiController@createtag');  // 新建标签
         Route::post('deletetag', 'ApiController@deletetag');  // 新建标签
