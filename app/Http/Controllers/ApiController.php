@@ -105,16 +105,7 @@ class ApiController extends CommonController
     {
         // 先存储文件
         $input = $request->all();
-        $result = (new Notebook())->createNoteBooks($input['uid'], [$input]);
-        if (!empty($result) && $result[0] && $request->hasFile('photo')) {
-            // 检查文件的有效性
-            if ($request->file('photo')->isValid()) {
-                // 验证文件的扩展 只能是图片类型jpg,png,gif
-                if (in_array($request->photo->extension(), ['jpg', 'png', 'gif'])) {
-                    Storage::disk('oss')->put("notebook/{$result[0]}.".$request->photo->extension(), file_get_contents($request->photo->path()));
-                }
-            }
-        }
+        $result = (new Notebook())->createOrUpdateNotebook($input['uid'], $input);
         return self::response($result);
     }
 

@@ -4,9 +4,12 @@ namespace App\models;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class NoteBook extends Model
+class Notebook extends Model
 {
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
 	static private $tables = [];
 
 	/**
@@ -26,6 +29,14 @@ class NoteBook extends Model
 		return $tableName;
 
 	}
+
+    /**
+     * 设置自动维护的字段格式
+     */
+    public function fromDateTime($value)
+    {
+        return strtotime(parent::fromDateTime($value));
+    }
 
     public function getIsDelete($where, $isDelete)
     {
@@ -112,11 +123,33 @@ class NoteBook extends Model
     /**
      * 获取笔记
      */
-    public function getNotebooks($uid, $where=[], $isDelete=0)
+    public function getNotebooks($uid, $where=[])
     {
-        $where = $this->getIsDelete($where, $isDelete);
-        $where['uid'] = $uid;
-        return DB::table($this->getTableName($uid))->where($where)->get()->keyBy('id');
+        $this->setTable(self::getTableName($uid));
+        return $this->where($where)->get()->keyBy('id');
+    }
+
+    /**
+     * 创建或修改笔记
+     */
+    public function createOrUpdateNotebook($uid, $data)
+    {
+        $this->setTable(self::getTableName($uid));
+        if (isset($data['id']) && !empty($data['id'])) {
+            $notebook = $this->where('id', $data['id'])->first();
+        }
+
+        if (!isset($notebook->id)) {
+            $notebook = $this;
+        }
+
+        $notebook->uid = $uid;
+        $notebook->title = $data['title'];
+        $notebook->desc = $data['desc'];
+        $notebook->open_status = $data['open_status'];
+        
+        $notebook->setTable(self::getTableName($uid));
+        return $notebook->save();
     }
 
 

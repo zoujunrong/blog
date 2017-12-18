@@ -9,7 +9,7 @@ use App\models\Tag;
 class TagMap extends Model
 {
     static private $tables = [];
-    
+
     public function __construct($objId=0)
     {
         if (!empty($objId)) {
@@ -58,7 +58,7 @@ class TagMap extends Model
 	 */
 	public function setTableName($objId)
 	{
-	    $this->table = self::getTableName($objId);
+	    $this->setTable(self::getTableName($objId));
 	}
 	
 	/**
@@ -82,7 +82,7 @@ class TagMap extends Model
 	        $tag->save();
 	    }
 	    
-	    if (!$tag->isEmpty()) {
+	    if (isset($tag->id)) {
 	        $this->setTableName($input['obj_id']);
 	        $tagMap = $this->where(
 	               [
@@ -91,16 +91,19 @@ class TagMap extends Model
 	                   ['tag_id', $tag->id]
 	               ]
 	            )->first();
-	        if ($tagMap->isEmpty()) {
+	        if (!isset($tagMap->id)) {
 	            $this->type = $input['type'];
 	            $this->tag_id = $tag->id;
 	            $this->obj_id = $input['obj_id'];
 	            $this->save();
+	            $response = $this->id;
 	            $tag->increment('uses');
+	        } else {
+	        	$response = $tagMap->id;
 	        }
 	    }
 	    
-	    $response = isset($tagMap->id) ? $tagMap->id : 0;
+	    $response = isset($response) ? $response : 0;
 	    return $response;
 	}
 	
@@ -110,10 +113,11 @@ class TagMap extends Model
 	public function deleteTag($useTagobjId, $tagMapId)
 	{
 	    $response = false;
-	    $this->setTableName(1);
+	    $this->setTableName($useTagobjId);
 	    $tagMap = $this->where('id', $tagMapId)->first();
-	    var_dump($tagMap->delete());die;
 	    // 删除映射
+	    $tagMap->setTableName($useTagobjId);
+
 	    if (isset($tagMap->tag_id) && $tagMap->delete()) {
 	        $tag = Tag::find($tagMap->tag_id);
 	        
@@ -137,7 +141,7 @@ class TagMap extends Model
 	    $tables = self::getTables($objIds);
 	    if (!empty($tables)) {
 	        foreach ($tables as $table => $newObjIds) {
-	            $this->table = $table;
+	            $this->setTable($table);
 	            $tagMaps = $this->where('type', $type)->whereIn('obj_id', $newObjIds)->get();
 	            
 	            if (!$tagMaps->isEmpty()) {
