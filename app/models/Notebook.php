@@ -120,6 +120,15 @@ class Notebook extends Model
     }
 
     /**
+     * 获取笔记
+     */
+    public function getNotebookById($uid, $id)
+    {
+        $this->setTable(self::getTableName($uid));
+        return $this->where([['id', $id], ['uid', $uid]])->first();
+    }
+
+    /**
      * 创建或修改笔记
      */
     public function createOrUpdateNotebook($uid, $data)
@@ -155,8 +164,6 @@ class Notebook extends Model
         }
         return false;
     }
-
-
 
     
 

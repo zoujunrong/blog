@@ -83,9 +83,11 @@ Route::group(['middleware' => ['api','cors'],'prefix' => 'api'], function () {
         Route::post('getnotebook', 'ApiController@getNotebooks');  // 获取笔记本
         Route::post('createnotebook', 'ApiController@createOrUpdateNotebook');  // 创建或修改笔记本
         Route::post('deletenotebook', 'ApiController@deleteNotebook');  // 创建或修改笔记本
+        Route::get('notebookedit', 'ApiController@notebookEdit');  // 创建或修改笔记本
         
         Route::post('createtag', 'ApiController@createtag');  // 新建标签
         Route::post('deletetag', 'ApiController@deletetag');  // 新建标签
+        Route::post('getallmytags', 'ApiController@getAllMyTags');  // 获取所有标签
 
     });
 });

@@ -14,16 +14,16 @@ class EditorController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
      * Show the application dashboard.
-     *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
+        // 获取笔记本信息
         $content = Storage::disk('oss')->has('docs/content.html') ? Storage::disk('oss')->get('docs/content.html') : null;
         $menu = Storage::disk('oss')->has('docs/menu.json') ? Storage::disk('oss')->get('docs/menu.json') : null;
         $folders = Storage::disk('oss')->has('docs/folders.json') ? Storage::disk('oss')->get('docs/folders.json') : '[{"text":"新建专题", "isFolder":true, "isExpanded":true}]';
@@ -37,7 +37,6 @@ class EditorController extends Controller
      */
     public function store(Request $request)
     {
-        
         Storage::disk('oss')->put('docs/content.html', $request->content);
         Storage::disk('oss')->put('docs/menu.json', $request->menuTree);
         Storage::disk('oss')->put('docs/folders.json', $request->folderList);

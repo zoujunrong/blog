@@ -164,7 +164,14 @@ class TagMap extends Model
 	 */
 	public function getUserAllTagsByType($uid, $type=null)
 	{
-	    
+	    $this->setTable(self::getTableName($uid));
+	    $where[] = ['obj_id', $uid];
+	    if (!empty($type)) {
+	    	$where[] = ['type', $type];
+	    }
+	    $tagMaps = $this->where($where)->get()->keyBy('tag_id');
+
+	    return Tag::whereIn('id', $tagMaps->keys()->all())->get();
 	}
 
 

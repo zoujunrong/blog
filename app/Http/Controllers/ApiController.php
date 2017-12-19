@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Storage;
 
 use App\User;
 use App\models\Bookmark;
@@ -149,14 +150,25 @@ class ApiController extends CommonController
         $response = (new TagMap())->deleteTag($request->input('obj_id'), $request->input('tag_map_id'));
         return self::response($response);
     }
-    
+
     /**
-     * 获取与我相关的所有标签
+     * 编辑笔记
      */
-    public function getAllMyTags(Request $request)
+    public function notebookEdit(Request $request)
     {
-        
+        // 查询笔记本信息
+        $notebook = (new Notebook())->getNotebookById($request->input('uid'), $request->input('id'));
+        if (isset($notebook->id)) {
+
+            $content    = Storage::disk('oss')->has("notebook/".$request->input('id')."/start.html") ? Storage::disk('oss')->get("notebook/".$request->input('id')."/start.html") : '<h1>介绍</h1><p>关于笔记的简介</p>';
+            $folders       = Storage::disk('oss')->has("notebook/".$request->input('id')."/folders.json") ? Storage::disk('oss')->get("notebook/".$request->input('id')."/folders.json") : '[{"text":"'.$notebook->title.'", "isFolder":true, "isExpanded":true}]';
+            
+        }
+
+        return view('editor.doc', ['content' => $content, 'folders'=> $folders]);
     }
+    
+    
     
     
 
