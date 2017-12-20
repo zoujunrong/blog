@@ -242,8 +242,8 @@
                         }
                     });
                 })
-
             }
+
             ue.addListener("keydown ready", function(type, e) {
                 if ( e && ( ( !e.ctrlKey && e.keyCode != 18 ) || e.keyCode == 86 ) ) contentIsChange = true;
                 if ( type == 'keydown' && e.keyCode == 83 && e.ctrlKey ) {
@@ -353,7 +353,7 @@
                             });
                         });
                     });
-
+                    
                     var menuFileActive = function(filename=null) {
                         $('#folder_list').hide();
                         $('#menu_list').show();

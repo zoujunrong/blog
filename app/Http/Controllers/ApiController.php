@@ -159,10 +159,8 @@ class ApiController extends CommonController
         // 查询笔记本信息
         $notebook = (new Notebook())->getNotebookById($request->input('uid'), $request->input('id'));
         if (isset($notebook->id)) {
-
-            $content    = Storage::disk('oss')->has("notebook/".$request->input('id')."/start.html") ? Storage::disk('oss')->get("notebook/".$request->input('id')."/start.html") : '<h1>介绍</h1><p>关于笔记的简介</p>';
-            $folders       = Storage::disk('oss')->has("notebook/".$request->input('id')."/folders.json") ? Storage::disk('oss')->get("notebook/".$request->input('id')."/folders.json") : '[{"text":"'.$notebook->title.'", "isFolder":true, "isExpanded":true}]';
-            
+            $content    = Storage::disk('oss')->has("notebook/".$request->input('id')."/start.html") ? Storage::disk('oss')->get("notebook/".$request->input('id')."/start.html") : '<h1>'.$notebook->title.'</h1><p>关于笔记的简介</p>';
+            $folders    = Storage::disk('oss')->has("notebook/".$request->input('id')."/folders.json") ? Storage::disk('oss')->get("notebook/".$request->input('id')."/folders.json") : '[{"text":"'.$notebook->title.'", "isFolder":true, "isExpanded":true}]';
         }
 
         return view('editor.doc', ['content' => $content, 'folders'=> $folders]);
