@@ -165,6 +165,29 @@ class Notebook extends Model
         return false;
     }
 
+    /**
+     * 获取激活项
+     * @param  [type] $folders [description]
+     * @return [type]          [description]
+     */
+    public function getNotebookTree($folders)
+    {
+        $active = '';
+        foreach ($folders as $folder) {
+            if (isset($folder['isActive']) && $folder['isActive']) {
+
+                if (!isset($folder['children'])) {
+                    $active = $folder['id'];
+                }
+                break;
+            } elseif (isset($folder['children']) && !empty($folder['children'])) {
+                $active = $this->getNotebookTree($folder['children']);
+            }
+        }
+        return $active;
+        
+    }
+
     
 
 }

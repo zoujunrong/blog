@@ -97,7 +97,24 @@ class ApiController extends CommonController
 
     }
 
-
+    
+    /**
+     * 创建标签
+     */
+    public function createtag(Request $request)
+    {
+        $response = (new TagMap())->insertTag($request->all());
+        return self::response($response);
+    }
+    
+    /**
+     * 删除标签
+     */
+    public function deletetag(Request $request)
+    {
+        $response = (new TagMap())->deleteTag($request->input('obj_id'), $request->input('tag_map_id'));
+        return self::response($response);
+    }
 
     /**
      * 创建笔记
@@ -131,24 +148,25 @@ class ApiController extends CommonController
         $response = (new Notebook())->deleteNotebook($request->input('uid'), $request->input('id'));
         return self::response($response);
     }
-    
-    
+
     /**
-     * 创建标签
+     * 获取笔记本文件内容
      */
-    public function createtag(Request $request)
+    public function getnotebookfile(Request $request)
     {
-        $response = (new TagMap())->insertTag($request->all());
-        return self::response($response);
-    }
-    
-    /**
-     * 删除标签
-     */
-    public function deletetag(Request $request)
-    {
-        $response = (new TagMap())->deleteTag($request->input('obj_id'), $request->input('tag_map_id'));
-        return self::response($response);
+        // 查询笔记本信息
+        $notebook = (new Notebook())->getNotebookById($request->input('uid'), $request->input('id'));
+        $content = '';
+        if (isset($notebook->id)) {
+            $active = $request->input('active');
+            if (!empty($active)) {
+                $content    = Storage::disk('oss')->has("notebook/".$notebook->id."/{$active}.html") ? Storage::disk('oss')->get("notebook/".$notebook->id."/{$active}.html") : '';
+                // echo $content;
+            }
+        } else {
+            self::setErrorMsg(302, '你要查找的笔记本不存在.');
+        }
+        return self::response($content);
     }
 
     /**
@@ -159,15 +177,43 @@ class ApiController extends CommonController
         // 查询笔记本信息
         $notebook = (new Notebook())->getNotebookById($request->input('uid'), $request->input('id'));
         if (isset($notebook->id)) {
-            $content    = Storage::disk('oss')->has("notebook/".$request->input('id')."/start.html") ? Storage::disk('oss')->get("notebook/".$request->input('id')."/start.html") : '<h1>'.$notebook->title.'</h1><p>关于笔记的简介</p>';
-            $folders    = Storage::disk('oss')->has("notebook/".$request->input('id')."/folders.json") ? Storage::disk('oss')->get("notebook/".$request->input('id')."/folders.json") : '[{"text":"'.$notebook->title.'", "isFolder":true, "isExpanded":true}]';
+            $folders    = Storage::disk('oss')->has("notebook/".$notebook->id."/folders.json") ? Storage::disk('oss')->get("notebook/".$notebook->id."/folders.json") : '[{"text":"'.$notebook->title.'","isFolder":true,"isExpanded":true,"id":"'.$notebook->uid.'_'.$notebook->id.'","isActive":false,"children":[{"text":"首页","tooltip":"首页","href":"#_start","id":"_start","isActive":true}]}]';
+            // 获取激活页ID
+            $active = (new Notebook())->getNotebookTree(json_decode($folders, true));
+            $active = !empty($active) ? $active : '_start';
+            if (!empty($active)) {
+                $content    = Storage::disk('oss')->has("notebook/".$notebook->id."/{$active}.html") ? Storage::disk('oss')->get("notebook/".$notebook->id."/{$active}.html") : '<h1>'.$notebook->title.'</h1><p>世界你好！</p>';
+            }
+        } else {
+            self::setErrorMsg(302, '你要查找的笔记本不存在.');
+            return self::response('notebook may not exist!');
         }
 
-        return view('editor.doc', ['content' => $content, 'folders'=> $folders]);
+        return view('editor.doc', ['content' => $content, 'folders'=> $folders, 'active' => $active, 'token' => $request->input('token', ''), 'id' => $notebook->id, 'uid' => $request->input('uid') ]);
     }
-    
-    
-    
+
+
+    /**
+     * 同步笔记本分类
+     */
+    public function syncNotebookInfo(Request $request)
+    {
+        // 查询笔记本信息
+        $notebook = (new Notebook())->getNotebookById($request->input('uid'), $request->input('id'));
+        $response = false;
+        if (isset($notebook->id)) {
+            if ($request->input('folderList')) {
+                $response = Storage::disk('oss')->put("notebook/".$notebook->id."/folders.json", $request->input('folderList'));
+            }
+
+            if ($request->input('content') && $request->input('active')) {
+                $response = Storage::disk('oss')->put("notebook/".$notebook->id."/".$request->input('active').".html", $request->input('content'));
+            }
+        } else {
+            self::setErrorMsg(302, '你要查找的笔记本不存在.');
+        }
+        return self::response($response);
+    }
     
 
 }
