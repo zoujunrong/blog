@@ -7,6 +7,10 @@
  * Time: 上午11: 32
  * UEditor编辑器通用上传类
  */
+include_once $_SERVER['DOCUMENT_ROOT'].'/vendor/aliyuncs/oss-sdk-php/autoload.php';
+use OSS\OssClient;
+use OSS\Core\OssException;
+
 class Uploader
 {
     private $fileField; //文件域名

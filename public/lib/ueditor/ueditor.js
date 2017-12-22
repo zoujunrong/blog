@@ -70,27 +70,26 @@ var resetHandler = function(){
     // 更新目录树
     easyTree.rebuildTree( traversal(dir) || null );
     // 删除章节按钮
-    $('.deleteIcon').click(function(e){
-        var $target = $(this),
-            address = $target.parent().attr('data-address');
-        ue.execCommand('deletesection', dirmap[address]);
-    });
-    // 选中章节按钮
-    $('#menu_list li a').click(function(e){
-        var posY = $(this).attr('href').replace('#', '');
-        document.getElementById('ueditor_0').contentWindow.document.body.scrollTop = posY;
-
-    });
-    // 章节上移
-    $('.moveUp,.moveDown').click(function(e){
-        var address = $(this).attr('href').replace('#', '');
-            moveUp = $(this).hasClass('moveUp') ? true:false;
-        if($(this).hasClass('moveUp')) {
-            ue.execCommand('movesection', dirmap[address], dirmap[address].previousSection);
-        } else {
-            ue.execCommand('movesection', dirmap[address], dirmap[address].nextSection, true);
-        }
-    });
+    // $('.deleteIcon').click(function(e){
+    //     var $target = $(this),
+    //         address = $target.parent().attr('data-address');
+    //     ue.execCommand('deletesection', dirmap[address]);
+    // });
+    // // 选中章节按钮
+    // $('#menu_list li a').click(function(e){
+    //     var posY = $(this).attr('href').replace('#', '');
+    //     document.getElementById('ueditor_0').contentWindow.document.body.scrollTop = posY;
+    // });
+    // // 章节上移
+    // $('.moveUp,.moveDown').click(function(e){
+    //     var address = $(this).attr('href').replace('#', '');
+    //         moveUp = $(this).hasClass('moveUp') ? true:false;
+    //     if($(this).hasClass('moveUp')) {
+    //         ue.execCommand('movesection', dirmap[address], dirmap[address].previousSection);
+    //     } else {
+    //         ue.execCommand('movesection', dirmap[address], dirmap[address].nextSection, true);
+    //     }
+    // });
 
     function traversal(section, l=30) {
         var child, childList, nodes = [];

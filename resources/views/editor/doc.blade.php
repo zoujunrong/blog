@@ -154,7 +154,10 @@
             .menu-item:hover > .menu {
                 -webkit-transition-delay: 100ms;
                 transition-delay: 300ms;
-            }  
+            }
+            .hide {
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -170,8 +173,8 @@
         <!-- {{-- 通过js将此菜单栏注入到插件中实现菜单栏功能 --}} -->
         <div id="ueditor_list_hide" style="display:none;">
             <div class="nav-tabs">
-                  <span id="menu_folder">笔记本</span>
-                  <span class="active" role="presentation" id="menu_file">内容目录</span>
+                  <span id="menu_folder">文件夹</span>
+                  <span class="active" role="presentation" id="menu_file">内容导航</span>
             </div>
             <div id="menu_list">
                 {{ $menu or '[{"text" : "首页", "href" : "#136"}]' }}
@@ -181,7 +184,7 @@
                 {{ $folders or '[]' }}
             </div>
         </div>
-        <div id="loadingDiv" style="display:none;right:0px;bottom:0px;line-height:500px;background-color: rgba(0,0,0,.6);color:white;position: absolute;z-index: 10000;text-align: center;">文件加载中...</div>
+        <div id="loadingDiv" class="hide" style="right:0px;bottom:0px;line-height:500px;background-color: rgba(0,0,0,.6);color:white;position: absolute;z-index: 10000;text-align: center;">文件加载中...</div>
         <div class="menu">
             <li class="menu-item">
                 <button type="button" id="menu_new_folder" class="menu-btn">

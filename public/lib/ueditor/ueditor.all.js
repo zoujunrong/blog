@@ -8027,6 +8027,9 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
 
             if(serverUrl) {
                 serverUrl = serverUrl + (serverUrl.indexOf('?') == -1 ? '?':'&') + 'action=' + (actionName || '');
+                // 添加认证信息，id, uid, token
+                serverUrl += '&uid='+$('input[name=uid]').val()+'&id='+$('input[name=id]').val()
+                $('input[name=token]').val() ? serverUrl += '&token='+$('input[name=token]').val() : serverUrl += '&token='+$('input[name=_token]').val()
                 return utils.formatUrl(serverUrl);
             } else {
                 return '';

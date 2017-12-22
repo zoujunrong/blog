@@ -70,7 +70,7 @@ return [
                 'bucket'     =>  env('OSS_BUCKET','your bucket'),
                 'endpoint'   =>  env('OSS_ENDPOINT','your endpoint'),  
                 'isCName'       => false, //'<如果上面使用了节点名称，这里设置为false，如果使用了自定义域名，为true>',
-                'debug'         => true, //'<true|false>'
+                'debug'         => false, //'<true|false>'
         ],
 
     ],
