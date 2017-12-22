@@ -172,6 +172,29 @@ class ApiController extends CommonController
         }
         return self::response($content);
     }
+    
+    /**
+     * 编辑笔记
+     */
+    public function notebookShow(Request $request)
+    {
+        // 查询笔记本信息
+        $notebook = (new Notebook())->getNotebookById($request->input('author'), $request->input('id'));
+        if (isset($notebook->id) && ($notebook->open_status > 0 || $request->input('author') == $request->input('uid')) ) {
+            $folders    = Storage::disk('oss')->has($notebook->id."/notebook/folders.json") ? Storage::disk('oss')->get($notebook->id."/notebook/folders.json") : '[{"text":"'.$notebook->title.'","isFolder":true,"isExpanded":true,"id":"'.$notebook->uid.'_'.$notebook->id.'","isActive":false,"children":[{"text":"首页","tooltip":"首页","href":"#_start","id":"_start","isActive":true}]}]';
+            // 获取激活页ID
+            $active = (new Notebook())->getNotebookTree(json_decode($folders, true));
+            $active = !empty($active) ? $active : '_start';
+            if (!empty($active)) {
+                $content    = Storage::disk('oss')->has($notebook->id."/notebook/{$active}.html") ? Storage::disk('oss')->get($notebook->id."/notebook/{$active}.html") : '<h1>'.$notebook->title.'</h1><p>世界你好！</p>';
+            }
+        } else {
+            self::setErrorMsg(302, '你要查找的笔记本不存在.');
+            return self::response('notebook may not exist!');
+        }
+    
+        return view('doc.showdoc', ['content' => $content, 'folders'=> $folders, 'active' => $active, 'token' => $request->input('token', ''), 'id' => $notebook->id, 'uid' => $request->input('uid') ]);
+    }
 
     /**
      * 编辑笔记
@@ -193,7 +216,7 @@ class ApiController extends CommonController
             return self::response('notebook may not exist!');
         }
 
-        return view('editor.doc', ['content' => $content, 'folders'=> $folders, 'active' => $active, 'token' => $request->input('token', ''), 'id' => $notebook->id, 'uid' => $request->input('uid') ]);
+        return view('doc.editdoc', ['content' => $content, 'folders'=> $folders, 'active' => $active, 'token' => $request->input('token', ''), 'id' => $notebook->id, 'uid' => $request->input('uid') ]);
     }
 
 

@@ -28,7 +28,7 @@ class EditorController extends Controller
         $menu = Storage::disk('oss')->has('docs/menu.json') ? Storage::disk('oss')->get('docs/menu.json') : null;
         $folders = Storage::disk('oss')->has('docs/folders.json') ? Storage::disk('oss')->get('docs/folders.json') : '[{"text":"新建专题", "isFolder":true, "isExpanded":true}]';
 
-        return view('editor.doc', ['content' => $content, 'menu'=> $menu, 'folders' => $folders]);
+        return view('doc.editdoc', ['content' => $content, 'menu'=> $menu, 'folders' => $folders]);
     }
 
     /**
