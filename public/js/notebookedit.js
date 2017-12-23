@@ -82,8 +82,6 @@ ue.addListener("keydown ready", function(type, e) {
         toggleNodes(nodes, 'open');
         easyTree.rebuildTree(nodes);
 
-
-
         $('#folder_list li a').on('dblclick', function(){
             menuFileActive($(this).text());
         });
@@ -195,17 +193,6 @@ ue.addListener("keydown ready", function(type, e) {
             $('#menu_folder').removeClass('active');
             $('#menu_file').addClass('active');
             if(filename!== null) $('#menu_file').text(filename)
-            //判断是否重复
-            /*if ( filename && $('#menu_file').text() != filename) {
-                $.ajax({
-                    type: "GET",
-                    url: "/editor/doc",
-                    data: {"columnId":10, "docId":10},
-                    success: function(msg){
-                        alert( "Data Saved: " + msg );
-                    }
-                });
-            }*/
         }
 
     }

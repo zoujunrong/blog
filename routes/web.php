@@ -43,6 +43,7 @@ Route::get('/settings', 'SettingsController@mine');
 //文档
 Route::get('/editor/doc', 'EditorController@create');
 Route::post('/editor/doc', 'EditorController@store');
+Route::get('/editor/test', 'EditorController@test');
 //专栏
 Route::get('/column', 'ColumnController@index');
 Route::get('/doc', 'DocController@index');

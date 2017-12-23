@@ -190,6 +190,7 @@ return [
         // JWT api
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
+        Stevenyangecho\UEditor\UEditorServiceProvider::class
 
     ],
 
@@ -242,7 +243,8 @@ return [
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
         
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'UEditor'=>Stevenyangecho\UEditor\UEditorServiceProvider::class
     ],
 
 ];

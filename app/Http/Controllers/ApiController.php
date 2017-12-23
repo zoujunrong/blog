@@ -193,7 +193,7 @@ class ApiController extends CommonController
             return self::response('notebook may not exist!');
         }
     
-        return view('doc.showdoc', ['content' => $content, 'folders'=> $folders, 'active' => $active, 'token' => $request->input('token', ''), 'id' => $notebook->id, 'uid' => $request->input('uid') ]);
+        return view('doc.showdoc', ['content' => $content, 'folders'=> $folders, 'title' => $notebook->title, 'token' => $request->input('token', ''), 'id' => $notebook->id, 'uid' => $request->input('uid') ]);
     }
 
     /**

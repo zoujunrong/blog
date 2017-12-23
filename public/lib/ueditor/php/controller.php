@@ -1,9 +1,25 @@
 <?php
 //header('Access-Control-Allow-Origin: http://www.baidu.com'); //设置http://www.baidu.com允许跨域访问
 //header('Access-Control-Allow-Headers: X-Requested-With,X_Requested_With'); //设置允许的跨域header
+include $_SERVER['DOCUMENT_ROOT'].'/../vendor/aliyuncs/oss-sdk-php/autoload.php';
+include $_SERVER['DOCUMENT_ROOT'].'/../vendor/tymon/jwt-auth/autoload.php';
 date_default_timezone_set("Asia/chongqing");
 error_reporting(E_ERROR);
 header("Content-Type: text/html; charset=utf-8");
+use Tymon\JWTAuth\Facades\JWTAuth;
+
+try {
+            // 如果用户登陆后的所有请求没有jwt的token抛出异常
+    $user = JWTAuth::toUser($_GET['token']);
+} catch (Exception $e) {
+    if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
+        return json_encode(['error'=>'Token 无效']);
+    } elseif ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
+        return json_encode(['error'=>'Token 已过期']);
+    } else {
+        return json_encode(['error'=>'出错了']);
+    }
+}
 
 $CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents("config.json")), true);
 $action = $_GET['action'];

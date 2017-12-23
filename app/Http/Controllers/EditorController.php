@@ -43,4 +43,9 @@ class EditorController extends Controller
         return ['errCode' => 200, 'errMsg' => '操作成功', 'data' => [1,2,3,3,4,5]];
         return view('editor.doc', ['content' => $request->content, 'menu'=> $request->menuTree, 'folders' => $request->folderList]);
     }
+
+    public function test(Request $request)
+    {
+        return view('doc.test');
+    }
 }
