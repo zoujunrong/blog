@@ -32,15 +32,11 @@ return [
 
         ],
         'oss' => [
-            'driver'        => 'oss',
-            'access_id'  =>  env('OSS_ACCESS_ID','your id'),
-            'access_key' =>  env('OSS_ACCESS_KEY','your key'),
-            'bucket'     =>  env('OSS_BUCKET','your bucket'),
-            'bucket_uploads'    =>  env('OSS_BUCKET_UPLOADS','your bucket'),
-            'endpoint'   =>  env('OSS_ENDPOINT','your endpoint'),  
-            'isCName'       => false, //'<如果上面使用了节点名称，这里设置为false，如果使用了自定义域名，为true>',
-            'debug'         => false, //'<true|false>'
-            'ssl' => false,
+            'access_id'  =>  env('OSS_ACCESS_ID_PUBLIC'),
+            'access_key' =>  env('OSS_ACCESS_KEY_PUBLIC'),
+            'bucket'     =>  env('OSS_BUCKET_PUBLIC'),
+            'endpoint'   =>  env('OSS_ENDPOINT_PUBLIC'),
+            'url' => 'http://'.env('OSS_BUCKET_PUBLIC').'.'.env('OSS_ENDPOINT_PUBLIC')
         ]
     ],
     /**
@@ -57,7 +53,7 @@ return [
         "imageCompressBorder" => 1600, /* 图片压缩最长边限制 */
         "imageInsertAlign" => "none", /* 插入的图片浮动方式 */
         "imageUrlPrefix" => "", /* 图片访问路径前缀 */
-        "imagePathFormat" => "/uploads/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+        "imagePathFormat" => "/uploads/image/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
         /* {filename} 会替换成原文件名,配置这项需要注意中文乱码问题 */
         /* {rand:6} 会替换成随机数,后面的数字是随机数的位数 */
         /* {time} 会替换成时间戳 */
@@ -74,14 +70,14 @@ return [
         /* 涂鸦图片上传配置项 */
         "scrawlActionName" => "uploadscrawl", /* 执行上传涂鸦的action名称 */
         "scrawlFieldName" => "upfile", /* 提交的图片表单名称 */
-        "scrawlPathFormat" => "/uploads/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+        "scrawlPathFormat" => "/uploads/image/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
         "scrawlMaxSize" => 2048000, /* 上传大小限制，单位B */
         "scrawlUrlPrefix" => "", /* 图片访问路径前缀 */
         "scrawlInsertAlign" => "none",
 
         /* 截图工具上传 */
         "snapscreenActionName" => "uploadimage", /* 执行上传截图的action名称 */
-        "snapscreenPathFormat" => "/uploads/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+        "snapscreenPathFormat" => "/uploads/image/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
         "snapscreenUrlPrefix" => "", /* 图片访问路径前缀 */
         "snapscreenInsertAlign" => "none", /* 插入的图片浮动方式 */
 
@@ -89,7 +85,7 @@ return [
         "catcherLocalDomain" => ["127.0.0.1", "localhost", "img.baidu.com"],
         "catcherActionName" => "catchimage", /* 执行抓取远程图片的action名称 */
         "catcherFieldName" => "source", /* 提交的图片列表表单名称 */
-        "catcherPathFormat" => "/uploads/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+        "catcherPathFormat" => "/uploads/image/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
         "catcherUrlPrefix" => "", /* 图片访问路径前缀 */
         "catcherMaxSize" => 2048000, /* 上传大小限制，单位B */
         "catcherAllowFiles" => [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* 抓取图片格式显示 */
@@ -97,7 +93,7 @@ return [
         /* 上传视频配置 */
         "videoActionName" => "uploadvideo", /* 执行上传视频的action名称 */
         "videoFieldName" => "upfile", /* 提交的视频表单名称 */
-        "videoPathFormat" => "/uploads/video/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+        "videoPathFormat" => "/uploads/video/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
         "videoUrlPrefix" => "", /* 视频访问路径前缀 */
         "videoMaxSize" => 102400000, /* 上传大小限制，单位B，默认100MB */
         "videoAllowFiles" => [
@@ -107,7 +103,7 @@ return [
         /* 上传文件配置 */
         "fileActionName" => "uploadfile", /* controller里,执行上传视频的action名称 */
         "fileFieldName" => "upfile", /* 提交的文件表单名称 */
-        "filePathFormat" => "/uploads/file/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+        "filePathFormat" => "/uploads/file/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
         "fileUrlPrefix" => "", /* 文件访问路径前缀 */
         "fileMaxSize" => 51200000, /* 上传大小限制，单位B，默认50MB */
         "fileAllowFiles" => [

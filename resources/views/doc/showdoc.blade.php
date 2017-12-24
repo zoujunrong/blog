@@ -61,8 +61,8 @@
             <div class="nav-tabs">
                   <span class="active" id="menu_folder">文件夹</span>
                   <span role="presentation" id="menu_file">内容导航</span>
-                  <span role="presentation" id="menu_file">记录</span>
-                  <span role="presentation" id="menu_file">作者</span>
+                  <span role="presentation" id="menu_file">变更记录</span>
+                  <span role="presentation" id="menu_file">问答互动</span>
             </div>
             <div id="menu_list" class="nav-content hide">
                 {{ $menu or '[{"text" : "首页", "href" : "#136"}]' }}
@@ -86,7 +86,10 @@
             menuListInit()
             setTimeout(function(){$('#folder_list').show(),toggleloadingDiv()}, 1000)
 
-            $(document).on('click', '#folder_list .easytree-ico-c', function() {
+            $(document).on('click', '#folder_list .easytree-node', function() {
+                if ($(this).hasClass('easytree-ico-ef')) {
+                    return;
+                }
                 // 防止重复点击
                 if ($('#loadingDiv').hasClass('hide')) {
                     getFileContent($(this).attr('id'))

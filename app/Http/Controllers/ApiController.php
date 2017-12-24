@@ -164,7 +164,7 @@ class ApiController extends CommonController
             //     $storage = Storage::disk('oss');
             //     $dirs = $storage->get('notebook/'.$notebook->id."/{$active}.html");
             // print_r($dirs);die;
-                $content    = Storage::disk('oss')->has($notebook->id."/notebook/{$active}.html") ? Storage::disk('oss')->get($notebook->id."/notebook/{$active}.html") : '';
+                $content    = Storage::disk('oss')->has($notebook->uid."/notebook/{$notebook->id}/{$active}.html") ? Storage::disk('oss')->get($notebook->uid."/notebook/{$notebook->id}/{$active}.html") : '';
                 // echo $content;
             }
         } else {
@@ -181,12 +181,12 @@ class ApiController extends CommonController
         // 查询笔记本信息
         $notebook = (new Notebook())->getNotebookById($request->input('author'), $request->input('id'));
         if (isset($notebook->id) && ($notebook->open_status > 0 || $request->input('author') == $request->input('uid')) ) {
-            $folders    = Storage::disk('oss')->has($notebook->id."/notebook/folders.json") ? Storage::disk('oss')->get($notebook->id."/notebook/folders.json") : '[{"text":"'.$notebook->title.'","isFolder":true,"isExpanded":true,"id":"'.$notebook->uid.'_'.$notebook->id.'","isActive":false,"children":[{"text":"首页","tooltip":"首页","href":"#_start","id":"_start","isActive":true}]}]';
+            $folders    = Storage::disk('oss')->has($notebook->uid."/notebook/{$notebook->id}/folders.json") ? Storage::disk('oss')->get($notebook->uid."/notebook/{$notebook->id}/folders.json") : '[{"text":"'.$notebook->title.'","isFolder":true,"isExpanded":true,"id":"'.$notebook->uid.'_'.$notebook->id.'","isActive":false,"children":[{"text":"首页","tooltip":"首页","href":"#_start","id":"_start","isActive":true}]}]';
             // 获取激活页ID
             $active = (new Notebook())->getNotebookTree(json_decode($folders, true));
             $active = !empty($active) ? $active : '_start';
             if (!empty($active)) {
-                $content    = Storage::disk('oss')->has($notebook->id."/notebook/{$active}.html") ? Storage::disk('oss')->get($notebook->id."/notebook/{$active}.html") : '<h1>'.$notebook->title.'</h1><p>世界你好！</p>';
+                $content    = Storage::disk('oss')->has($notebook->uid."/notebook/{$notebook->id}/{$active}.html") ? Storage::disk('oss')->get($notebook->uid."/notebook/{$notebook->id}/{$active}.html") : '<h1>'.$notebook->title.'</h1><p>世界你好！</p>';
             }
         } else {
             self::setErrorMsg(302, '你要查找的笔记本不存在.');
@@ -204,12 +204,12 @@ class ApiController extends CommonController
         // 查询笔记本信息
         $notebook = (new Notebook())->getNotebookById($request->input('uid'), $request->input('id'));
         if (isset($notebook->id)) {
-            $folders    = Storage::disk('oss')->has($notebook->id."/notebook/folders.json") ? Storage::disk('oss')->get($notebook->id."/notebook/folders.json") : '[{"text":"'.$notebook->title.'","isFolder":true,"isExpanded":true,"id":"'.$notebook->uid.'_'.$notebook->id.'","isActive":false,"children":[{"text":"首页","tooltip":"首页","href":"#_start","id":"_start","isActive":true}]}]';
+            $folders    = Storage::disk('oss')->has($notebook->uid."/notebook/{$notebook->id}/folders.json") ? Storage::disk('oss')->get($notebook->uid."/notebook/{$notebook->id}/folders.json") : '[{"text":"'.$notebook->title.'","isFolder":true,"isExpanded":true,"id":"'.$notebook->uid.'_'.$notebook->id.'","isActive":false,"children":[{"text":"首页","tooltip":"首页","href":"#_start","id":"_start","isActive":true}]}]';
             // 获取激活页ID
             $active = (new Notebook())->getNotebookTree(json_decode($folders, true));
             $active = !empty($active) ? $active : '_start';
             if (!empty($active)) {
-                $content    = Storage::disk('oss')->has($notebook->id."/notebook/{$active}.html") ? Storage::disk('oss')->get($notebook->id."/notebook/{$active}.html") : '<h1>'.$notebook->title.'</h1><p>世界你好！</p>';
+                $content    = Storage::disk('oss')->has($notebook->uid."/notebook/{$notebook->id}/{$active}.html") ? Storage::disk('oss')->get($notebook->uid."/notebook/{$notebook->id}/{$active}.html") : '<h1>'.$notebook->title.'</h1><p>世界你好！</p>';
             }
         } else {
             self::setErrorMsg(302, '你要查找的笔记本不存在.');
@@ -230,11 +230,11 @@ class ApiController extends CommonController
         $response = false;
         if (isset($notebook->id)) {
             if ($request->input('folderList')) {
-                $response = Storage::disk('oss')->put($notebook->id."/notebook/folders.json", $request->input('folderList'));
+                $response = Storage::disk('oss')->put($notebook->uid."/notebook/{$notebook->id}/folders.json", $request->input('folderList'));
             }
 
             if ($request->input('content') && $request->input('active')) {
-                $response = Storage::disk('oss')->put($notebook->id."/notebook/".$request->input('active').".html", $request->input('content'));
+                $response = Storage::disk('oss')->put($notebook->uid."/notebook/{$notebook->id}/".$request->input('active').".html", $request->input('content'));
             }
         } else {
             self::setErrorMsg(302, '你要查找的笔记本不存在.');
