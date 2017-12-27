@@ -235,6 +235,15 @@ class ApiController extends CommonController
 
             if ($request->input('content') && $request->input('active')) {
                 $response = Storage::disk('oss')->put($notebook->uid."/notebook/{$notebook->id}/".$request->input('active').".html", $request->input('content'));
+                if ($response) {
+                    $data = [
+                        'notebook_id' => $notebook->id,
+                        'file_id'   => $request->input('active'),
+                        'title' => '',
+                        'desc'  => ''
+                    ];
+                    (new NotebookFile())->createOrUpdateNoteBookFile();
+                }
             }
         } else {
             self::setErrorMsg(302, '你要查找的笔记本不存在.');

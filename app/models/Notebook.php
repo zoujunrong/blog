@@ -175,7 +175,6 @@ class Notebook extends Model
         $active = '';
         foreach ($folders as $folder) {
             if (isset($folder['isActive']) && $folder['isActive']) {
-
                 if (!isset($folder['children'])) {
                     $active = $folder['id'];
                 }
