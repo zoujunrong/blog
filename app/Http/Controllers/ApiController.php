@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\DomCrawler\Crawler;
 
 use App\User;
 use App\models\Bookmark;
@@ -234,15 +235,22 @@ class ApiController extends CommonController
             }
 
             if ($request->input('content') && $request->input('active')) {
+//                 $crawler = new Crawler($request->input('content'));
+//                 $crawler = $crawler->filter('h1');
+// foreach ($crawler as $domElement)
+// {
+// var_dump($domElement->nodeName);
+// }
+// die;
                 $response = Storage::disk('oss')->put($notebook->uid."/notebook/{$notebook->id}/".$request->input('active').".html", $request->input('content'));
                 if ($response) {
-                    $data = [
-                        'notebook_id' => $notebook->id,
-                        'file_id'   => $request->input('active'),
-                        'title' => '',
-                        'desc'  => ''
-                    ];
-                    (new NotebookFile())->createOrUpdateNoteBookFile();
+                    // $data = [
+                    //     'notebook_id' => $notebook->id,
+                    //     'file_id'   => $request->input('active'),
+                    //     'title' => '',
+                    //     'desc'  => ''
+                    // ];
+                    // (new NotebookFile())->createOrUpdateNoteBookFile();
                 }
             }
         } else {
@@ -250,6 +258,14 @@ class ApiController extends CommonController
         }
         return self::response($response);
     }
-    
+
+    /**
+     * 删除笔记本目录
+     * @return [type] [description]
+     */
+    public function deleteNotebookTree(Request $request)
+    {
+
+    }
 
 }

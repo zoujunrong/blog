@@ -14,8 +14,9 @@
         "league/flysystem": "~1.0",
         "mews/captcha": "^2.1",
         "socialiteproviders/weixin": "^4.0",
-        "tymon/jwt-auth": "^0.5.12",
-        "stevenyangecho/laravel-u-editor": "~1.4"
+        "stevenyangecho/laravel-u-editor": "~1.4",
+        "symfony/dom-crawler": "^4.0",
+        "tymon/jwt-auth": "^0.5.12"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
