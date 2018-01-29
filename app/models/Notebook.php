@@ -116,6 +116,7 @@ class Notebook extends Model
     public function getNotebooks($uid, $where=[])
     {
         $this->setTable(self::getTableName($uid));
+        $where['uid'] = $uid;
         return $this->where($where)->get()->keyBy('id');
     }
 

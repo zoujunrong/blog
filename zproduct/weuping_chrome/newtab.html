@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<title>Weuping-有态度的读者</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/config.js" ></script>
+		<script type="text/javascript" src="js/newtab/newtab.js" ></script>
+		
+		<style type="text/css">
+			body { padding-top: 20px;}
+			a {color: #333;}
+			.address div > a {overflow:hidden; width:80px;height:17px; font-size: 13px; display: inline-block;}
+			.address div li > a {overflow:hidden;text-overflow:ellipsis; width:170px;height:25px; font-size: 12px;line-height: 25px;}
+			.bookmark-list .col-lg-8 {overflow:hidden;text-overflow:ellipsis;height: 25px;}
+			.icon {display: inline-block;width: 18px;height: 18px;line-height: 40px;}
+			.dropdownSearch {position: absolute; z-index: 100; border:1px solid #eee; background-color: #fff;padding: 0; display: none;}
+			.dropdownSearch li{list-style: none;height: 25px; line-height: 25px;padding: 0 5px;overflow: hidden;text-overflow:ellipsis;}
+			.dropdownSearch li:hover{background-color: #eee;}
+			.hover:hover{background-color: #eee;}
+			.bookmark-list > div {
+				height: 25px;line-height: 25px;
+			}
+			.bookmark-list input {
+				margin-right: 10px;
+			}
+			.glyphicon-folder-close {color: #ffcc55;}
+			.glyphicon-folder-open {color : #ff9933;}
+			.bookmark-inner-oper {display: none;}
+			.hover:hover .bookmark-inner-oper {display: inline-block;}
+			#dialog .modal-body {
+				max-height: 400px;
+				overflow: auto;
+			}
+			.icon-16 {
+				width: 16px; height: 16px;
+			}
+
+			.tree {
+			  min-height:20px;
+			  padding:19px;
+			  margin-bottom:20px;
+			  background-color:#fbfbfb;
+			  border:1px solid #999;
+			  -webkit-border-radius:4px;
+			  -moz-border-radius:4px;
+			  border-radius:4px;
+			  -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+			  -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+			  box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05)
+			}
+			.tree li {
+			  list-style-type:none;
+			  margin:0;
+			  padding:10px 5px 0 5px;
+			  position:relative
+			}
+			.tree li::before, .tree li::after {
+			  content:'';
+			  left:-20px;
+			  position:absolute;
+			  right:auto
+			}
+			.tree li::before {
+			  border-left:1px solid #999;
+			  bottom:50px;
+			  height:100%;
+			  top:0;
+			  width:1px
+			}
+			.tree li::after {
+			  border-top:1px solid #999;
+			  height:20px;
+			  top:25px;
+			  width:25px
+			}
+
+			.tree li.parent_li>span {
+			  cursor:pointer
+			}
+			.tree>ul>li::before, .tree>ul>li::after {
+			  border:0
+			}
+			.tree li:last-child::before {
+			  height:30px
+			}
+			.tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span {
+			  background:#eee;
+			  border:1px solid #94a0b4;
+			  color:#000
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-2"><a class="navbar-brand" href="#">WeUping</a></div>
+				<div class="col-lg-8">
+					<div class="input-group input-group-lg">
+						<div class="input-group-btn">
+					        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="searchType" role-url="https://www.baidu.com/s?ie=utf-8&wd="><img class="icon" src="https://baike.baidu.com/favicon.ico"/> 百度</span> <span class="caret"></span></button>
+					        <ul role-search class="dropdown-menu">
+								<li><a href="#" role-href="https://www.baidu.com/s?ie=utf-8&wd="><img class="icon" src="https://www.baidu.com/img/favicon_1177a47fa1821047bb22235ac5f86ada.ico"/> 百度</a></li>
+								<li><a href="#" role-href="https://cn.bing.com/search?&ie=utf-8&q="><img class="icon" src="https://cn.bing.com/sa/simg/bing_p_rr_teal_min.ico"/> 必应</a></li>
+								<li><a href="#" role-href="https://www.sogou.com/web?ie=utf8&query="><img class="icon" src="https://www.sogou.com/images/logo/new/favicon.ico"/> 搜狗</a></li>
+								<li><a href="#" role-href="https://www.so.com/s?ie=utf-8&q="><img class="icon" src="https://s.ssl.qhres.com/static/52166db8c450f68d.ico"/> 360搜</a></li>
+								<li><a href="#" role-href="https://www.google.com.hk/search?ie=UTF-8&q="><i class="glyphicon glyphicon-search"></i> Google</a></li>
+								<li><a href="#" role-href="bookmark"><i class="glyphicon glyphicon-bookmark"></i> 书签</a></li>
+								<li><a href="#" role-href="history"><i class="glyphicon glyphicon-eye-open"></i> 历史</a></li>
+								<!-- <li role="separator" class="divider"></li>
+								<li><a href="#">书签</a></li>
+								<li><a href="#">历史记录</a></li> -->
+					        </ul>
+					    </div>
+						<input id="searchText" type="text" class="form-control" autocomplete="off" placeholder="搜我想搜的...">
+						<ul class="dropdownSearch">
+						</ul>
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" id="startSearch">搜索</button>
+						</span>
+				    </div>
+				</div>
+				<div class="col-lg-2">
+					<ul login-status='no' class="nav navbar-nav navbar-right">
+				        <li class="dropdown">
+				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><status>未登录</status> <span class="caret"></span></a>
+				          <ul class="dropdown-menu">
+				            <li><a target="_blank" href="login.html">登录</a></li>
+				          </ul>
+				        </li>
+				    </ul>
+				    <ul login-status='yes' class="nav navbar-nav navbar-right hide">
+				        <li class="dropdown">
+				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><status>未知</status> <span class="caret"></span></a>
+				          <ul class="dropdown-menu">
+				          	<li><a target="_blank" href="login.html">切换账号</a></li>
+				          	<li><a id='singout' href="#">注销账号</a></li>
+				          </ul>
+				        </li>
+				    </ul>
+				</div>
+			</div>
+			<br/>
+			<div class="row address">
+				
+			</div>
+
+			<hr/>
+			<div class="row">
+				<div class="col-lg-2">
+					<div class="list-group">
+						<button left-button="bookmarks" type="button" class="list-group-item active"><i class="glyphicon glyphicon-bookmark"></i> 书签</button>
+						<button left-button="notbooks" type="button" class="list-group-item active"><i class="glyphicon glyphicon-book"></i> 笔记本</button>
+						<button left-button="discovery" type="button" class="list-group-item"><i class="glyphicon glyphicon-eye-open"></i> 发现</button>
+						<button left-button="review" type="button" class="list-group-item"><i class="glyphicon glyphicon-comment"></i> 评论</button>
+						<button left-button="subscribe" type="button" class="list-group-item"><i class="glyphicon glyphicon-floppy-save"></i> 订阅</button>
+						<button left-button="setting" type="button" class="list-group-item"><i class="glyphicon glyphicon-cog"></i> 设置</button>
+					</div>
+				</div>
+				<div class="col-lg-10">
+					<div right-content="we-bookmarks" class="panel panel-default hide">
+						<ol role-path="" class="breadcrumb" style="margin:0px;">
+						</ol>
+						<div class="panel-body">
+							<div role-items="" class="row bookmark-list">
+							</div>
+						</div>
+					</div>
+					<div right-content="we-discovery" class="panel panel-default hide">
+					</div>
+					<div right-content="we-review" class="panel panel-default hide">
+					</div>
+					<div right-content="we-history" class="panel panel-default hide">
+					</div>
+					<div right-content="we-subscribe" class="panel panel-default hide">
+					</div>
+					<div right-content="we-setting" class="panel panel-default hide">
+						<div class="panel-body">
+							<div role-items="" class="row">
+								<div class="col-lg-12">
+									<form>
+										<h4>页面浏览设置</h4><hr/>
+									  
+									  <div class="form-group">
+									    <label>页面浮动 </label>
+									    <div>
+											<label class="checkbox-inline">
+											  <input type="checkbox" name="pages" value="comment"> 添加/显示讨论问题
+											</label>
+											<label class="checkbox-inline">
+											  <input type="checkbox" name="pages" value="good"> 赞
+											</label>
+											<label class="checkbox-inline">
+											  <input type="checkbox" name="pages" value="bookmark"> 保存书签
+											</label>
+											<label class="checkbox-inline">
+											  <input type="checkbox" name="pages" value="edit"> 编辑网页
+											</label>
+											<label class="checkbox-inline">
+											  <input type="checkbox" name="pages" value="share"> 分享
+											</label>
+									    </div>
+									  </div>
+									  <div class="form-group">
+									    <label>右键菜单 </label>
+									    <div>
+									    	<label class="checkbox-inline">
+											  <input type="checkbox" name="contextmenu" value="bookmark"> 保存书签
+											</label>
+											<label class="checkbox-inline">
+											  <input type="checkbox" name="contextmenu" value="search"> 搜索
+											</label>
+											<label class="checkbox-inline">
+											  <input type="checkbox" name="contextmenu" value="translate"> 翻译
+											</label>
+											<label class="checkbox-inline">
+											  <input type="checkbox" name="contextmenu" value="quote"> 引用
+											</label>
+									    </div>
+									  </div>
+									  <div class="form-inline">
+									  	  <div class="form-group">
+									  	    <label>默认搜索引擎：</label>
+									  	    <select name="search" class="form-control">
+									  		  <option selected="true" value="baidu">百度</option>
+									  		  <option value="google">谷歌</option>
+									  		</select>
+									  	  </div>
+									  	  <div class="form-group">
+									  	    <label>&nbsp;&nbsp;默认翻译引擎：</label>
+									  	    <select name="translate" class="form-control">
+									  		  <option selected="true" value="baidu">百度翻译</option>
+									  		  <option value="google">谷歌翻译</option>
+									  		</select>
+									  	  </div>
+									  </div>
+									  <hr/>
+									  <div class="form-group">
+									  		<label>隐私设置 </label>
+										    <div>
+										    	<label class="checkbox-inline">
+												  <input type="checkbox" name="shows" value="review"> 评论是否公开
+												</label>
+												<label class="checkbox-inline">
+												  <input type="checkbox" name="shows" value="storage"> 收藏是否公开
+												</label>
+												<label class="checkbox-inline">
+												  <input type="checkbox" name="shows" value="assist"> 点赞是否公开
+												</label>
+												<label class="checkbox-inline">
+												  <input type="checkbox" name="shows" value="edit"> 编辑保存网页是否公开
+												</label>
+										    </div>
+									  </div>
+									  <hr/>
+									  <button type="button" id="resetSettings" class="btn btn-default">恢复默认设置</button>&nbsp;&nbsp;
+									  <button type="button" id="saveSettings" class="btn btn-primary">保存</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 对话框 Modal -->
+			<div class="modal fade" id="dialog" tabindex="-1" role="dialog">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" dialog-title></h4>
+			      </div>
+			      <div class="modal-body" dialog-body>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal" dialog-close>关闭</button>
+			        <button type="button" class="btn btn-primary" dialog-confirm>确定</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+
+	</body>
+</html>

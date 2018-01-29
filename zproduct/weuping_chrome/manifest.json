@@ -1,0 +1,47 @@
+{
+    "name": "WeUping",
+    "manifest_version": 2,
+    "version": "2.0.0",
+    "description": "知识共享平台",
+    "author" : {
+        "name" : "zjr",
+        "birth" : 1990
+    },
+    "icons": {
+        "16": "images/favicon.png",
+        "48": "images/favicon.png",
+        "128": "images/favicon1.png"
+    },
+    "chrome_url_overrides": {
+        "newtab" : "bookmarks.html"
+    },
+    "browser_action": {
+        "default_icon": {
+            "19": "images/favicon.png",
+            "38": "images/favicon.png"
+        },
+        "default_title": "WeUping",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": ["js/jquery-3.2.1.min.js", "js/config.js", "js/background/main.js"]
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "css": [
+                "css/content/main.css"
+            ],
+            "js": [
+                "js/jquery-3.2.1.min.js", 
+                "js/content/content.js"
+            ]
+        }
+    ],
+
+    "permissions": [
+        "bookmarks", "tabs", "history", "contextMenus", "storage", "activeTab"
+        // , {"fileSystem": ["write", "directory"]}
+    ]
+
+}

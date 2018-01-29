@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bookmark extends Model
 {
 	static private $tables = [];
-
+    static private $baseTable = 'bookmarks';
 	/**
 	 * 获取表名
 	 * @param  userId 用户ID
@@ -16,17 +16,46 @@ class Bookmark extends Model
 	 */
 	static public function getTableName($userId)
 	{
-		$baseTable = 'bookmarks';
-		$tableName = "{$baseTable}_".ceil($userId/config("model.bookmark_max_user"));
+		$tableName = "{$this->baseTable}_".ceil($userId/config("model.bookmark_max_user"));
 		// 检测表是否存在，不存在时创建
 		if (!isset(self::$tables[$tableName])) {
-			DB::statement('CREATE TABLE IF NOT EXISTS `'.$tableName.'` LIKE `'.$baseTable.'`');
+			DB::statement('CREATE TABLE IF NOT EXISTS `'.$tableName.'` LIKE `'.$this->baseTable.'`');
 			self::$tables[$tableName] = 1;
 		}
 		return $tableName;
-
 	}
 
+    /**
+     * 获取最新表
+     * @return [type] [description]
+     */
+    static public function getLatestTable()
+    {
+        $tables = DB::select('select table_name from information_schema.tables where table_name LIKE "'.self::$baseTable.'_%"');
+        $latestIndex = null;
+        foreach($tables as $key => $item) {
+            $tmpIndex = substr($item->table_name, stripos($item->table_name, '_')+1);
+            if ($tmpIndex > $latestIndex) {
+                $latestIndex = $tmpIndex;
+            }
+        }
+        return self::$baseTable.'_'.$latestIndex;
+    }
+
+    /**
+     * 设置表名
+     */
+    public function setTableName($userId)
+    {
+        $this->setTable(self::getTableName($userId));
+    }
+
+    /**
+     * 获取是否删除
+     * @param  [type] $where    [description]
+     * @param  [type] $isDelete [description]
+     * @return [type]           [description]
+     */
     public function getIsDelete($where, $isDelete)
     {
         if ($isDelete === 0) {
@@ -165,6 +194,13 @@ class Bookmark extends Model
     public function updateDatasByIds($uid, $ids, $data)
     {
         return DB::table(self::getTableName($uid))->whereIn('id', $ids)->update($data);
+    }
+
+
+    public function getBookmarks($uid)
+    {
+        $this->setTable(self::getLatestTable());
+        return $this->orderBy('quotes', 'desc')->where([['uid', '<>', $uid], ['fid', '>', 1]])->paginate(50);
     }
 
 

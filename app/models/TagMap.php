@@ -34,6 +34,7 @@ class TagMap extends Model
         
 		return $tableName;
 	}
+
 	
 	/**
 	 * 获取分表

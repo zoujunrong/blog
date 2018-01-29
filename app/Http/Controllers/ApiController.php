@@ -98,6 +98,16 @@ class ApiController extends CommonController
 
     }
 
+    /**
+     * 获取推荐书签
+     */
+    public function getRecommends(Request $request)
+    {
+        $input = $request->all();
+        $response = (new Bookmark())->getBookmarks($input['uid']);
+        return self::response($response);
+    }
+
     
     /**
      * 创建标签

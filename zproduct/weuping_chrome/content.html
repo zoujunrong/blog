@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<style type="text/css">
+    .left_fixed {
+        position: fixed;
+        z-index: 9999;
+        left: 20px;
+        top: 150px;
+        width: 39px;
+        overflow: visible;
+        clear: both;
+    }
+    .left_fixed .left_show_button {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 54px;
+    text-align: center;
+    background-color: #e3e3e3;
+    cursor: pointer;
+}
+ul, li, ol, dl, dd, dt, form {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.left_fixed ul.left_menu li .left-fixed-btn {
+    border: 0;
+    padding: 0;
+    background: rgba(0,0,0,0);
+    height: auto;
+    vertical-align: top;
+}
+button, input, textarea {
+    outline: none;
+    border: 0;
+}
+.left_fixed ul.left_menu li .left-fixed-btn span.iconbox {
+    background-color: #eee;
+    display: block;
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    clear: both;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.05);
+}
+.left_fixed ul.left_menu li {
+    clear: both;
+    overflow: visible;
+    width: 39px;
+    height: 50px;
+    margin: 0;
+}
+
+.left_fixed ul.left_menu li.menu_con {
+    height: 0;
+    margin-bottom: 0;
+    overflow: visible;
+    width: 200px;
+    position: relative;
+}
+
+.left_fixed ul.left_menu li#share_box {
+    position: relative;
+    z-index: 1;
+}
+</style>
+<html>
+<div class="left_fixed" style="left: 44.5px;">
+      <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+      </div>
+    <ul class="left_menu">
+
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics" data-mod="popu_373" target="_self">
+                <span class="iconbox border_red"><i class="icon iconfont icon-dianzan"></i></span>
+                <span class="txt">12</span>
+            </button>
+        </li>
+        <li id="blog_artical_directory" style="display: none;">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics" data-mod="popu_372" target="_self">
+                <span class="iconbox border_black"><i class="icon iconfont icon-mulu"></i></span>
+            </button>
+        </li>
+        <li class="menu_con" style="display: none; overflow: hidden; height: 0px;">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics" data-mod="popu_374" id="com-quick-collect" target="_self">
+                <span class="iconbox border_purple"><i class="icon iconfont icon-shoucang"></i></span>
+    
+            </button>
+        </li>
+        <li>
+          <button class="left-fixed-btn btn-pinglun">
+            <span class="iconbox border_purple"><i class="icon iconfont icon-pinglun"></i></span>
+          </button>
+        </li>
+        <li id="share_box">
+            <button class="left-fixed-btn  csdn-tracking-statistics" data-mod="popu_375" target="_self">
+                <span class="iconbox border_orange"><i class="icon iconfont icon-fenxiang"></i></span>
+            </button>
+            <div class="bdsharebuttonbox csdn-tracking-statistics bdshare-button-style0-16" data-mod="popu_172" data-bd-bind="1509001609724">
+                <div class="outside">
+                    <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博" target="_blank"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信" target="_blank"> </a>
+                </div>
+                <div class="outside">
+                    <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间" target="_blank"> </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</html>
