@@ -104,7 +104,7 @@ class ApiController extends CommonController
     public function getRecommends(Request $request)
     {
         $input = $request->all();
-        $response = (new Bookmark())->getBookmarks($input['uid']);
+        $response = (new Bookmark())->getBookmarks($input['uid'], $input['action']);
         return self::response($response);
     }
 

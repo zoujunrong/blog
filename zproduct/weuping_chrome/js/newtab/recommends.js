@@ -1,6 +1,11 @@
 $(function(){
     createToolbars()
-    createItems()
+    createItems('folders')
+    $('#share_nav li').on('click', function() {
+        $(this).siblings('li').removeClass('active')
+        $(this).addClass('active')
+        createItems($(this).attr('role-name'))
+    })
 })
 
 // 生成工具栏
@@ -45,11 +50,14 @@ function createToolbars() {
 }
 
 // 笔记Items栏
-function createItems() {
+function createItems(action, isAppend) {
+    if (!isAppend) {
+        $('#item-container').html('')
+    }
     checkIsRelogin(function(){
         toggleLoading()
         var timestamp = String(Date.parse(new Date())).substr(0, 10)
-        weupingRequest('/api/getRecommends', {'latesttime': timestamp}, function(ret) {
+        weupingRequest('/api/getRecommends', {'latesttime': timestamp, 'action': action}, function(ret) {
             toggleLoading()
             if (ret.hasOwnProperty('code') && ret.code == 0) {
                 var data = ret.data
@@ -58,15 +66,15 @@ function createItems() {
                     var totalTags = {}
                     for (var i in datas) {
                         
-                        var innerHtml = '<div class="panel-body">\
+                        var innerHtml = '<div class="panel-body col-md-4">\
                             <div class="media">\
                               <div class="media-body">\
-                                  <h4>\
-                                    <span class="glyphicon glyphicon-'+(datas[i]['is_folder'] ? 'folder-close' : 'link')+'"></span> <a href="'+datas[i]['url']+'" target="_blank">'+datas[i]['title']+'</a>\
-                                    <div role="presentation" class="dropdown pull-right" style="margin-top: -10px;">\
-                                      <a title="添加书签" class="dropdown-toggle" style="font-size:12px; color:silver;" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-plus"></i></a>\
+                                  <h5>\
+                                    <span class="glyphicon glyphicon-'+(datas[i]['is_folder'] ? 'folder-close' : 'link')+'"></span> <a href="'+datas[i]['url']+'" target="_blank">'+datas[i]['title']+'</a> <span>('+datas[i]['childrens']+')</span>\
+                                    <div role="presentation" class="pull-right" style="font-size:12px;">\
+                                      '+(userDetails.id ==datas[i]['uid'] ? '<a title="删除书签" href="#"><i class="glyphicon glyphicon-plus"></i></a>' : '<a title="添加书签" style="color:silver;" href="#"><i class="glyphicon glyphicon-plus"></i></a>')+'\
                                     </div>\
-                                  </h4>\
+                                  </h5>\
                                   <div class="panel-card-footer">\
                                     <span class=""><a href="#" method="post" title="所属"> 工具-laravel</a></span>\
                                     <span class="" title="引用数 '+datas[i]['quotes']+'">'+datas[i]['quotes']+' 引用</span>\

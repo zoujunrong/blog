@@ -59,7 +59,7 @@ var header = '<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css
       <div class="row">\
         <div class="col-lg-2">\
           <div class="list-group">\
-            <button left-button="recommends" type="button" class="list-group-item active"><i class="glyphicon glyphicon-filter"></i> 推荐</button>\
+            <button left-button="recommends" type="button" class="list-group-item active"><i class="glyphicon glyphicon-filter"></i> 共享</button>\
             <button left-button="bookmarks" type="button" class="list-group-item"><i class="glyphicon glyphicon-bookmark"></i> 书签</button>\
             <button left-button="messages" type="button" class="list-group-item"><i class="glyphicon glyphicon-envelope"></i> 消息<span class="badge">4</span></button>\
             <button left-button="mines" type="button" class="list-group-item"><i class="glyphicon glyphicon-cog"></i> 我的</button>\

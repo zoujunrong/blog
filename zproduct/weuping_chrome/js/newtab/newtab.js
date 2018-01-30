@@ -84,6 +84,8 @@ function searchMain() {
 			if ($('.dropdownSearch').find('li:eq('+index+')').text()) {
 				window.open($('.dropdownSearch').find('li:eq('+index+')').find('a').attr('href'))
 			}
+		} else if (roleUrl == 'search') {
+
 		} else if ($.trim($('#searchText').val())) {
 			// 记录搜索关键词
 			window.open(roleUrl + $.trim($('#searchText').val()))
@@ -183,6 +185,12 @@ function getSearchRecommend(url, data) {
 	});
 }
 
+// 站内搜索
+function getSearchResult(text) {
+	
+}
+
+// 历史浏览记录搜索
 function searchHistory(text) {
 	var config = {
 		text: text,
@@ -205,6 +213,7 @@ function searchHistory(text) {
 	});
 }
 
+// 书签搜索
 function searchBookmark(text) {
 	chrome.bookmarks.search(text, function(bookmarkArray) {
 		var existKeys = {}

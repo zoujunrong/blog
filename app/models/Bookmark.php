@@ -197,10 +197,17 @@ class Bookmark extends Model
     }
 
 
-    public function getBookmarks($uid)
+    public function getBookmarks($uid, $action)
     {
         $this->setTable(self::getLatestTable());
-        return $this->orderBy('quotes', 'desc')->where([['uid', '<>', $uid], ['fid', '>', 1]])->paginate(50);
+        $where = [['fid', '>', 1]];
+        if ($action == 'folders') {
+            $where[] = ['childrens', '>', 0];
+        }
+        if ($action == 'bookmarks') {
+            $where[] = ['is_folder', 0];
+        }
+        return $this->orderBy('quotes', 'desc')->where($where)->paginate(50);
     }
 
 
