@@ -66,7 +66,7 @@ function createItems(action, isAppend) {
                     var totalTags = {}
                     for (var i in datas) {
                         
-                        var innerHtml = '<div class="panel-body col-md-4">\
+                        var innerHtml = '<div class="panel-body col-md-'+(action == 'bookmarks' ? '12' : '4')+'">\
                             <div class="media">\
                               <div class="media-body">\
                                   <h5>\

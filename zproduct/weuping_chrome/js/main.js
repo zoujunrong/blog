@@ -1,4 +1,6 @@
 $(function(){
+    // 首先判断是否已经打开了这个窗口
+
     window.open('bookmarks.html')
     // 初始化窗口
     initFrm();
@@ -40,7 +42,7 @@ function initFrm() {
 }
 
 function swithFrm(contentId) {
-
+    
     $('div[tapmode]').removeClass('aui-active');
     $('div[role-frm='+contentId+']').addClass('aui-active');
 
