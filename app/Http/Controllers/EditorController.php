@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class EditorController extends Controller
 {
+    const STORAGE_DRIVE = 'local';
     /**
      * Create a new controller instance.
      *
@@ -24,9 +25,9 @@ class EditorController extends Controller
     public function create()
     {
         // 获取笔记本信息
-        $content = Storage::disk('oss')->has('docs/content.html') ? Storage::disk('oss')->get('docs/content.html') : null;
-        $menu = Storage::disk('oss')->has('docs/menu.json') ? Storage::disk('oss')->get('docs/menu.json') : null;
-        $folders = Storage::disk('oss')->has('docs/folders.json') ? Storage::disk('oss')->get('docs/folders.json') : '[{"text":"新建专题", "isFolder":true, "isExpanded":true}]';
+        $content = Storage::disk(self::STORAGE_DRIVE)->has('docs/content.html') ? Storage::disk(self::STORAGE_DRIVE)->get('docs/content.html') : null;
+        $menu = Storage::disk(self::STORAGE_DRIVE)->has('docs/menu.json') ? Storage::disk(self::STORAGE_DRIVE)->get('docs/menu.json') : null;
+        $folders = Storage::disk(self::STORAGE_DRIVE)->has('docs/folders.json') ? Storage::disk(self::STORAGE_DRIVE)->get('docs/folders.json') : '[{"text":"新建专题", "isFolder":true, "isExpanded":true}]';
 
         return view('doc.editdoc', ['content' => $content, 'menu'=> $menu, 'folders' => $folders]);
     }
@@ -37,9 +38,9 @@ class EditorController extends Controller
      */
     public function store(Request $request)
     {
-        Storage::disk('oss')->put('docs/content.html', $request->content);
-        Storage::disk('oss')->put('docs/menu.json', $request->menuTree);
-        Storage::disk('oss')->put('docs/folders.json', $request->folderList);
+        Storage::disk(self::STORAGE_DRIVE)->put('docs/content.html', $request->content);
+        Storage::disk(self::STORAGE_DRIVE)->put('docs/menu.json', $request->menuTree);
+        Storage::disk(self::STORAGE_DRIVE)->put('docs/folders.json', $request->folderList);
         return ['errCode' => 200, 'errMsg' => '操作成功', 'data' => [1,2,3,3,4,5]];
         return view('editor.doc', ['content' => $request->content, 'menu'=> $request->menuTree, 'folders' => $request->folderList]);
     }

@@ -22,6 +22,7 @@ return [
     |
     */
 
+    
     'notebook_max_user' => 100000,
 
     /*

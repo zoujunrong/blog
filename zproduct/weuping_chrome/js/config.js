@@ -1,5 +1,19 @@
 
 var _env = 'test';
+// 搜索引擎配置
+var searchConfig = {
+  baidu: 'https://www.baidu.com/s?ie=utf-8&wd=',
+  bing: 'https://cn.bing.com/search?&ie=utf-8&q=',
+  sogou: 'https://www.sogou.com/web?ie=utf8&query=',
+  so: 'https://www.so.com/s?ie=utf-8&q=',
+  google: 'https://www.google.com.hk/search?ie=UTF-8&q='
+}
+// 翻译
+var translateConfig = {
+  baidu: 'http://fanyi.baidu.com/#auto/auto/',
+  youdao: 'http://fanyi.baidu.com/#auto/auto/',
+  google: ''
+}
 
 function getEnv() {
   return _env;
@@ -12,6 +26,33 @@ function weupingHost() {
     return 'www.weuping.com';
   }
 }
+
+function httpGet(url, callback){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, false);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            callback(xhr.responseText);
+        }
+    }
+    xhr.send();
+}
+
+function httpPost(url, params={}, callback) {
+  $.ajax({
+      async: false,
+      url: url,
+      type: 'POST',
+      dataType: 'json',
+      data: params,
+      timeout: 5000,
+      success: function(data) {
+        callback(data)
+      }
+  })
+  
+}
+
 
 function weupingliburl(path) {
   return 'http://' + weupingHost() + '' +path;
@@ -132,3 +173,5 @@ function checkIsRelogin(callback) {
       callback()
     }
 }
+
+

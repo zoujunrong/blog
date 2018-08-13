@@ -167,7 +167,7 @@
             <input type="hidden" name="uid" value="{{ $uid or 0 }}" />
             <input type="hidden" name="token" value="{{ $token or '' }}" />
             <input type="hidden" name="folderList" value="{{$folders}}" />
-            <input type="hidden" name="active" value="{{$active}}" />
+            {{-- <input type="hidden" name="active" value="{{$active}}" /> --}}
             <script id="editor" type="text/plain" name="content">{!! $content or '<h1 id="136">首页</h1>世界你好！' !!}</script>
         </form>
         <!-- {{-- 通过js将此菜单栏注入到插件中实现菜单栏功能 --}} -->

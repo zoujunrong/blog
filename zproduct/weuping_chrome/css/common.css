@@ -9,7 +9,7 @@ body { padding-top: 20px;}
       .dropdownSearch li:hover{background-color: #eee;}
       .hover:hover{background-color: #eee;}
       .bookmark-list > div {
-        height: 25px;line-height: 25px;
+        height: 30px;line-height: 30px;font-size: 15px;
       }
       .bookmark-list input {
         margin-right: 10px;

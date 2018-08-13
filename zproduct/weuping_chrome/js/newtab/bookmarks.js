@@ -12,6 +12,9 @@ $(function() {
 
     // 绑定书签操作事件
     bookmarksEvent()
+
+    // 生产历史记录
+    // getHistory()
 })
 
 
@@ -481,11 +484,11 @@ function createBookMarkPath(booksPath) {
 
     chrome.bookmarks.getChildren(pathArr[pathArr.length-1], function(bookmarkArray){
         var pathHtml = ''
-        var newDate = new Date()
+        // var newDate = new Date()
         var bookmarkIds = []
         for (i in bookmarkArray) {
             bookmarkIds.push(bookmarkArray[i]['id'])
-            newDate.setTime(bookmarkArray[i]['dateAdded'])
+            // newDate.setTime(bookmarkArray[i]['dateAdded'])
             var isGrpup = bookmarkArray[i].hasOwnProperty('dateGroupModified')
 
             var iconHtml = ''
@@ -495,7 +498,7 @@ function createBookMarkPath(booksPath) {
                 iconHtml = getIcon(bookmarkArray[i]['url'])
             }
             pathHtml += '<div bookmarks-items='+bookmarkArray[i]['index']+' class="col-lg-12 hover">\
-                            <div class="col-lg-8">\
+                            <div class="col-lg-11">\
                                 <input type="checkbox" bookmarks-id="'+bookmarkArray[i]['id']+'"> '+iconHtml+'<a id="'+bookmarkArray[i]['id']+'" href='+(isGrpup ? '"#'+booksPath+'-'+bookmarkArray[i]['id']+'" bookmark-folder' : '"'+bookmarkArray[i]['url']+'" bookmark-link target="_blank"')+' title="'+bookmarkArray[i]['title']+'"> '+bookmarkArray[i]['title']+'</a>\
                             </div>\
                             <div class="col-lg-1">\
@@ -507,8 +510,8 @@ function createBookMarkPath(booksPath) {
                                     <li><a bookmark-movedown href="#">下移</a></li>\
                                     <li><a bookmark-delete="single" href="#">删除</a></li>\
                                 </ul>\
-                            </div>\
-                            <div class="col-lg-3"><i class="pull-right">'+newDate.toLocaleString()+'</i></div></div>'
+                            </div></div>'
+                            // <div class="col-lg-3"><i class="pull-right">'+newDate.toLocaleString()+'</i></div></div>'
         }
         var roleItemsObj = $('div[right-content="we-bookmarks"] div[role-items]')
         roleItemsObj.html(pathHtml)

@@ -5,19 +5,7 @@ $(function() {
 
 // ======================= 系统设置事件 =================================
 function showSystemSettings() {
-    var systemConfig = localStorage.getItem('we-systemConfig')
-    if (!systemConfig) {
-        systemConfig = {
-            'pages': ['good', 'comment', 'bookmark', 'edit', 'share'],
-            'contextmenu': ['bookmark', 'search', 'translate', 'quote'],
-            'shows': ['review', 'storage', 'assist', 'edit'],
-            'search': 'baidu',
-            'translate': 'baidu'
-        }
-        localStorage.setItem('we-systemConfig', JSON.stringify(systemConfig))
-    } else {
-        systemConfig = JSON.parse(systemConfig)
-    }
+    var systemConfig = JSON.parse(localStorage.getItem('we-systemConfig'))
     for (var i in systemConfig) {
         $('[name='+i+']').val(systemConfig[i])
     }

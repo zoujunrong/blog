@@ -1,6 +1,5 @@
 $(function(){
-    chrome.runtime.sendMessage({'type': 'getContentConfig'}, function(response){
-        datas = JSON.parse(response)
+    chrome.runtime.sendMessage({'type': 'getContentConfig'}, function(datas){
         var pages = datas ? datas.pages : null
         var contentDiv = '';
         if (pages && pages.length > 0 ) {
@@ -21,24 +20,76 @@ $(function(){
                 } else if (pages[i] == 'edit') {
                     title = '编辑网页'
                     svg = '<svg t="1510757868179" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3130" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style type="text/css"></style></defs><path fill="#fff" d="M34.155089 230.940227 9.17948 230.940227 9.17948 256.203386 9.17948 854.158012C9.17948 923.769568 65.248004 980.289737 134.081773 980.289737L927.938515 980.289737 952.914125 980.289737 952.914125 955.026579 952.914125 471.100561C952.914125 457.148105 941.732164 445.837402 927.938515 445.837402 914.144868 445.837402 902.962906 457.148105 902.962906 471.100561L902.962906 955.026579 927.938515 929.76342 134.081773 929.76342C92.797081 929.76342 59.130699 895.825847 59.130699 854.158012L59.130699 256.203386 34.155089 281.466543 598.93821 281.466543C612.731859 281.466543 623.91382 270.155842 623.91382 256.203386 623.91382 242.250928 612.731859 230.940227 598.93821 230.940227L34.155089 230.940227Z" p-id="3131"></path><path fill="#fff" d="M437.016339 593.503789 431.876019 600.104892 431.668623 608.505214 427.984924 757.709741 427.077935 794.446421 461.312335 782.146455 605.005395 730.519447 611.980762 728.013291 616.479561 722.067243 1003.181673 210.964228 1018.529978 190.678421 998.306108 175.379305 869.49174 77.932781 849.985487 63.176536 834.913446 82.53177 437.016339 593.503789ZM839.575373 118.395018 968.389739 215.841542 963.514174 180.256619 576.81206 691.359633 588.286225 682.907428 444.593165 734.534436 477.920574 758.971151 481.604275 609.766622 476.256559 624.768047 874.153664 113.79603 839.575373 118.395018Z" p-id="3132"></path><path fill="#fff" d="M891.217762 310.505713 920.474916 269.553252 808.309143 187.564266 779.051989 228.516725 891.217762 310.505713Z" p-id="3133"></path></svg>'
-                } else if (pages[i] == 'share') {
-                    title = '分享'
-                    svg = '<svg t="1510758370950" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3591" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style type="text/css"></style></defs><path fill="#fff" d="M697.15674 422.956522 847.731148 422.956522C884.876874 422.956522 915.087718 452.959788 915.087718 489.801828L915.087718 912.632955 915.087718 1001.739129 937.543859 979.47826 847.939848 979.47826 218.726818 979.47826C181.707983 979.47826 151.578948 949.486546 151.578948 912.632955L151.578948 489.801828C151.578948 472.785796 151.578948 472.785796 151.578948 450.127108 151.578948 442.919656 151.578948 442.919656 151.578948 435.893809 151.578948 408.715613 151.578948 408.715613 151.578948 400.695652L129.122807 422.956522C137.296139 422.956522 137.296139 422.956522 164.865734 422.956522 171.618554 422.956522 171.618554 422.956522 178.53178 422.956522 201.762058 422.956522 201.762058 422.956522 218.906254 422.956522L354.437705 422.956522C366.839887 422.956522 376.893843 412.98999 376.893843 400.695652 376.893843 388.401314 366.839887 378.434781 354.437705 378.434781L218.906254 378.434781C201.762058 378.434781 201.762058 378.434781 178.53178 378.434781 171.618554 378.434781 171.618554 378.434781 164.865734 378.434781 137.296139 378.434781 137.296139 378.434781 129.122807 378.434781 116.720624 378.434781 106.666667 388.401314 106.666667 400.695652 106.666667 408.715613 106.666667 408.715613 106.666667 435.893809 106.666667 442.919656 106.666667 442.919656 106.666667 450.127108 106.666667 472.785796 106.666667 472.785796 106.666667 489.801828L106.666667 912.632955C106.666667 974.033806 156.86164 1023.999999 218.726818 1023.999999L847.939848 1023.999999 937.543859 1023.999999C949.946043 1023.999999 960 1014.033469 960 1001.739129L960 912.632955 960 489.801828C960 428.38942 909.69975 378.434781 847.731148 378.434781L697.15674 378.434781C684.754556 378.434781 674.700599 388.401314 674.700599 400.695652 674.700599 412.98999 684.754556 422.956522 697.15674 422.956522L697.15674 422.956522Z" p-id="3592"></path><path fill="#fff" d="M347.996815 282.764936 548.760439 59.327972 515.337485 59.454466 715.839402 279.198683C724.158863 288.316569 738.359462 289.022466 747.557327 280.775347 756.755193 272.52823 757.467283 258.451114 749.147821 249.333231L548.645903 29.589012 531.863345 11.19582 515.22295 29.715506 314.459326 253.152471C306.210339 262.333062 307.030836 276.404377 316.291958 284.581634 325.55308 292.75889 339.747827 291.945527 347.996815 282.764936L347.996815 282.764936Z" p-id="3593"></path><path fill="#fff" d="M511.087716 78.416783 510.666677 782.242894C510.659322 794.53723 520.707315 804.50967 533.109495 804.516961 545.511678 804.524251 555.571595 794.563632 555.57895 782.269296L555.999989 78.443185C556.007345 66.148848 545.959351 56.176409 533.557171 56.169118 521.154989 56.161828 511.095072 66.122446 511.087716 78.416783L511.087716 78.416783Z" p-id="3594"></path></svg>'
+                } else if (pages[i] == 'tab') {
+                    title = '标签'
+                    svg = '<svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="974"><path d="M128 832.042667c0 17.002667 4.906667 20.309333 20.629333 14.016l15.36-6.144c75.733333-30.293333 193.578667-30.293333 269.354667 0l94.506667 37.802666h-31.701334l94.506667-37.802666c75.733333-30.293333 193.578667-30.293333 269.354667 0l15.36 6.144c15.658667 6.272 20.629333 2.901333 20.629333-14.016V255.957333c0-29.738667-24.746667-66.304-52.309333-77.333333l-15.36-6.144c-55.424-22.165333-150.549333-22.186667-205.973334 0l-94.506666 37.802667-15.850667 6.336-15.850667-6.336-94.506666-37.802667c-55.402667-22.165333-150.528-22.186667-205.952 0l-15.36 6.144C152.810667 189.610667 128 226.304 128 255.957333v576.085334zM164.48 139.008l15.36-6.144c65.621333-26.24 172.117333-26.218667 237.653333 0L512 170.666667l94.506667-37.802667c65.621333-26.24 172.117333-26.218667 237.653333 0l15.36 6.144c43.733333 17.493333 79.146667 69.717333 79.146667 116.949333v576.085334c0 47.104-35.477333 71.104-79.146667 53.632l-15.36-6.144c-65.621333-26.24-172.117333-26.218667-237.653333 0L512 917.333333l-94.506667-37.802666c-65.621333-26.24-172.117333-26.218667-237.653333 0l-15.36 6.144c-43.733333 17.493333-79.146667-6.4-79.146667-53.632V255.957333C85.333333 208.853333 120.810667 156.48 164.48 139.008zM490.666667 213.397333a21.333333 21.333333 0 1 1 42.666666 0v511.872a21.333333 21.333333 0 1 1-42.666666 0V213.397333z" fill="#fff" p-id="975"></path></svg>'
                 }
-                contentDiv += '<div weuping-button="'+pages[i]+'">'+tips+svg+'</div>';
+                contentDiv += '<div title="'+title+'" weuping-button="'+pages[i]+'">'+tips+svg+'</div>';
             }
             contentDiv += '<div id="weuping-close"><svg t="1510757767738" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3015" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path fill="#fff" d="M176.661601 817.172881C168.472798 825.644055 168.701706 839.149636 177.172881 847.338438 185.644056 855.527241 199.149636 855.298332 207.338438 846.827157L826.005105 206.827157C834.193907 198.355983 833.964998 184.850403 825.493824 176.661601 817.02265 168.472798 803.517069 168.701706 795.328267 177.172881L176.661601 817.172881Z" p-id="3016"></path><path fill="#fff" d="M795.328267 846.827157C803.517069 855.298332 817.02265 855.527241 825.493824 847.338438 833.964998 839.149636 834.193907 825.644055 826.005105 817.172881L207.338438 177.172881C199.149636 168.701706 185.644056 168.472798 177.172881 176.661601 168.701706 184.850403 168.472798 198.355983 176.661601 206.827157L795.328267 846.827157Z" p-id="3017"></path></svg></div>';
-            contentDiv = '<div class="weuping-content">'+contentDiv+'</div>'
+            contentDiv = '<div class="weuping-content" style="display:none;">'+contentDiv+'</div>'
             contentDiv += '<div class="weuping-tips weuping-hide"><em></em><span></span><div class="weuping-tip-content scrollbar"></div></div>'
             contentDiv += '<div class="weuping-edit-selection" draggable="true"></div>'
             $('body').append(contentDiv)
         }
+
+        // 翻译输入框重新输入时触发重新翻译
+        $(document).on('blur', '#wp_translateInput', function() {
+            createTranslateDiv($.trim($(this).val()))
+        })
+
+        // 监听快捷键按钮
+        var pressCount = 0
+        var settimeout = null
+        $(document).on('keyup', function(e) {
+            // ctrl + Q
+            if (81 == e.keyCode && e.ctrlKey) {
+                console.log($(window.getSelection()).parent('td').text())
+                var selection = window.getSelection().toString()
+                createTranslateDiv(selection)
+                pressCount = 0
+            }
+            // escape
+            else if (e.keyCode == 27) {
+                hideWeupingTips()
+            }
+            // 多次触发ctrl键
+            else if (e.keyCode == 17) {
+                window.clearTimeout(settimeout)
+                pressCount++
+                settimeout = setTimeout(function() {
+                    switch (pressCount) {
+                        case 2:
+                            var selection = window.getSelection().toString()
+                            chrome.runtime.sendMessage({'type': 'getSearchResult', 'text' : selection}, function(content) {
+                                content = content == undefined ? '<p class="h4">未获取到搜索结果</p>' : content
+                                showWeupingTips(null, content, 'margin-left:10px;width:700px;')
+                            })
+                            
+                        break
+                        case 3:
+
+                        break
+                    }
+                    pressCount = 0
+                }, 300)
+            }
+        })
+
 /*
         chrome.fileSystem.chooseEntry({}, function(fileEntry){
             console.log(fileEntry);
             //do something with fileEntry
         });
-*/
+*/  
+        $(document).on('mousemove', function(e) {
+            if (e.clientX > 60) {
+                $('.weuping-content').hide()
+            } else if (e.clientX == 0) {
+                $('.weuping-content').show()
+            }
+        })
+        
         // 点击删除按钮时
         $(document).on('click', '#weuping-close', function() {
             $(this).parents('.weuping-content').remove()
@@ -55,22 +106,63 @@ $(function(){
                     goodEvent()
                     break
                 case 'bookmark':
+                    chrome.runtime.sendMessage({'type': 'getBookmarks'}, function(content) {
+                        content = content == undefined ? '<p class="h4">未获取到搜索结果</p>' : content
+                        var iframe = '<iframe id="weupingIframe" style="border:none;width:100%;height:100%;overflow-x:hidden;" src="" />'
+                        showWeupingTips(null, iframe, 'margin-left:10px;width:700px;')
+                        $('#weupingIframe').contents().find('body').html($(content).html());
+                    })
                     showWeupingTips(this, 'bookmark')
                     break
                 case 'edit':
                     editEvent()
                     break
-                case 'share':
-                    showWeupingTips(this, 'share')
+                case 'tab':
+                    var tabObj = this
+                    // 在触发获取
+                    sendMessage({'type': 'getTabs', 'protocol': document.location.protocol}, function(content) {
+                        var style = 'margin-left:8px;'
+                        showWeupingTips(tabObj, content, style)
+                        // 处理滚动条位置
+                        var container = $(document).find('.weuping-tip-content'),
+                        scrollTo = $(document).find('.wp_list-group .active')
+                        container.scrollTop(0)
+                        container.scrollTop(
+                            scrollTo.offset().top - container.offset().top + container.scrollTop() - 13
+                        )
+
+                        $(document).find('a.wp_list-group-item').off('mousemove').on('mousemove', function(e) {
+                            $(this).siblings().find('span svg').hide()
+                            $(this).siblings().find('span i').show()
+                            $(this).find('span svg').show()
+                            $(this).find('span i').hide()
+                        }).on('mouseout', function() {
+                            $(this).find('span i').show()
+                            $(this).find('span svg').hide()
+                        })
+                    })
                     break
                 default:
                     break
             }
             e.stopPropagation()
         })
-
-        $(document).on('click', '.weuping-tips', function(e){
+        // 响应点击标签事件
+        $(document).on('click', '.weuping-tips,a[wp-tab-id]', function(e){
+            if ($(this).attr('wp-tab-id') != undefined) {
+                hideWeupingTips()
+                sendMessage({'type': 'activeTab', 'tabId': $(this).attr('wp-tab-id')}, function(content) {
+                })
+            }
             e.stopPropagation()
+        })
+        // 响应点击标签的删除动作
+        $(document).on('click', '.wp_list-group-item span', function(e){
+            e.stopPropagation()
+            var pa = $(this).parents('a.wp_list-group-item')
+            chrome.runtime.sendMessage({'type': 'deleteTab', 'tabId': pa.attr('wp-tab-id')}, function() {
+            })
+            pa.remove()
         })
         
         $(document).on('click', 'body', function(){
@@ -83,19 +175,29 @@ $(function(){
 
 })
 
-function showWeupingTips(obj, content) {
-    if ($('.weuping-tips[tip='+$(obj).attr('weuping-button')+']').attr('tip') == undefined) {
-        
+function sendMessage(message, callback) {
+    chrome.runtime.sendMessage(message, function(content) {
+        callback(content)
+    })
+}
+
+function showWeupingTips(obj, content, style='') {
+    var domObj = $(document).find('.weuping-tips[tip='+$(obj).attr('weuping-button')+']')
+    if (domObj.attr('tip') == undefined) {
         var contentDiv = '<div class="weuping-tips weuping-hide" tip="'+$(obj).attr('weuping-button')+'"><em></em><span></span><div class="weuping-tip-content scrollbar">'+content+'</div></div>'
         $('body').append(contentDiv);
+    } else {
+        domObj.find('.weuping-tip-content').html(content)
     }
-    $('.weuping-tips').addClass('weuping-hide')
-    $('.weuping-tips[tip='+$(obj).attr('weuping-button')+']').removeClass('weuping-hide')
+    $(document).find('.weuping-tips').addClass('weuping-hide')
+    $(document).find('.weuping-tips').attr('style', style)
+    $(document).find('.weuping-tips[tip='+$(obj).attr('weuping-button')+']').removeClass('weuping-hide')
 
-    var Y = $(obj).offset().top - $(document).scrollTop() - 6
-    $('.weuping-tips[tip='+$(obj).attr('weuping-button')+'] > em').css('top', Y)
-    $('.weuping-tips[tip='+$(obj).attr('weuping-button')+'] > span').css('top', Y+2)
+    var Y = obj ? $(obj).offset().top - $(document).scrollTop() - 6 : 6
+    $(document).find('.weuping-tips[tip='+$(obj).attr('weuping-button')+'] > em').css('top', Y)
+    $(document).find('.weuping-tips[tip='+$(obj).attr('weuping-button')+'] > span').css('top', Y)
 }
+
 function hideWeupingTips() {
     $('.weuping-tips').addClass('weuping-hide')
 }
@@ -112,7 +214,6 @@ function goodEvent() {
         url: window.location.href
     }
     chrome.runtime.sendMessage({'type': 'goodEvent', 'data': data}, function(response){
-        
     })
 }
 
@@ -127,7 +228,7 @@ function editEvent() {
     $('.weuping-edit-selection').addClass('weuping-hide')
     $('.weuping-content').addClass('weuping-hide')
     $('.weuping-tips').addClass('weuping-hide')
-    $(document).on('mouseover', '*', function(e) {
+    $(document).on('mouseenter', '*', function(e) {
         var width = $(this).outerWidth()
         var height = $(this).outerHeight()
         var left = $(this).offset().left
@@ -135,11 +236,10 @@ function editEvent() {
             $('.weuping-edit-selection').removeClass('weuping-hide')
             $('.weuping-edit-selection').css({'top': top, 'left': left, 'width': width, 'height': height})
         e.stopPropagation()
-    }).on('click', '*', function() {
-        $(document).off('mouseover', '*')
     })
-    $(document).on('mouseover', '.weuping-edit-selection', function() {
-        $(this).addClass('weuping-hide')
+    $(document).on('click', '*', function() {
+        $(document).off('mouseenter', '*')
+        $('.weuping-edit-selection').addClass('weuping-hide')
     })
 /*
     chrome.runtime.sendMessage({'type': 'editEvent', data: 'download'}, function(response){
@@ -161,9 +261,22 @@ function refrashToken() {
     }
 }
 
-chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) { 
-    if (msg.ready === "ready") {
-        sendResponse({download : "download"})
+chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
+    console.log(msg)
+    if (msg.type === "getTabs") {
+        showWeupingTips(null, msg.data)
     }
 
 })
+
+function createTranslateDiv(selection) {
+    var style = 'margin-left:10px;width:327px;height:auto;max-height:95%;overflow:auto;'
+    if (selection) {
+        chrome.runtime.sendMessage({'type': 'getTranslateResult', 'text' : selection}, function(content) {
+            content = content == undefined ? '<p class="h4">未获取到翻译结果</p>' : content
+            showWeupingTips(null, content, style)
+        })
+    } else {
+        showWeupingTips(null, '<p class="h4">请选择内容</p>', style)
+    }
+}

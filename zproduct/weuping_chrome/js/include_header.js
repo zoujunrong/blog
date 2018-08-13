@@ -14,14 +14,13 @@ var header = '<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css
             <div class="input-group-btn">\
                   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="searchType" role-url="https://www.baidu.com/s?ie=utf-8&wd="><img class="icon" src="https://baike.baidu.com/favicon.ico"/> 百度</span> <span class="caret"></span></button>\
                   <ul role-search class="dropdown-menu">\
-                <li><a href="#" role-href="search"><i class="glyphicon glyphicon-search"></i> 站内 <ii>Alt+1</ii></a></li>\
-                <li><a href="#" role-href="bookmark"><i class="glyphicon glyphicon-bookmark"></i> 书签 <ii>Alt+2</ii></a></li>\
-                <li><a href="#" role-href="history"><i class="glyphicon glyphicon-eye-open"></i> 历史 <ii>Alt+3</ii></a></li>\
                 <li><a href="#" role-href="https://www.baidu.com/s?ie=utf-8&wd="><img class="icon" src="https://www.baidu.com/img/favicon_1177a47fa1821047bb22235ac5f86ada.ico"/> 百度 <ii>Alt+4</ii></a></li>\
                 <li><a href="#" role-href="https://cn.bing.com/search?&ie=utf-8&q="><img class="icon" src="https://cn.bing.com/sa/simg/bing_p_rr_teal_min.ico"/> 必应 <ii>Alt+5</ii></a></li>\
                 <li><a href="#" role-href="https://www.sogou.com/web?ie=utf8&query="><img class="icon" src="https://www.sogou.com/images/logo/new/favicon.ico"/> 搜狗 <ii>Alt+6</ii></a></li>\
                 <li><a href="#" role-href="https://www.so.com/s?ie=utf-8&q="><img class="icon" src="https://s.ssl.qhres.com/static/52166db8c450f68d.ico"/> 360搜 <ii>Alt+7</ii></a></li>\
-                <li><a href="#" role-href="https://www.google.com.hk/search?ie=UTF-8&q="><i class="glyphicon glyphicon-search"></i> Google <ii>Alt+8</ii></a></li>\
+                <li><a href="#" role-href="https://www.google.com.hk/search?ie=UTF-8&q="><img class="icon" src="/images/google.png"/> Google <ii>Alt+8</ii></a></li>\
+                <li><a href="#" role-href="bookmark"><i class="glyphicon glyphicon-bookmark"></i> 书签 <ii>Alt+2</ii></a></li>\
+                <li><a href="#" role-href="history"><i class="glyphicon glyphicon-eye-open"></i> 历史 <ii>Alt+3</ii></a></li>\
                   </ul>\
               </div>\
             <input id="searchText" type="text" class="form-control" autocomplete="off" placeholder="搜我想搜的...">\

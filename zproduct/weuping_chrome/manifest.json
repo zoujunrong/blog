@@ -24,11 +24,11 @@
         "default_popup": "popup.html"
     },
     "background": {
-        "scripts": ["js/jquery-3.2.1.min.js", "js/config.js", "js/background/main.js"]
+        "scripts": ["js/jquery-3.2.1.min.js", "js/config.js", "js/background/main.js", "js/background/data.js", "js/background/tab.js"]
     },
     "content_scripts": [
         {
-            "matches": ["http://*/*", "https://*/*"],
+            "matches": ["*://*/*"],
             "css": [
                 "css/content/main.css"
             ],
@@ -40,8 +40,10 @@
     ],
 
     "permissions": [
-        "bookmarks", "tabs", "history", "contextMenus", "storage", "activeTab"
+        "bookmarks", "tabs", "history", "contextMenus", "storage", "activeTab", "*://*.baidu.com/*", "*://*.google.com/*"
         // , {"fileSystem": ["write", "directory"]}
     ]
+
+    // "content_security_policy" : "connect-src https://fanyi.baidu.com"
 
 }

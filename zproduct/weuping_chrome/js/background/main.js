@@ -4,6 +4,19 @@ if (userDetails && userDetails != 'undefined') {
 } else {
     userDetails = null
 }
+var systemConfig = localStorage.getItem('we-systemConfig')
+if (!systemConfig) {
+    systemConfig = {
+        'pages': ['good', 'comment', 'bookmark', 'edit', 'tab'],
+        'contextmenu': ['bookmark', 'search', 'translate', 'quote'],
+        'shows': ['review', 'storage', 'assist', 'edit'],
+        'search': 'baidu',
+        'translate': 'baidu'
+    }
+    localStorage.setItem('we-systemConfig', JSON.stringify(systemConfig))
+}
+
+
 // 清空书签路径访问记录
 localStorage.removeItem('bookmarks-openArr')
 localStorage.removeItem('bookmarks-open')
@@ -23,20 +36,45 @@ chrome.tabs.onCreated.addListener(function(tab){
 
 // 监听注入页面事件
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
-    if (message.type == 'getContentConfig') {
-    	var systemConfig = localStorage.getItem('we-systemConfig')
-        sendResponse(systemConfig)
-    } else if (message.type == 'refreshSystemConfig') {
-    	createMenu()
-    } else if (message.type == 'goodEvent') {
-    	
-    } else if (message.type == 'editEvent') {
-    	screenshot.init();
-    } else if (message.type == 'userDetails') {
-    	checkIsRelogin(function() {
-    		sendResponse(userDetails)
-    	})
-    }
+	switch (message.type) {
+		case 'getContentConfig':
+			var systemConfig = JSON.parse(localStorage.getItem('we-systemConfig'))
+	    	systemConfig['search_url'] = searchConfig[systemConfig.search]
+	        sendResponse(systemConfig)
+			break
+		case 'refreshSystemConfig':
+			createMenu()
+			break
+		case 'getTranslateResult':
+			getBaiduTranslateResultV1(message.text, function(content) {
+				sendResponse(content)
+			})
+			break
+		case 'getSearchResult':
+			getBaiduSearchResult(message.text, function(content) {
+				sendResponse(content)
+			})
+			break
+		case 'getBookmarks':
+			getBaiduSearchResult(message.text, function(content) {
+				sendResponse(content)
+			})
+			break
+		case 'userDetails':
+			checkIsRelogin(function() {
+	    		sendResponse(userDetails)
+	    	})
+			break
+		case 'getTabs':
+			sendResponse(getTabContent(message.protocol))
+			break
+		case 'activeTab':
+			activeTab(message.tabId)
+			break
+		case 'deleteTab':
+			deleteTab(message.tabId)
+			break
+	}
 })
 
 
@@ -117,7 +155,7 @@ function baiduTranslate(info, tab){
 }
 function googleTranslate(info, tab){
 	var text = info.selectionText ? info.selectionText : ''
-    var url = 'https://translate.google.cn//#auto/auto/'+text;
+    var url = 'https://translate.google.cn/#auto/auto/'+text;
     window.open(url, '_blank');
 }
 function baiduSearch(info, tab){
@@ -222,9 +260,9 @@ function getNodeParents(bookmarkArr, callback) {
 
 initBookmarks()
 // 每5min钟同步一次
-setInterval(function() {
-	initBookmarks()
-}, 5000)
+// setInterval(function() {
+// 	initBookmarks()
+// }, 5000)
 
 /** 
  * 初始化标签
